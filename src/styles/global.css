@@ -1,20 +1,25 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/*
-- nunito sans (variable)
-- sora (variable)
-- cascadia code (400)
-*/
-@import url('https://api.fonts.coollabs.io/css2?family=Cascadia+Code&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Sora:wght@100..800&display=swap');
-
 @theme {
+    /* fonts */
     --font-sans: "Nunito Sans", sans-serif;
     --font-mono: "Cascadia Code", monospace;
     --font-heading: "Sora", sans-serif;
+
+    /* palette */
+    --color-foreground: var(--catppuccin-color-text);
+    --color-background: var(--catppuccin-color-mantle);
 }
 
+/* override media query for dark mode so my theme selector works */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
+    body {
+        @apply bg-background text-foreground;
+    }
+
     main {
         @apply prose prose-sm sm:prose-base md:prose-lg prose-h1:mb-4 prose-headings:font-heading prose-headings:mb-2 prose-p:my-2 prose-headings:mt-0;
     }
