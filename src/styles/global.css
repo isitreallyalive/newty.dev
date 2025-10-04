@@ -1,3 +1,5 @@
+@import "$styles/prose.css";
+
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
@@ -60,12 +62,13 @@
   * {
     @apply border-border outline-ring/50;
   }
+  
   body {
     @apply bg-background text-foreground;
   }
 
   main {
-    @apply prose prose-sm sm:prose-base md:prose-lg prose-h1:mb-4 prose-headings:font-heading prose-headings:mb-2 prose-p:my-2 prose-headings:mt-0;
+    @apply prose prose-ctp prose-sm sm:prose-base md:prose-lg prose-h1:mb-4 prose-headings:font-heading prose-headings:mb-2 prose-p:my-2 prose-headings:mt-0;
   }
 
   /* if p comes before heading, increase p bottom margin */

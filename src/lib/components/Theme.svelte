@@ -32,7 +32,14 @@
   }
 
   function applyTheme(theme: Theme) {
-    link.href = theme === "latte" ? mocha : urls[theme];
+    const dark = theme !== "latte";
+    // update stylesheet
+    link.href = dark ? urls[theme] : mocha;
+    // update class
+    const oldTheme = localStorage.getItem("theme");
+    if (oldTheme) document.documentElement.classList.remove(oldTheme);
+    document.documentElement.classList.add(theme);
+    // store preference
     localStorage.setItem("theme", theme);
   }
 
