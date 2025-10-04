@@ -5,14 +5,16 @@
   import frappe from "@catppuccin/tailwindcss/frappe.css?url";
   import macchiato from "@catppuccin/tailwindcss/macchiato.css?url";
   import mocha from "@catppuccin/tailwindcss/mocha.css?url";
+  import * as Select from "$lib/components/ui/select";
+  import { writable } from "svelte/store";
 
   type Theme = "latte" | "frappe" | "macchiato" | "mocha";
+  const themes: Theme[] = ["latte", "frappe", "macchiato", "mocha"];
   const urls: Record<Exclude<Theme, "latte">, string> = {
     frappe,
     macchiato,
     mocha,
   };
-
   let link: HTMLLinkElement;
 
   function detectTheme(): Theme {
@@ -43,10 +45,12 @@
     localStorage.setItem("theme", theme);
   }
 
+  const theme = writable<Theme>();
+
   onMount(() => {
-    const theme = detectTheme();
-    console.log(theme);
-    applyTheme(theme);
+    console.log(detectTheme());
+    theme.set(detectTheme());
+    theme.subscribe(applyTheme);
   });
 </script>
 
@@ -54,3 +58,13 @@
 <svelte:head>
   <link bind:this={link} rel="stylesheet" />
 </svelte:head>
+
+<!-- choose a theme :] -->
+<Select.Root type="single" bind:value={$theme}>
+  <Select.Trigger></Select.Trigger>
+  <Select.Content>
+    {#each themes as theme}
+      <Select.Item value={theme}>{theme}</Select.Item>
+    {/each}
+  </Select.Content>
+</Select.Root>
