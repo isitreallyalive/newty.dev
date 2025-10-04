@@ -9,13 +9,41 @@
   import { writable } from "svelte/store";
 
   type Theme = "latte" | "frappe" | "macchiato" | "mocha";
-  const themes: Theme[] = ["latte", "frappe", "macchiato", "mocha"];
   const urls: Record<Exclude<Theme, "latte">, string> = {
     frappe,
     macchiato,
     mocha,
   };
+  const emojis: Record<Theme, string> = {
+    latte: "🌻",
+    frappe: "🪴",
+    macchiato: "🌺",
+    mocha: "🌿",
+  };
+
+  const themes: Theme[] = ["latte", "frappe", "macchiato", "mocha"];
+  const theme = writable<Theme>();
   let link: HTMLLinkElement;
+
+  // load the stylesheet and then swap into the svelte managed <link> element
+  // prevents a flash of unstyled content
+  function loadStylesheet(url: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const tmp = document.createElement("link");
+      tmp.rel = "stylesheet";
+      tmp.href = url;
+      tmp.onload = () => {
+        link.href = url;
+        tmp.remove();
+        resolve();
+      };
+      tmp.onerror = e => {
+        tmp.remove();
+        reject(e);
+      };
+      document.head.appendChild(tmp);
+    });
+  }
 
   function detectTheme(): Theme {
     // saved preference wins
@@ -33,22 +61,23 @@
     else return "mocha"; // default to dark
   }
 
-  function applyTheme(theme: Theme) {
+  async function applyTheme(theme: Theme) {
     const dark = theme !== "latte";
+
     // update stylesheet
-    link.href = dark ? urls[theme] : mocha;
+    const url = dark ? urls[theme] : mocha;
+    if (link.href !== url) await loadStylesheet(url);
+
     // update class
     const oldTheme = localStorage.getItem("theme");
     if (oldTheme) document.documentElement.classList.remove(oldTheme);
     document.documentElement.classList.add(theme);
+
     // store preference
     localStorage.setItem("theme", theme);
   }
 
-  const theme = writable<Theme>();
-
   onMount(() => {
-    console.log(detectTheme());
     theme.set(detectTheme());
     theme.subscribe(applyTheme);
   });
@@ -61,10 +90,12 @@
 
 <!-- choose a theme :] -->
 <Select.Root type="single" bind:value={$theme}>
-  <Select.Trigger></Select.Trigger>
+  <Select.Trigger class="flex items-center">
+    <div>{emojis[$theme]}</div>
+  </Select.Trigger>
   <Select.Content>
     {#each themes as theme}
-      <Select.Item value={theme}>{theme}</Select.Item>
+      <Select.Item value={theme}>{emojis[theme]} {theme}</Select.Item>
     {/each}
   </Select.Content>
 </Select.Root>

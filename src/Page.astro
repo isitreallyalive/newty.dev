@@ -1,5 +1,5 @@
 ---
-import Theme from "$lib/components/Theme.svelte";
+import Nav from "$lib/components/nav/Nav.astro";
 import mocha from "@catppuccin/tailwindcss/mocha.css?url";
 
 import "$styles/global.css";
@@ -29,7 +29,7 @@ import "$styles/global.css";
 	</head>
 	<body>
 		<nav>
-			<Theme client:load />
+			<Nav />
 		</nav>
         <main>
             <slot />

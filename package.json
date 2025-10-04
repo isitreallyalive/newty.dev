@@ -19,8 +19,9 @@
   },
   "devDependencies": {
     "@catppuccin/tailwindcss": "^1.0.0",
+    "@iconify-json/mdi": "^1.2.3",
+    "@iconify/svelte": "^5.0.2",
     "@internationalized/date": "^3.8.1",
-    "@lucide/svelte": "^0.544.0",
     "@tailwindcss/typography": "^0.5.19",
     "bits-ui": "^2.11.0",
     "clsx": "^2.1.1",
