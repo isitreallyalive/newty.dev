@@ -1,9 +1,10 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   // dark mode themes - latte included in all
   import frappe from "@catppuccin/tailwindcss/frappe.css?url";
   import macchiato from "@catppuccin/tailwindcss/macchiato.css?url";
   import mocha from "@catppuccin/tailwindcss/mocha.css?url";
-  import { onMount } from "svelte";
 
   type Theme = "latte" | "frappe" | "macchiato" | "mocha";
   const urls: Record<Exclude<Theme, "latte">, string> = {
