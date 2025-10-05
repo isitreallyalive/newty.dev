@@ -8,6 +8,10 @@
 /* override media query for dark mode so my theme selector works */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* inline border classes */
+@source inline("border-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender,text}");
+
+
 :root {
   --radius: 0.625rem;
 }
@@ -55,6 +59,23 @@
   --color-sidebar-accent-foreground: var(--catppuccin-color-base);
   --color-sidebar-border: var(--catppuccin-color-surface2);
   --color-sidebar-ring: var(--catppuccin-color-mauve);
+
+  /* all catppuccin accents */
+  --color-rosewater: var(--catppuccin-color-rosewater);
+  --color-flamingo: var(--catppuccin-color-flamingo);
+  --color-pink: var(--catppuccin-color-pink);
+  --color-mauve: var(--catppuccin-color-mauve);
+  --color-red: var(--catppuccin-color-red);
+  --color-maroon: var(--catppuccin-color-maroon);
+  --color-peach: var(--catppuccin-color-peach);
+  --color-yellow: var(--catppuccin-color-yellow);
+  --color-green: var(--catppuccin-color-green);
+  --color-teal: var(--catppuccin-color-teal);
+  --color-sky: var(--catppuccin-color-sky);
+  --color-sapphire: var(--catppuccin-color-sapphire);
+  --color-blue: var(--catppuccin-color-blue);
+  --color-lavender: var(--catppuccin-color-lavender);
+  --color-text: var(--catppuccin-color-text);
 
   /* spacing/radius */
   --spacing: 0.25rem;

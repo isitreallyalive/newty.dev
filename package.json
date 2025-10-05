@@ -18,6 +18,7 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@catppuccin/palette": "^1.7.1",
     "@catppuccin/tailwindcss": "^1.0.0",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify/svelte": "^5.0.2",

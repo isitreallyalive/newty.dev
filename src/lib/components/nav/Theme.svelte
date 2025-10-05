@@ -37,7 +37,7 @@
         tmp.remove();
         resolve();
       };
-      tmp.onerror = e => {
+      tmp.onerror = (e) => {
         tmp.remove();
         reject(e);
       };
@@ -85,13 +85,13 @@
 
 <!-- actually laod the necessary styles -->
 <svelte:head>
-  <link bind:this={link} rel="stylesheet" />
+  <link bind:this={link} href={mocha} rel="stylesheet" />
 </svelte:head>
 
 <!-- choose a theme :] -->
 <Select.Root type="single" bind:value={$theme}>
-  <Select.Trigger class="flex items-center">
-    <div>{emojis[$theme]}</div>
+  <Select.Trigger rainbow class="border-2">
+    {emojis[$theme]}
   </Select.Trigger>
   <Select.Content>
     {#each themes as theme}
