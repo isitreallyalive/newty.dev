@@ -32,8 +32,8 @@ export function accentStore(initial: Value = "text") {
     subscribe,
     next: () =>
       update((current) =>
-        current === "text" ? randomAccent() : randomAccent(current)
+        current === "text" ? randomAccent() : randomAccent(current),
       ),
-    clear: () => set("text")
+    clear: () => set("text"),
   };
 }

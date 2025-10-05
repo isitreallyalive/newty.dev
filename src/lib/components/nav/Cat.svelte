@@ -25,14 +25,14 @@
 </script>
 
 <button
-  class="relative font-mono font-bold text-sm sm:text-base -tracking-[0.125em] transition-colors select-none hover:cursor-pointer hover:brightness-125 {!$enabled
+  class="relative font-mono text-sm font-bold -tracking-[0.125em] transition-colors select-none hover:cursor-pointer hover:brightness-125 sm:text-base {!$enabled
     ? 'text-muted-foreground'
     : ''}"
   onclick={() => ($enabled = !$enabled)}
   aria-label="Toggle cat"
 >
   {#if !$enabled}
-    <div class="-right-8 absolute motion-safe:animate-bounce">zzz</div>
+    <div class="absolute -right-8 motion-safe:animate-bounce">zzz</div>
   {/if}
   <div>/\_/\</div>
   <div>

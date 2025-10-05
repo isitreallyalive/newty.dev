@@ -7,10 +7,9 @@ import Theme from "$lib/components/nav/Theme.svelte";
 <div class="flex items-center gap-4">
   <a class="title" href="/">
     <Accent class="flex flex-col" client:only="svelte">
-          <span>newt's</span>
-    <span>nook</span>
+      <span>newt's</span>
+      <span>nook</span>
     </Accent>
-
   </a>
   <Cat client:only="svelte" />
 </div>
@@ -23,6 +22,6 @@ import Theme from "$lib/components/nav/Theme.svelte";
   @reference "tailwindcss";
 
   .title {
-    @apply flex flex-col font-bold text-xl sm:text-2xl md:text-3xl text-right;
+    @apply flex flex-col text-right text-xl font-bold sm:text-2xl md:text-3xl;
   }
 </style>

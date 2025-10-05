@@ -12,7 +12,6 @@
 /* inline border classes */
 @source inline("{text,border}-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender,text}");
 
-
 ::selection {
   background-color: var(--catppuccin-color-mauve);
   color: var(--catppuccin-color-mantle);
@@ -24,10 +23,10 @@
   }
 
   body {
-    @apply bg-background text-foreground flex flex-col min-h-screen mx-auto max-w-xs lg:max-w-3xl xl:max-w-5xl my-8;
+    @apply bg-background text-foreground mx-auto my-8 flex min-h-screen max-w-xs flex-col lg:max-w-3xl xl:max-w-5xl;
   }
-  
+
   nav {
-    @apply flex items-center justify-between mb-8;
+    @apply mb-8 flex items-center justify-between;
   }
 }

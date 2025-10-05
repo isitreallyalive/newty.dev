@@ -54,7 +54,7 @@
     const forcedColours = window.matchMedia("(forced-colors: acive)").matches;
     const highContrast = window.matchMedia("(prefers-contrast: more)").matches;
     const prefersLight = window.matchMedia(
-      "(prefers-color-scheme: light)"
+      "(prefers-color-scheme: light)",
     ).matches;
 
     if (prefersLight || forcedColours || highContrast) return "latte";
