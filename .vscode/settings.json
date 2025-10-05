@@ -4,5 +4,7 @@
     },
     "files.exclude": {
         "**/.astro": true
-    }
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
 }

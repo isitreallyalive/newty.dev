@@ -1,0 +1,2 @@
+bun fmt
+git add -u .
