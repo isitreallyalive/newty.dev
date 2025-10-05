@@ -23,6 +23,7 @@
     "@iconify-json/mdi": "^1.2.3",
     "@iconify/svelte": "^5.0.2",
     "@internationalized/date": "^3.8.1",
+    "@nanostores/persistent": "^1.1.0",
     "@tailwindcss/typography": "^0.5.19",
     "bits-ui": "^2.11.0",
     "clsx": "^2.1.1",

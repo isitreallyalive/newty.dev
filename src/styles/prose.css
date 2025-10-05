@@ -1,5 +1,16 @@
 @reference "tailwindcss";
 
+@layer base {
+  main {
+    @apply prose prose-ctp prose-sm sm:prose-base md:prose-lg prose-h1:mb-4 prose-headings:font-heading prose-headings:mb-2 prose-p:my-2 prose-headings:mt-0;
+  }
+
+  /* if p comes before heading, increase p bottom margin */
+  p:has(+ :is(h1, h2, h3, h4, h5, h6)) {
+    @apply mb-4;
+  }
+}
+
 @utility prose-ctp {
   /* text */
   --tw-prose-body: var(--catppuccin-color-text);

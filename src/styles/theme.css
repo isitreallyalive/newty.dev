@@ -1,0 +1,67 @@
+:root {
+  --radius: 0.625rem;
+}
+
+@theme inline {
+  /* fonts */
+  --font-sans: "Nunito Sans", sans-serif;
+  --font-mono: "Cascadia Code", monospace;
+  --font-heading: "Sora", sans-serif;
+
+  /* palette */
+  --color-background: var(--catppuccin-color-mantle);
+  --color-foreground: var(--catppuccin-color-text);
+  --color-card: var(--catppuccin-color-surface0);
+  --color-card-foreground: var(--catppuccin-color-text);
+  --color-popover: var(--catppuccin-color-surface1);
+  --color-popover-foreground: var(--catppuccin-color-text);
+  --color-primary: var(--catppuccin-color-mauve);
+  --color-primary-foreground: var(--catppuccin-color-base);
+  --color-secondary: var(--catppuccin-color-mauve);
+  --color-secondary-foreground: var(--catppuccin-color-base);
+  --color-muted: var(--catppuccin-color-overlay0);
+  --color-muted-foreground: var(--catppuccin-color-subtext0);
+  --color-accent: var(--catppuccin-color-mauve);
+  --color-accent-foreground: var(--catppuccin-color-base);
+  --color-destructive: var(--catppuccin-color-red);
+  --color-border: var(--catppuccin-color-surface2);
+  --color-input: var(--catppuccin-color-surface2);
+  --color-ring: var(--catppuccin-color-mauve);
+  --color-chart-1: var(--catppuccin-color-mauve);
+  --color-chart-2: var(--catppuccin-color-blue);
+  --color-chart-3: var(--catppuccin-color-teal);
+  --color-chart-4: var(--catppuccin-color-green);
+  --color-chart-5: var(--catppuccin-color-yellow);
+  --color-sidebar: var(--catppuccin-color-surface0);
+  --color-sidebar-foreground: var(--catppuccin-color-text);
+  --color-sidebar-primary: var(--catppuccin-color-mauve);
+  --color-sidebar-primary-foreground: var(--catppuccin-color-base);
+  --color-sidebar-accent: var(--catppuccin-color-mauve);
+  --color-sidebar-accent-foreground: var(--catppuccin-color-base);
+  --color-sidebar-border: var(--catppuccin-color-surface2);
+  --color-sidebar-ring: var(--catppuccin-color-mauve);
+
+  /* all catppuccin accents */
+  --color-rosewater: var(--catppuccin-color-rosewater);
+  --color-flamingo: var(--catppuccin-color-flamingo);
+  --color-pink: var(--catppuccin-color-pink);
+  --color-mauve: var(--catppuccin-color-mauve);
+  --color-red: var(--catppuccin-color-red);
+  --color-maroon: var(--catppuccin-color-maroon);
+  --color-peach: var(--catppuccin-color-peach);
+  --color-yellow: var(--catppuccin-color-yellow);
+  --color-green: var(--catppuccin-color-green);
+  --color-teal: var(--catppuccin-color-teal);
+  --color-sky: var(--catppuccin-color-sky);
+  --color-sapphire: var(--catppuccin-color-sapphire);
+  --color-blue: var(--catppuccin-color-blue);
+  --color-lavender: var(--catppuccin-color-lavender);
+  --color-text: var(--catppuccin-color-text);
+
+  /* spacing/radius */
+  --spacing: 0.25rem;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
