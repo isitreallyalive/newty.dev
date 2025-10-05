@@ -1,8 +1,18 @@
 ---
 import Nav from "$lib/components/nav/Nav.astro";
-import mocha from "@catppuccin/tailwindcss/mocha.css?url";
 
 import "$styles/global.css";
+
+interface Props {
+  title?: string;
+}
+
+const segments = Astro.url ? Astro.url.pathname.split("/").filter(Boolean) : [];
+const slug = segments.join(" / ");
+
+const { title } = Astro.props;
+let fullTitle = "newt";
+if (slug) fullTitle += ` / ${slug}`;
 ---
 
 <html lang="en">
@@ -24,11 +34,11 @@ import "$styles/global.css";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
+    <title>{fullTitle}</title>
   </head>
   <body>
     <nav>
-      <Nav />
+      <Nav {title} slug={segments} />
     </nav>
     <main>
       <slot />

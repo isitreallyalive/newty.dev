@@ -32,7 +32,7 @@
   aria-label="Toggle cat"
 >
   {#if !$enabled}
-    <div class="absolute -right-8 motion-safe:animate-bounce">zzz</div>
+    <div class="absolute -top-2 -right-6 motion-safe:animate-bounce">zzz</div>
   {/if}
   <div>/\_/\</div>
   <div>

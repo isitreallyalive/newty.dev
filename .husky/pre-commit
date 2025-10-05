@@ -1,2 +1,2 @@
-bun fmt
+bun --silent fmt --log-level silent
 git add -u .

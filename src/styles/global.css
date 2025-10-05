@@ -9,7 +9,7 @@
 /* override media query for dark mode so my theme selector works */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* inline border classes */
+/* inline text+border classes */
 @source inline("{text,border}-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender,text}");
 
 ::selection {
@@ -28,5 +28,9 @@
 
   nav {
     @apply mb-8 flex items-center justify-between;
+  }
+
+  a {
+    @apply hover:text-accent;
   }
 }
