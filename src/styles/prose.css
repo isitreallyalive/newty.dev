@@ -1,8 +1,8 @@
 @reference "tailwindcss";
 
 @layer base {
-  main {
-    @apply prose prose-ctp prose-sm sm:prose-base md:prose-lg prose-h1:mb-4 prose-headings:font-heading prose-headings:mb-2 prose-p:my-2 prose-headings:mt-0;
+  .has-prose {
+    @apply prose prose-ctp prose-sm prose-a:no-underline prose-a:font-normal sm:prose-base md:prose-lg prose-h1:mb-4 prose-headings:font-heading prose-headings:mb-2 prose-p:my-2 prose-headings:mt-0;
   }
 
   /* if p comes before heading, increase p bottom margin */
@@ -16,7 +16,7 @@
   --tw-prose-body: var(--catppuccin-color-text);
   --tw-prose-headings: var(--catppuccin-color-text);
   --tw-prose-lead: var(--catppuccin-color-subtext0);
-  --tw-prose-links: var(--catppuccin-color-mauve);
+  --tw-prose-links: var(--catppuccin-color-text);
   --tw-prose-bold: var(--catppuccin-color-text);
 
   /* lists / counters */
@@ -44,7 +44,7 @@
   --tw-prose-invert-body: var(--catppuccin-color-base);
   --tw-prose-invert-headings: var(--catppuccin-color-base);
   --tw-prose-invert-lead: var(--catppuccin-color-subtext0);
-  --tw-prose-invert-links: var(--catppuccin-color-mauve);
+  --tw-prose-invert-links: var(--catppuccin-color-text);
   --tw-prose-invert-bold: var(--catppuccin-color-base);
   --tw-prose-invert-counters: var(--catppuccin-color-overlay0);
   --tw-prose-invert-bullets: var(--catppuccin-color-overlay0);

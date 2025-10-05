@@ -1,0 +1,30 @@
+---
+import Commit from "$lib/components/footer/Commit.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<div class="text-muted-foreground has-prose container">
+  <div>
+    <span>
+      made with <Icon
+        name="mdi:heart"
+        class="hover:text-red hover:cursor-pointer"
+      /> by newt
+    </span>
+  </div>
+  <div class="justify-self-end">
+    <Commit />
+  </div>
+</div>
+
+<style>
+  @reference "tailwindcss";
+
+  .container {
+    @apply mx-auto grid max-w-xs grid-cols-2 lg:max-w-3xl xl:max-w-5xl;
+  }
+
+  .container > div > * {
+    @apply flex items-center gap-1;
+  }
+</style>

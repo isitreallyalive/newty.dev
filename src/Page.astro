@@ -1,5 +1,6 @@
 ---
 import Nav from "$lib/components/nav/Nav.astro";
+import Footer from "$lib/components/footer/Footer.astro";
 
 import "$styles/global.css";
 
@@ -37,11 +38,24 @@ if (slug) fullTitle += ` / ${slug}`;
     <title>{fullTitle}</title>
   </head>
   <body>
-    <nav>
-      <Nav {title} slug={segments} />
-    </nav>
-    <main>
-      <slot />
-    </main>
+    <div class="container">
+      <nav>
+        <Nav {title} slug={segments} />
+      </nav>
+      <main class="has-prose">
+        <slot />
+      </main>
+    </div>
+    <footer>
+      <Footer />
+    </footer>
   </body>
 </html>
+
+<style>
+  @reference "tailwindcss";
+
+  .container {
+    @apply mx-auto my-8 flex max-w-xs flex-col lg:max-w-3xl xl:max-w-5xl;
+  }
+</style>
