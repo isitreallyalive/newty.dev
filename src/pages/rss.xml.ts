@@ -2,11 +2,11 @@ import type { APIContext } from "astro";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { getContainerRenderer } from "@astrojs/mdx";
 import { loadRenderers } from "astro:container";
-import { getCollection } from "astro:content";
 import rss from "@astrojs/rss";
+import { getPosts } from "$lib/helpers/blog";
 
 export async function GET(context: APIContext) {
-  const posts = await getCollection("blog");
+  const posts = await getPosts();
   const items = [];
 
   // mock Astro with MDX
