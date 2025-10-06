@@ -4,6 +4,8 @@ import { getContainerRenderer } from "@astrojs/mdx";
 import { loadRenderers } from "astro:container";
 import rss from "@astrojs/rss";
 import { getPosts } from "$lib/helpers/blog";
+import RSS from "$lib/components/RSS.astro";
+import { render } from "astro:content";
 
 export async function GET(context: APIContext) {
   const posts = await getPosts();
@@ -20,34 +22,30 @@ export async function GET(context: APIContext) {
       data: { title, published },
       id,
     } = post;
-    var formattedDate =
-      (published?.toISOString() ?? "") +
-      "+" +
-      (published ? published.getTimezoneOffset() / 60 : "00") +
-      ":00";
+    const html = await container.renderToString(RSS, { params: { id } });
+    const {
+      remarkPluginFrontmatter: { readingTime },
+    } = await render(post);
 
     items.push({
       title,
       link: `/blog/${id}`,
       pubDate: published,
+      content: html,
       customData: `
-        <pubDateISO>${published?.toISOString()}</pubDateISO>
-      `,
-      // description: post.data.description,
-      // categories: data.tags,
-      // content: html,
-      // customData: `
-      //     <minutesRead>${minutesRead}</minutesRead>
-      //     ${data.published ? `<prettyPubDate>${formatDate(data.published)}</prettyPubDate>` : ""}
-      //   `,
+          <readingTime>${readingTime}</readingTime>
+          ${published ? `<pubDateISO>${published.toISOString()}</pubDateISO>` : ""}
+        `,
     });
   }
 
+  const site = new URL(context.site ?? "https://newty.dev");
+
   return rss({
-    title: "",
-    description: "",
-    site: context.site ?? "https://newty.dev",
+    title: site.hostname,
+    description: "newt's personal blog",
+    site,
     items,
-    stylesheet: "/feed.xsl",
+    stylesheet: "/rss/feed.xsl",
   });
 }

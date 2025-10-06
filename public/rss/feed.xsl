@@ -40,12 +40,16 @@
             color: var(--color-background);
           }
 
-          h1, i {
-            @apply font-mono text-2xl font-semibold sm:text-3xl;
+          h1, h2 {
+            @apply font-mono font-semibold;
           }
 
           p {
             @apply mb-2;
+          }
+
+          .has-icon {
+            @apply flex gap-1 items-center;
           }
         </style>
       </head>
@@ -69,25 +73,29 @@
                 <div>&gt; ^ &lt;</div>
               </button>
 
-              <a href="/" class="hover:text-accent font-semibold">newt</a>
+              <div class="flex gap-1">
+                <a href="/" class="hover:text-accent font-semibold">newt</a>
+                <span>/</span>
+                <span class="text-muted-foreground">rss.xml</span>
+              </div>
             </div>
           </nav>
           <main>
             <div
-              class="border-accent 2shadow-lg 2bg-ctp-base/40 mt-8 mb-10 flex w-full flex-col rounded-xl border p-4 sm:p-6"
+              class="border-accent shadow-lg bg-ctp-base/40 mt-8 mb-10 flex w-full flex-col rounded-xl border p-4 sm:p-6"
             >
-              <div class="flex gap-1 items-center">
-                <xsl:for-each select="document('rss.svg')/*">
+              <div class="has-icon select-none">
+                <xsl:for-each select="document('/rss/rss.svg')/*">
                   <xsl:copy>
                     <xsl:copy-of select="@*"/>
-                    <xsl:attribute name="class">fill-current h-9 text-foreground</xsl:attribute>
+                    <xsl:attribute name="class">fill-current h-9</xsl:attribute>
                     <xsl:copy-of select="node()"/>
                   </xsl:copy>
                 </xsl:for-each>
-                <h1>This is an RSS feed</h1>
+                <h1 class="text-2xl sm:text-3xl">This is an RSS feed</h1>
               </div>
 
-              <p>
+              <p class="select-none">
                 To subscribe to this feed, add this URL to your RSS reader:
                 <code><xsl:value-of select="/rss/channel/link" />rss.xml</code>
               </p>
@@ -95,19 +103,33 @@
 
             <!-- posts -->
             <xsl:for-each select="/rss/channel/item">
-              <a class="flex items-center gap-8 group max-w-fit">
-                <xsl:attribute name="href">
-                  <xsl:value-of select="link" />
-                </xsl:attribute>
-                <!-- date -->
-                <span class="text-muted-foreground font-mono flex-none w-auto whitespace-nowrap">
-                  <xsl:value-of select="substring(pubDateISO, 1, 4)" /> · <xsl:value-of select="substring(pubDateISO, 6, 2)" />  · <xsl:value-of select="substring(pubDateISO, 9, 2)" />
-                </span>
-                <!-- title -->
-                <h1 class="group-hover:text-accent"><xsl:value-of select="title" /></h1>
-              </a>
-              <!-- description -->
-              <p><xsl:value-of select="description" /></p>
+              <div class="flex items-center justify-between gap-4">
+                <a class="flex items-center gap-8 group max-w-fit">
+                  <xsl:attribute name="href">
+                    <xsl:value-of select="link" />
+                  </xsl:attribute>
+                  <!-- date -->
+                  <span class="text-muted-foreground font-mono flex-none w-auto whitespace-nowrap">
+                    <xsl:value-of select="substring(pubDateISO, 1, 4)" /> · <xsl:value-of select="substring(pubDateISO, 6, 2)" />  · <xsl:value-of select="substring(pubDateISO, 9, 2)" />
+                  </span>
+                  <!-- title -->
+                  <h2 class="text-xl sm:text-2xl group-hover:text-accent">
+                    <xsl:value-of select="title" />
+                  </h2>
+                </a>
+                <div class="has-icon select-none text-muted-foreground flex-none">
+                  <xsl:for-each select="document('/rss/clock-outline.svg')/*">
+                    <xsl:copy>
+                      <xsl:copy-of select="@*"/>
+                      <xsl:attribute name="class">fill-current h-6</xsl:attribute>
+                      <xsl:copy-of select="node()"/>
+                    </xsl:copy>
+                  </xsl:for-each>
+                  <span>
+                    <xsl:value-of select="readingTime" />
+                  </span>
+                </div>
+              </div>
               <!-- divider -->
               <xsl:if test="position() != last()">
                 <hr class="border-foreground/50 my-6 rounded-full border-t-2" />

@@ -12,6 +12,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "^6.3.7",
     "@astrojs/mdx": "^4.3.6",
     "@astrojs/rss": "^4.0.12",
     "@astrojs/svelte": "^7.2.0",
@@ -35,10 +36,12 @@
     "clsx": "^2.1.1",
     "html-minifier-terser": "^7.2.0",
     "husky": "^9.1.7",
+    "mdast-util-to-string": "^4.0.0",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-svelte": "^3.4.0",
     "prettier-plugin-tailwindcss": "^0.6.14",
+    "reading-time": "^1.5.0",
     "shadcn-svelte": "^1.0.8",
     "tailwind-merge": "^3.3.1",
     "tailwind-variants": "^3.1.1",
