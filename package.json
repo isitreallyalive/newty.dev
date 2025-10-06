@@ -12,6 +12,8 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@astrojs/mdx": "^4.3.6",
+    "@astrojs/rss": "^4.0.12",
     "@astrojs/svelte": "^7.2.0",
     "@tailwindcss/vite": "^4.1.14",
     "astro": "^5.14.1",
@@ -28,8 +30,10 @@
     "@internationalized/date": "^3.8.1",
     "@nanostores/persistent": "^1.1.0",
     "@tailwindcss/typography": "^0.5.19",
+    "@types/html-minifier-terser": "^7.0.2",
     "bits-ui": "^2.11.0",
     "clsx": "^2.1.1",
+    "html-minifier-terser": "^7.2.0",
     "husky": "^9.1.7",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",

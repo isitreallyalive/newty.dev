@@ -1,10 +1,13 @@
 {
-    "files.associations": {
-        "*.css": "tailwindcss"
-    },
-    "files.exclude": {
-        "**/.astro": true
-    },
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "files.exclude": {
+    "**/.astro": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "[xml]": {
+    "editor.defaultFormatter": "PrateekMahendrakar.prettyxml"
+  }
 }

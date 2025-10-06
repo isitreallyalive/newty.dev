@@ -3,14 +3,19 @@ import Commit from "$lib/components/footer/Commit.astro";
 import { Icon } from "astro-icon/components";
 ---
 
-<div class="text-muted-foreground has-prose container">
+<div class="text-muted-foreground has-prose container **:my-0">
   <div>
-    <span>
+    <p class="has-icon">
       made with <Icon
         name="mdi:heart"
         class="hover:text-red hover:cursor-pointer"
       /> by newt
-    </span>
+    </p>
+    <ul class="not-prose flex gap-2">
+      <li>
+        <a href="/rss.xml"><Icon name="mdi:rss" /> rss</a>
+      </li>
+    </ul>
   </div>
   <div class="justify-self-end">
     <Commit />
@@ -24,7 +29,8 @@ import { Icon } from "astro-icon/components";
     @apply mx-auto grid max-w-xs grid-cols-2 lg:max-w-3xl xl:max-w-5xl;
   }
 
-  .container > div > * {
+  li > a,
+  .has-icon {
     @apply flex items-center gap-1;
   }
 </style>
