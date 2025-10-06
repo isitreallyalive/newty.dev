@@ -14,44 +14,11 @@
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width" />
         <title>newty.dev</title>
-
-        <!-- styling -->
-        <script
-          src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"
-        ></script>
-        <!-- fonts -->
-    <link
-      href="https://api.fonts.coollabs.io/css2?family=Cascadia+Code&amp;family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&amp;display=swap"
-      rel="stylesheet"
-    />
-        <style type="text/tailwindcss">
-          @theme inline {
-            --font-sans: "Outfit", sans-serif;
-            --font-mono: "Cascadia Code", monospace;
-            --color-background: #181825; /* mantle */
-            --color-foreground: #cdd6f4; /* text */
-            --color-muted-foreground: #a6adc8; /* subtext0 */
-            --color-accent: #cba6f7; /* mauve */
-            --color-lavender: #b4befe;
-          }
-
-          ::selection {
-            background-color: var(--color-accent);
-            color: var(--color-background);
-          }
-
-          h1, h2 {
-            @apply font-mono font-semibold;
-          }
-
-          p {
-            @apply mb-2;
-          }
-
-          .has-icon {
-            @apply flex gap-1 items-center;
-          }
-        </style>
+        <link
+          href="https://api.fonts.coollabs.io/css2?family=Cascadia+Code&amp;family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&amp;display=swap"
+          rel="stylesheet"
+        />
+        <link href="/rss/feed.css" rel="stylesheet" />
       </head>
       <body
         class="bg-background text-foreground flex min-h-screen flex-col sm:text-lg"

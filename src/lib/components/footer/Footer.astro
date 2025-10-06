@@ -3,7 +3,7 @@ import Commit from "$lib/components/footer/Commit.astro";
 import { Icon } from "astro-icon/components";
 ---
 
-<div class="text-muted-foreground has-prose container **:my-0">
+<div class="has-prose container">
   <div>
     <p class="has-icon">
       made with <Icon
@@ -23,14 +23,18 @@ import { Icon } from "astro-icon/components";
 </div>
 
 <style>
-  @reference "tailwindcss";
+  @reference "$styles/global.css";
 
   .container {
-    @apply mx-auto grid max-w-xs grid-cols-2 lg:max-w-3xl xl:max-w-5xl;
+    @apply text-muted-foreground mx-auto grid max-w-xs grid-cols-2 **:my-0 lg:max-w-3xl xl:max-w-5xl;
   }
 
   li > a,
   .has-icon {
     @apply flex items-center gap-1;
+  }
+
+  a {
+    @apply hover:text-accent;
   }
 </style>

@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: "Outfit", sans-serif;
+  --font-mono: "Cascadia Code", monospace;
+  --color-background: #181825; /* mantle */
+  --color-foreground: #cdd6f4; /* text */
+  --color-muted-foreground: #a6adc8; /* subtext0 */
+  --color-accent: #cba6f7; /* mauve */
+  --color-lavender: #b4befe;
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-background);
+}
+
+h1,
+h2 {
+  @apply font-mono font-semibold;
+}
+
+p {
+  @apply mb-2;
+}
+
+.has-icon {
+  @apply flex items-center gap-1;
+}
