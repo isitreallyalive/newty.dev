@@ -7,7 +7,6 @@
   --color-foreground: #cdd6f4; /* text */
   --color-muted-foreground: #a6adc8; /* subtext0 */
   --color-accent: #cba6f7; /* mauve */
-  --color-lavender: #b4befe;
 }
 
 ::selection {

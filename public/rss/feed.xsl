@@ -18,7 +18,7 @@
           href="https://api.fonts.coollabs.io/css2?family=Cascadia+Code&amp;family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&amp;display=swap"
           rel="stylesheet"
         />
-        <link href="/rss/feed.css" rel="stylesheet" />
+        <link href="/rss/rss.css" rel="stylesheet" />
       </head>
       <body
         class="bg-background text-foreground flex min-h-screen flex-col sm:text-lg"

@@ -1,13 +1,14 @@
+import path from "node:path";
 import type { Plugin } from "vite";
-import { getPaths } from "./_helpers";
 import fs from "node:fs/promises";
 import { minify } from "html-minifier-terser";
 
-const [inPath, outPath] = getPaths("rss", "feed.xsl");
+const inPath = path.resolve(process.cwd(), "src", "rss", "feed.xsl");
+const outPath = path.resolve(process.cwd(), "dist", "rss", "feed.xsl");
 
 export default function rssMinify(): Plugin {
   return {
-    name: "minify-xsl",
+    name: "rss-minify",
     apply: "build",
     async writeBundle() {
       try {
