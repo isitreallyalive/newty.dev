@@ -18,22 +18,19 @@ const ACCENTS: AccentName[] = [
   "lavender",
 ];
 
-export type Value = AccentName | "text";
+export type Value = AccentName | null;
 
 const randomAccent = (exclude?: AccentName) => {
   const choices = exclude ? ACCENTS.filter((a) => a !== exclude) : ACCENTS;
   return choices[Math.floor(Math.random() * choices.length)];
 };
 
-export function accentStore(initial: Value = "text") {
+export default function accentStore(initial: Value = null) {
   const { subscribe, set, update } = writable<Value>(initial);
 
   return {
     subscribe,
-    next: () =>
-      update((current) =>
-        current === "text" ? randomAccent() : randomAccent(current),
-      ),
-    clear: () => set("text"),
+    next: () => update((current) => randomAccent(current ?? undefined)),
+    clear: () => set(null),
   };
 }

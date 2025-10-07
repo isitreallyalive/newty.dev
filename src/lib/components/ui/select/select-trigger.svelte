@@ -2,7 +2,7 @@
   import { Select as SelectPrimitive } from "bits-ui";
   import Icon from "@iconify/svelte";
   import { cn, stopPropagation, type WithoutChild } from "$lib/utils.js";
-  import { accentStore } from "$lib/stores/accent";
+  import accentStore from "$lib/stores/accent";
   import { onMount } from "svelte";
 
   let {
@@ -20,7 +20,6 @@
   function isOpen(): boolean {
     return ref?.ariaExpanded === "true";
   }
-
   const accent: ReturnType<typeof accentStore> | undefined = rainbow
     ? accentStore()
     : undefined;
@@ -50,7 +49,7 @@
   }}
   class={cn(
     `border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit items-center justify-between gap-1 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none select-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4`,
-    rainbow ? `border-${$accent}` : "hover:border-accent",
+    rainbow && $accent ? `border-${$accent}` : "hover:border-accent",
     className,
   )}
   {...restProps}

@@ -1,5 +1,5 @@
 ---
-import Accent from "$lib/components/Accent.svelte";
+import Newt from "$lib/components/Newt.svelte";
 import Cat from "$lib/components/nav/Cat.svelte";
 import Theme from "$lib/components/nav/Theme.svelte";
 
@@ -23,12 +23,10 @@ function buildSegmentHref(index: number): string {
 ---
 
 <div class="flex items-center gap-4 font-mono text-xl">
-  <Cat client:only="svelte" />
+  <Cat client:load />
 
   <div class="flex gap-1">
-    <Accent client:only="svelte">
-      <a href="/" class="font-semibold">newt</a>
-    </Accent>
+    <a href="/"><Newt client:load /></a>
     {
       slug?.map((segment, i) => (
         <>

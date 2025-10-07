@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import { accentStore } from "$lib/stores/accent";
+  import accentStore from "$lib/stores/accent";
 
   interface Props {
     children: Snippet;
@@ -16,7 +16,7 @@
   role="presentation"
   onmouseenter={() => accent.next()}
   onmouseleave={() => accent.clear()}
-  class={[`text-${$accent}`, ...classList]}
+  class={[$accent ? `text-${$accent}` : "", ...classList]}
 >
   {@render children()}
 </span>
