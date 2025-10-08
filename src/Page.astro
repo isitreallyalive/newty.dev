@@ -1,8 +1,9 @@
 ---
+import "$styles/global.css";
+
 import Nav from "$lib/components/nav/Nav.astro";
 import Footer from "$lib/components/footer/Footer.astro";
-
-import "$styles/global.css";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title?: string;
@@ -16,7 +17,7 @@ let fullTitle = "newt";
 if (slug) fullTitle += ` / ${slug}`;
 ---
 
-<html lang="en">
+<html lang="en" transition:name="root" transition:animate="none">
   <head>
     <!--
 			load fonts
@@ -36,13 +37,15 @@ if (slug) fullTitle += ` / ${slug}`;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{fullTitle}</title>
+
+    <ClientRouter />
   </head>
   <body>
     <div class="container">
       <nav>
         <Nav {title} slug={segments} />
       </nav>
-      <main class="has-prose">
+      <main class="has-prose" transition:animate="fade">
         <slot />
       </main>
     </div>
@@ -56,6 +59,14 @@ if (slug) fullTitle += ` / ${slug}`;
   @reference "$styles/global.css";
 
   .container {
-    @apply mx-auto my-8 flex max-w-xs flex-col lg:max-w-3xl xl:max-w-5xl;
+    @apply xs:max-w-md mx-auto flex max-w-xs flex-col gap-8 sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-6xl;
+  }
+
+  nav {
+    @apply mt-8 flex items-center justify-between select-none;
+  }
+
+  footer {
+    @apply bg-primary-foreground mt-auto py-4 select-none;
   }
 </style>

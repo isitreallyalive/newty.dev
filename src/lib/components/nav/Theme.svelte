@@ -90,7 +90,7 @@
 
 <!-- choose a theme :] -->
 <Select.Root type="single" bind:value={$theme}>
-  <Select.Trigger rainbow class="w-17 border-2">
+  <Select.Trigger rainbow class="hidden w-17 border-2 sm:inline-flex">
     {emojis[$theme]}
   </Select.Trigger>
   <Select.Content>

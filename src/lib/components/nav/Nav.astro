@@ -29,19 +29,32 @@ function buildSegmentHref(index: number): string {
     <a href="/"><Newt client:load /></a>
     {
       slug?.map((segment, i) => (
-        <>
+        <span class={i !== 0 ? "hidden sm:inline" : ""}>
           <span>/</span>
           {i === slug.length - 1 ? (
             <span class="text-muted-foreground">{segment}</span>
           ) : (
             <a href={buildSegmentHref(i)}>{segment}</a>
           )}
-        </>
+        </span>
       ))
     }
   </div>
 </div>
 
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-8">
+  <ul class="flex gap-2 md:gap-6 md:text-lg">
+    <li><a href="/projects">projects</a></li>
+    <li><a href="/writing" data-astro-prefetch>writing</a></li>
+    <li><a href="/friends" data-astro-prefetch>friends</a></li>
+  </ul>
   <Theme client:load />
 </div>
+
+<style>
+  @reference "$styles/global.css";
+
+  a {
+    @apply hover:text-accent;
+  }
+</style>

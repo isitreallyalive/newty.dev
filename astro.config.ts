@@ -10,6 +10,8 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
+  prefetch: true,
+
   vite: {
     plugins: [tailwindcss(), rssMinify()],
   },
