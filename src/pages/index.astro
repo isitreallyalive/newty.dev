@@ -1,6 +1,7 @@
 ---
 import Page from "../Page.astro";
 import Newt from "$lib/components/Newt.svelte";
+import Song from "$lib/components/Song.svelte";
 
 const age = new Date().getFullYear() - 2006;
 ---
@@ -11,4 +12,7 @@ const age = new Date().getFullYear() - 2006;
     Hey, I'm <Newt client:load bold={false} /> - I'm a {age}-year-old from the
     UK, and I go by he/they.
   </p>
+  <ul>
+    <li><Song client:only="svelte" /></li>
+  </ul>
 </Page>
