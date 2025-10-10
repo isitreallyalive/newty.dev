@@ -1,5 +1,5 @@
 ---
-import Newt from "$lib/components/Newt.svelte";
+import Accent from "$lib/components/Accent.svelte";
 import Cat from "$lib/components/nav/Cat.svelte";
 import Theme from "$lib/components/nav/Theme.svelte";
 
@@ -25,18 +25,20 @@ function buildSegmentHref(index: number): string {
 <div class="flex items-center gap-4 font-mono text-xl">
   <Cat client:load />
 
-  <div class="flex gap-1">
-    <a href="/"><Newt client:load /></a>
+  <div class="flex">
+    <a href="/">
+      <Accent class="font-semibold" client:load>newt</Accent>
+    </a>
     {
       slug?.map((segment, i) => (
-        <span class={i !== 0 ? "hidden sm:inline" : ""}>
-          <span>/</span>
+        <div class={i !== 0 ? "hidden sm:inline" : ""}>
+          <span class="mx-1">/</span>
           {i === slug.length - 1 ? (
             <span class="text-muted-foreground">{segment}</span>
           ) : (
             <a href={buildSegmentHref(i)}>{segment}</a>
           )}
-        </span>
+        </div>
       ))
     }
   </div>
@@ -44,17 +46,10 @@ function buildSegmentHref(index: number): string {
 
 <div class="flex items-center gap-8">
   <ul class="flex gap-2 md:gap-6 md:text-lg">
-    <li><a href="/projects">projects</a></li>
+    <li><a href="/about" data-astro-prefetch>about</a></li>
+    <li><a href="/projects" data-astro-prefetch>projects</a></li>
     <li><a href="/writing" data-astro-prefetch>writing</a></li>
     <li><a href="/friends" data-astro-prefetch>friends</a></li>
   </ul>
   <Theme client:load />
 </div>
-
-<style>
-  @reference "$styles/global.css";
-
-  a {
-    @apply hover:text-accent;
-  }
-</style>

@@ -1,7 +1,7 @@
 ---
 import Commit from "$lib/components/footer/Commit.astro";
 import { Icon } from "astro-icon/components";
-import Newt from "$lib/components/Newt.svelte";
+import Accent from "$lib/components/Accent.svelte";
 ---
 
 <div class="has-prose container">
@@ -10,7 +10,7 @@ import Newt from "$lib/components/Newt.svelte";
       made with <Icon
         name="mdi:heart"
         class="hover:text-red hover:cursor-pointer"
-      /> by <Newt client:visible />
+      /> by <Accent class="font-medium" client:visible>newt</Accent>
     </p>
     <ul class="not-prose flex gap-2">
       <li>
@@ -33,9 +33,5 @@ import Newt from "$lib/components/Newt.svelte";
   li > a,
   .has-icon {
     @apply flex items-center gap-1;
-  }
-
-  a {
-    @apply hover:text-accent;
   }
 </style>

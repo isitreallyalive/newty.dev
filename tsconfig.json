@@ -6,7 +6,8 @@
     "baseUrl": ".",
     "paths": {
       "$lib/*": ["src/lib/*"],
-      "$styles/*": ["src/styles/*"]
+      "$styles/*": ["src/styles/*"],
+      "$img/*": ["content/img/*"]
     }
   }
 }

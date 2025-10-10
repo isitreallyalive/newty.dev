@@ -25,7 +25,7 @@
 </script>
 
 <button
-  class="relative font-mono text-sm font-bold -tracking-[0.125em] transition-colors select-none hover:cursor-pointer hover:brightness-125 sm:text-base {!$enabled
+  class="xs:inline relative hidden font-mono text-sm font-bold -tracking-[0.125em] transition-colors select-none hover:cursor-pointer hover:brightness-125 sm:text-base {!$enabled
     ? 'text-muted-foreground'
     : ''}"
   onclick={() => ($enabled = !$enabled)}

@@ -7,7 +7,7 @@
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "[xml]": {
-    "editor.defaultFormatter": "PrateekMahendrakar.prettyxml"
+  "[mdx]": {
+    "editor.formatOnSave": false
   }
 }

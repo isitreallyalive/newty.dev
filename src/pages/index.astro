@@ -1,18 +1,38 @@
 ---
 import Page from "../Page.astro";
-import Newt from "$lib/components/Newt.svelte";
-import Song from "$lib/components/Song.svelte";
-
-const age = new Date().getFullYear() - 2006;
+import Accent from "$lib/components/Accent.svelte";
+import { AGE, SOCIALS } from "$lib/data";
+import { Icon } from "astro-icon/components";
 ---
 
 <Page>
   <h1>Welcome!</h1>
   <p>
-    Hey, I'm <Newt client:load bold={false} /> - I'm a {age}-year-old from the
-    UK, and I go by he/they.
+    Hey, I'm <Accent client:load>newt</Accent> (he/they), a {AGE}-year-old from
+    the UK. I'm in my second year of university, working towards a BSc (Hons) in
+    Computer Science.
   </p>
-  <ul>
-    <li><Song client:only="svelte" /></li>
+  <ul class="not-prose prose-p">
+    {
+      Object.entries(SOCIALS).map(([name, { href, class: clazz }]) => (
+        <li>
+          <a class={clazz} {href}>
+            <Icon {name} />
+          </a>
+        </li>
+      ))
+    }
   </ul>
 </Page>
+
+<style>
+  @reference "$styles/global.css";
+
+  ul {
+    @apply flex gap-2;
+  }
+
+  li {
+    @apply text-lg sm:text-xl md:text-2xl;
+  }
+</style>

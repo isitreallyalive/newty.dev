@@ -1,0 +1,38 @@
+---
+import Page from "../Page.astro";
+import Accent from "$lib/components/Accent.svelte";
+import { AGE } from "$lib/data";
+import fpwe from "$img/fpwe.webp";
+import { Image } from "astro:assets";
+---
+
+<Page>
+  <h1>Hey, I'm <Accent client:load>newt</Accent></h1>
+
+  <p>
+    I'm a {AGE}-year-old student from the UK. I'm in my second year of
+    university, working towards a BSc (Hons) in Computer Science.
+  </p>
+
+  <p>
+    I love music, programming, and video games! My favourite programming
+    language is Rust.
+  </p>
+
+  <p>
+    I'm a member of the
+    <a
+      class="text-lavender hover:text-accent"
+      href="https://github.com/lavenderstones"
+    >
+      LavenderStones
+    </a>
+    jam team. You can play our most recent game,
+    <strong>Fast Paced Working Environment</strong> on itch.io
+    <a href="https://isitreallyalive.itch.io/fast">here</a> and check out the code
+    on GitHub
+    <a href="https://github.com/lavenderstones/fpwe">here</a>.
+  </p>
+
+  <Image src={fpwe} alt="Fast Paced Working Environment" />
+</Page>
