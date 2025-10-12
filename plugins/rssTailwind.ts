@@ -6,7 +6,10 @@ import tailwindcss from "@tailwindcss/postcss";
 import { watch, type FSWatcher } from "node:fs";
 
 const inPath = path.resolve(process.cwd(), "src", "styles", "rss.css");
+const xslPath = path.resolve(process.cwd(), "public", "rss", "feed.xsl");
 const outPath = path.resolve(process.cwd(), "public", "rss", "rss.css");
+
+const toWatch = [inPath, xslPath];
 
 async function processCss() {
   const css = await fs.readFile(inPath, "utf8");
@@ -21,7 +24,7 @@ async function processCss() {
 }
 
 export default function rssTailwind(): AstroIntegration {
-  let watchHandle: FSWatcher | null = null;
+  let watchHandles: FSWatcher[] = [];
   let debounceTimer: NodeJS.Timeout | null = null;
 
   return {
@@ -33,13 +36,16 @@ export default function rssTailwind(): AstroIntegration {
 
         if (process.env.NODE_ENV !== "production") {
           try {
-            watchHandle = watch(inPath, { persistent: true }, () => {
-              // simple debounce to avoid multiple runs
-              if (debounceTimer) clearTimeout(debounceTimer);
-              debounceTimer = setTimeout(() => {
-                void processCss();
-              }, 100);
-            });
+            for (const path of toWatch) {
+              const h = watch(path, { persistent: true }, () => {
+                // simple debounce to avoid multiple runs
+                if (debounceTimer) clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                  void processCss();
+                }, 100);
+              });
+              watchHandles.push(h);
+            }
           } catch {}
         }
       },
@@ -48,10 +54,10 @@ export default function rssTailwind(): AstroIntegration {
       "astro:build:start": async () => {
         await processCss();
 
-        if (watchHandle) {
+        if (watchHandles) {
           try {
-            watchHandle.close();
-            watchHandle = null;
+            for (const h of watchHandles) h.close();
+            watchHandles = [];
           } catch {}
         }
       },

@@ -1,3 +1,8 @@
+@import "@fontsource-variable/outfit";
+@import "@fontsource-variable/cascadia-code";
+
+@import "@fontsource/poppins/800.css";
+
 :root {
   --radius: 0.625rem;
 }

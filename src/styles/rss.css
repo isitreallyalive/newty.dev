@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+@import "@fontsource-variable/outfit";
+@import "@fontsource-variable/cascadia-code";
+
 @theme inline {
   --font-sans: "Outfit", sans-serif;
   --font-mono: "Cascadia Code", monospace;

@@ -14,10 +14,6 @@
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width" />
         <title>newty.dev</title>
-        <link
-          href="https://api.fonts.coollabs.io/css2?family=Cascadia+Code&amp;family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&amp;display=swap"
-          rel="stylesheet"
-        />
         <link href="/rss/rss.css" rel="stylesheet" />
       </head>
       <body
@@ -49,7 +45,7 @@
           </nav>
           <main>
             <div
-              class="border-accent shadow-lg bg-ctp-base/40 mt-8 mb-10 flex w-full flex-col rounded-xl border p-4 sm:p-6"
+              class="border-accent shadow-lg gap-1 bg-ctp-base/40 mt-8 mb-10 flex w-full flex-col rounded-xl border p-4 sm:p-6"
             >
               <div class="has-icon select-none">
                 <xsl:for-each select="document('/rss/rss.svg')/*">
