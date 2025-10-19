@@ -1,0 +1,20 @@
+---
+import type { AccentName } from "@catppuccin/palette";
+
+export interface Props {
+  colour?: AccentName;
+  class?: string;
+}
+
+const { colour = "lavender", class: clazz } = Astro.props;
+---
+
+<span class="group relative inline-block" id="outer">
+  <slot />
+  <span
+    class:list={[
+      clazz,
+      `bg-${colour}`,
+      "absolute bottom-0.75 left-0 h-0.5 w-full origin-left scale-x-0 transition-transform duration-200 group-hover:scale-x-100",
+    ]}></span>
+</span>

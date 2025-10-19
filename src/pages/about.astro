@@ -1,6 +1,7 @@
 ---
 import Page from "../Page.astro";
 import Accent from "$lib/components/Accent.svelte";
+import Link from "$lib/components/Link.astro";
 import { AGE } from "$lib/data";
 import fpwe from "$img/fpwe.webp";
 import { Image } from "astro:assets";
@@ -15,24 +16,37 @@ import { Image } from "astro:assets";
   </p>
 
   <p>
-    I love music, programming, and video games! My favourite programming
-    language is Rust.
+    I love music, programming, and video games! My favourite album is
+    <Link colour="sky" href="https://soundcloud.com/underscores/sets/wsk">
+      Wallsocket
+    </Link>
+    by
+    <Link href="https://soundcloud.com/underscores">underscores</Link>, my
+    favourite programming language is
+    <Link colour="maroon" href="https://www.rust-lang.org/">Rust</Link>, and my
+    favourite video game is
+    <Link colour="green" href="https://www.minecraft.net">Minecraft</Link>.
   </p>
 
   <p>
     I'm a member of the
-    <a
-      class="text-lavender hover:text-accent"
-      href="https://github.com/lavenderstones"
-    >
+    <Link colour="lavender" href="https://github.com/lavenderstones">
       LavenderStones
-    </a>
+    </Link>
     jam team. You can play our most recent game,
-    <strong>Fast Paced Working Environment</strong> on itch.io
-    <a href="https://isitreallyalive.itch.io/fast">here</a> and check out the code
-    on GitHub
-    <a href="https://github.com/lavenderstones/fpwe">here</a>.
+    <span class="font-semibold">Fast Paced Working Environment</span> on itch.io
+    <Link href="https://isitreallyalive.itch.io/fast">here</Link> and check out the
+    code on GitHub
+    <Link href="https://github.com/lavenderstones/fpwe">here</Link>.
   </p>
 
   <Image src={fpwe} alt="Fast Paced Working Environment" />
 </Page>
+
+<style>
+  @reference "$styles/global.css";
+
+  a {
+    @apply font-medium;
+  }
+</style>

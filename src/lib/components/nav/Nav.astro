@@ -2,11 +2,20 @@
 import Accent from "$lib/components/Accent.svelte";
 import Cat from "$lib/components/nav/Cat.svelte";
 import Theme from "$lib/components/nav/Theme.svelte";
+import type { Links } from "$lib/data";
+import Link from "../Link.astro";
 
 interface Props {
   slug?: string[];
   title?: string;
 }
+
+const LINKS: Links = {
+  about: { href: "/about" },
+  projects: { href: "/projects" },
+  writing: { href: "/writing" },
+  friends: { href: "/friends" },
+};
 
 let { slug = [], title } = Astro.props;
 if (title) {
@@ -31,25 +40,38 @@ function buildSegmentHref(index: number): string {
     </a>
     {
       slug?.map((segment, i) => (
-        <div class={i !== 0 ? "hidden sm:inline" : ""}>
-          <span class="mx-1">/</span>
+        <>
+          <span class="text-muted-foreground mx-1">/</span>
           {i === slug.length - 1 ? (
             <span class="text-muted-foreground">{segment}</span>
           ) : (
             <a href={buildSegmentHref(i)}>{segment}</a>
           )}
-        </div>
+        </>
       ))
     }
+    <!-- {
+      slug?.map((segment, i) => (
+        <div class={i !== 0 ? "hidden sm:inline" : ""}>
+          <span class="mx-1">/</span>
+
+        </div>
+      ))
+    } -->
   </div>
 </div>
 
 <div class="flex items-center gap-8">
   <ul class="flex gap-2 md:gap-6 md:text-lg">
-    <li><a href="/about" data-astro-prefetch>about</a></li>
-    <li><a href="/projects" data-astro-prefetch>projects</a></li>
-    <li><a href="/writing" data-astro-prefetch>writing</a></li>
-    <li><a href="/friends" data-astro-prefetch>friends</a></li>
+    {
+      Object.entries(LINKS).map(([name, { href }]) => (
+        <li>
+          <Link class="text-text font-normal" {href} data-astro-prefetch>
+            {name}
+          </Link>
+        </li>
+      ))
+    }
   </ul>
   <Theme client:load />
 </div>

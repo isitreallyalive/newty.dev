@@ -17,7 +17,7 @@ const sha = VERCEL_GIT_COMMIT_SHA ?? (await execAsync("git rev-parse HEAD"));
 
 <a
   href={`https://github.com/${REPO}/tree/${sha}`}
-  class="hover:text-red flex items-center gap-1 truncate"
+  class="text-muted-foreground hover:text-maroon flex items-center gap-1 truncate"
 >
   <Icon name="mdi:git" />
   {message}

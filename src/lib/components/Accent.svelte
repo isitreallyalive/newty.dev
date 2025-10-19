@@ -16,7 +16,7 @@
   role="presentation"
   onmouseenter={() => accent.next()}
   onmouseleave={() => accent.clear()}
-  class={[$accent ? `text-${$accent}` : "", ...classList]}
+  class={[$accent ? `text-${$accent}` : "", "transition-colors", ...classList]}
 >
   {@render children()}
 </span>

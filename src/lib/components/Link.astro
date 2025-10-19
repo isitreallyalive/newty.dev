@@ -1,0 +1,16 @@
+---
+import Underline, {
+  type Props as UnderlineProps,
+} from "$lib/components/Underline.astro";
+
+type Props = {
+  href: string;
+} & UnderlineProps;
+const { colour = "lavender", href, class: clazz } = Astro.props as Props;
+---
+
+<Underline {colour}>
+  <a class=`text-${colour} font-medium ${clazz}` {href}>
+    <slot />
+  </a>
+</Underline>

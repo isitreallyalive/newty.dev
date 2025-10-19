@@ -2,6 +2,14 @@
 import Commit from "$lib/components/footer/Commit.astro";
 import { Icon } from "astro-icon/components";
 import Accent from "$lib/components/Accent.svelte";
+import type { Links } from "$lib/data";
+
+const LINKS: Links = {
+  rss: {
+    href: "/rss.xml",
+    icon: "mdi:rss",
+  },
+};
 ---
 
 <div class="has-prose container">
@@ -14,7 +22,13 @@ import Accent from "$lib/components/Accent.svelte";
     </p>
     <ul class="not-prose flex gap-2">
       <li>
-        <a href="/rss.xml"><Icon name="mdi:rss" /> rss</a>
+        {
+          Object.entries(LINKS).map(([name, { href, icon }]) => (
+            <a {href}>
+              {icon ? <Icon name={icon} /> : null} {name}
+            </a>
+          ))
+        }
       </li>
     </ul>
   </div>
@@ -28,6 +42,10 @@ import Accent from "$lib/components/Accent.svelte";
 
   .container {
     @apply xs:max-w-md text-muted-foreground mx-auto grid max-w-xs grid-cols-2 **:my-0 sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-6xl;
+  }
+
+  a {
+    @apply hover:text-accent;
   }
 
   li > a,

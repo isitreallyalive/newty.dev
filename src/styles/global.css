@@ -10,7 +10,7 @@
 @custom-variant dark (&:where(.frappe, .frappe *, .macchiato, .macchiato *, .mocha, .mocha *, .));
 
 /* inline text+border classes */
-@source inline("{text,border}-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender,text}");
+@source inline("{text,border,bg}-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender,text}");
 
 ::selection {
   background-color: var(--catppuccin-color-mauve);
@@ -24,10 +24,6 @@
 
   body {
     @apply bg-background text-foreground flex min-h-screen flex-col;
-  }
-
-  a {
-    @apply hover:text-accent;
   }
 
   img {
