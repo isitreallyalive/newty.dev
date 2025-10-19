@@ -1,24 +1,36 @@
 <script lang="ts">
   import { DISCORD_ID } from "$lib/data";
   import { useLanyard } from "svelte-lanyard";
-  import { derived, readable } from "svelte/store";
+  import {
+    derived,
+    readable,
+    writable,
+    type Readable,
+    type Writable,
+  } from "svelte/store";
   import Progress from "$components/ui/progress/progress.svelte";
-  import { GITHUB_USERNAME } from "$lib/data";
+  import { onMount } from "svelte";
+  type LanyardData =
+    ReturnType<typeof useLanyard> extends Readable<infer T> ? T : never;
 
-  const data = useLanyard(DISCORD_ID);
+  async function fetchRest(): Promise<LanyardData["spotify"]> {
+    const response = await fetch(
+      `https://api.lanyard.rest/v1/users/${DISCORD_ID}`,
+    );
+    const data = await response.json();
+    return data?.data?.spotify as LanyardData["spotify"];
+  }
 
-  const isPlaying = derived(data, (d) => !!d?.spotify);
-  const song = derived(data, (d) => d?.spotify?.song ?? "");
+  const data: Writable<LanyardData["spotify"] | null> = writable(
+    await fetchRest(),
+  );
+
+  const isPlaying = derived(data, (d) => d !== null);
   const href = derived(data, (d) =>
-    d?.spotify ? `https://open.spotify.com/track/${d.spotify.track_id}` : "#",
+    d?.track_id ? `https://open.spotify.com/track/${d.track_id}` : "#",
   );
   // only first artist if multiple
-  const artist = derived(
-    data,
-    (d) => d?.spotify?.artist?.split(";")?.[0] ?? "",
-  );
-  const albumName = derived(data, (d) => d?.spotify?.album ?? "");
-  const albumArt = derived(data, (d) => d?.spotify?.album_art_url ?? "");
+  const artist = derived(data, (d) => d?.artist?.split(";")?.[0] ?? "");
 
   // format milliseconds to M:SS
   const fmt = (ms: number) => {
@@ -30,17 +42,17 @@
 
   // total length of song
   const total = derived(data, (d) => {
-    const ts = d?.spotify?.timestamps;
+    const ts = d?.timestamps;
     if (!ts || typeof ts.start !== "number" || typeof ts.end !== "number")
       return "";
     return fmt(ts.end - ts.start);
   });
 
-  // current position in song (formatted)
-  const curr = readable("", (set) => {
+  // current position in song
+  const current = readable("", (set) => {
     let interval: ReturnType<typeof setInterval> | null = null;
-    let currentStart = 0;
-    let currentEnd = 0;
+    let start = 0;
+    let end = 0;
 
     const clearTimer = () => {
       if (interval) {
@@ -51,13 +63,13 @@
 
     const updateOnce = () => {
       const now = Date.now();
-      const duration = currentEnd - currentStart;
+      const duration = end - start;
       if (duration <= 0) {
         set("");
         clearTimer();
         return;
       }
-      let pos = now - currentStart;
+      let pos = now - start;
       if (pos < 0) pos = 0;
       if (pos >= duration) {
         pos = duration;
@@ -69,21 +81,22 @@
     };
 
     const unsubscribe = data.subscribe((d: any) => {
-      const ts = d?.spotify?.timestamps;
+      const ts = d?.timestamps;
       const hasTimestamps =
         ts && typeof ts.start === "number" && typeof ts.end === "number";
 
-      if (!hasTimestamps || !d?.spotify) {
-        currentStart = 0;
-        currentEnd = 0;
+      if (!hasTimestamps || !isPlaying) {
+        // Changed $isPlaying to isPlaying
+        start = 0;
+        end = 0;
         set("");
         clearTimer();
         return;
       }
 
-      if (ts.start !== currentStart || ts.end !== currentEnd) {
-        currentStart = ts.start;
-        currentEnd = ts.end;
+      if (ts.start !== start || ts.end !== end) {
+        start = ts.start;
+        end = ts.end;
       }
 
       updateOnce();
@@ -119,6 +132,14 @@
 
     return seconds;
   }
+
+  onMount(() => {
+    const lanyard = useLanyard(DISCORD_ID);
+    lanyard.subscribe((value) => {
+      if (value === undefined) return;
+      data.set(value.spotify);
+    });
+  });
 </script>
 
 <div class="not-prose relative select-none">
@@ -127,8 +148,8 @@
       <div class="relative">
         <img
           class="h-20 w-20 animate-[spin_8s_linear_infinite] rounded-full sm:h-24 sm:w-24"
-          src={$albumArt}
-          alt={$albumName}
+          src={$data?.album_art_url}
+          alt={$data?.album}
           decoding="async"
           loading="lazy"
         />
@@ -142,14 +163,14 @@
           href={$href}
           class="hover:text-accent mt-1 truncate text-base font-semibold"
         >
-          {$song}
+          {$data?.song}
         </a>
         <p class="text-muted-foreground truncate text-sm">{$artist}</p>
 
         <div class="mt-3">
-          <Progress value={convertTime($curr)} max={convertTime($total)} />
+          <Progress value={convertTime($current)} max={convertTime($total)} />
           <div class="text-muted-foreground mt-1 text-xs tabular-nums">
-            {$curr} / {$total}
+            {$current} / {$total}
           </div>
         </div>
       </div>
@@ -159,8 +180,8 @@
       <div class="relative">
         <img
           class="h-20 w-20 animate-[spin_8s_linear_infinite] rounded-full sm:h-24 sm:w-24"
-          src={`https://github.com/${GITHUB_USERNAME}.png`}
-          alt={$albumName}
+          src="/bert.webp"
+          alt="bert :3c"
           decoding="async"
           loading="lazy"
         />
