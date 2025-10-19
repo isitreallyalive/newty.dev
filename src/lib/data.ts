@@ -1,6 +1,6 @@
 export const AGE = new Date().getFullYear() - 2006;
 
-const GITHUB_USERNAME = "isitreallyalive";
+export const GITHUB_USERNAME = "isitreallyalive";
 export const REPO = `${GITHUB_USERNAME}/newty.dev`;
 
 export interface Links {

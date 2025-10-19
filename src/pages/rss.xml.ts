@@ -4,7 +4,7 @@ import { getContainerRenderer } from "@astrojs/mdx";
 import { loadRenderers } from "astro:container";
 import rss from "@astrojs/rss";
 import { getPosts } from "$lib/helpers/blog";
-import RSS from "$lib/components/RSS.astro";
+import RSS from "$components/RSS.astro";
 import { render } from "astro:content";
 
 export async function GET(context: APIContext) {

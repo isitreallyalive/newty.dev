@@ -1,7 +1,8 @@
 ---
 import Page from "../Page.astro";
-import Accent from "$lib/components/Accent.svelte";
-import Link from "$lib/components/Link.astro";
+import Accent from "$components/Accent.svelte";
+import Link from "$components/Link.astro";
+import Song from "$components/about/Song.svelte";
 import { AGE } from "$lib/data";
 import fpwe from "$img/fpwe.webp";
 import { Image } from "astro:assets";
@@ -27,6 +28,10 @@ import { Image } from "astro:assets";
     favourite video game is
     <Link colour="green" href="https://www.minecraft.net">Minecraft</Link>.
   </p>
+
+  <div class="my-8">
+    <Song client:only="svelte" />
+  </div>
 
   <p>
     I'm a member of the

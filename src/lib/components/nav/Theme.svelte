@@ -5,7 +5,7 @@
   import frappe from "@catppuccin/tailwindcss/frappe.css?url";
   import macchiato from "@catppuccin/tailwindcss/macchiato.css?url";
   import mocha from "@catppuccin/tailwindcss/mocha.css?url";
-  import * as Select from "$lib/components/ui/select";
+  import * as Select from "$components/ui/select";
   import { writable } from "svelte/store";
 
   type Theme = "latte" | "frappe" | "macchiato" | "mocha";
