@@ -1,0 +1,29 @@
+---
+import { cn } from "$lib/utils";
+import { Image } from "astro:assets";
+
+interface Props {
+  name: string;
+  href?: string;
+  class?: string;
+}
+
+const { name, href, class: clazz } = Astro.props;
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "$img/friends/*.webp",
+  { eager: true },
+);
+const imagePath = Object.keys(images).find((key) => key.includes(name));
+
+if (!imagePath) {
+  throw new Error(`Image not found: ${name}.webp`);
+}
+
+const imageMetadata = images[imagePath].default;
+const { width, height } = imageMetadata;
+---
+
+<a href={href} class={cn("inline-block", clazz)}>
+  <Image src={imagePath} alt={name} class="m-0" {width} {height} />
+</a>

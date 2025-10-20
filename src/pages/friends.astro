@@ -3,10 +3,7 @@ import Page from "$page";
 import Catppuccin from "$components/friends/Catppuccin.astro";
 import Link from "$components/Link.astro";
 import { REPO } from "$lib/data";
-import { getCollection } from "astro:content";
-
-const friends = await getCollection("friends");
-console.log(friends);
+import Friend from "$lib/components/friends/Friend.astro";
 ---
 
 <Page>
@@ -15,8 +12,12 @@ console.log(friends);
 
   <blockquote>
     If we're friends, and you want to be featured here, let me know, or
-    <Link href=`https://github.com/${REPO}`>add yourself</Link> :]
+    <Link href={`https://github.com/${REPO}`}>add yourself</Link> :]
   </blockquote>
+
+  <div class="mt-8 mb-6 flex flex-wrap gap-4">
+    <Friend name="abstralexis" href="https://abstralexis.dev/" class="size-8" />
+  </div>
 
   <h2>Webrings</h2>
   <figure>
