@@ -156,7 +156,7 @@
       </div>
 
       <div class="min-w-0 flex-1">
-        <div class="text-accent text-xs tracking-wide uppercase">
+        <div class="text-accent font-mono text-xs tracking-wide uppercase">
           Now Playing
         </div>
         <a
@@ -165,7 +165,9 @@
         >
           {$data?.song}
         </a>
-        <p class="text-muted-foreground truncate text-sm">{$artist}</p>
+        <p class="text-muted-foreground truncate font-mono text-sm">
+          {$artist}
+        </p>
 
         <div class="mt-3">
           <Progress value={convertTime($current)} max={convertTime($total)} />

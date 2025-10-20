@@ -8,7 +8,8 @@
       "$lib/*": ["src/lib/*"],
       "$styles/*": ["src/styles/*"],
       "$img/*": ["content/img/*"],
-      "$components/*": ["src/lib/components/*"]
+      "$components/*": ["src/lib/components/*"],
+      "$page": ["src/Page.astro"]
     }
   }
 }

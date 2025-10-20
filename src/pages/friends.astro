@@ -1,0 +1,35 @@
+---
+import Page from "$page";
+import Catppuccin from "$components/friends/Catppuccin.astro";
+import Link from "$components/Link.astro";
+import { REPO } from "$lib/data";
+import { getCollection } from "astro:content";
+
+const friends = await getCollection("friends");
+console.log(friends);
+---
+
+<Page>
+  <h1>Say hello to my friends</h1>
+  <p>Here are some of my friends! You should check out their sites :]</p>
+
+  <blockquote>
+    If we're friends, and you want to be featured here, let me know, or
+    <Link href=`https://github.com/${REPO}`>add yourself</Link> :]
+  </blockquote>
+
+  <h2>Webrings</h2>
+  <figure>
+    <blockquote>
+      A webring is a collection of websites linked together in a loop. Each
+      website contains links to the previous and next websites in the ring. If
+      you navigate far enough, eventually you end up back where you started!
+    </blockquote>
+    <figcaption>
+      — <Link href="https://github.com/k3rs3d/ringfairy">k3rs3d/ringfairy</Link>
+      README.md
+    </figcaption>
+  </figure>
+
+  <Catppuccin />
+</Page>

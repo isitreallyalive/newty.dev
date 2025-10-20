@@ -2,7 +2,7 @@
 
 @layer base {
   .has-prose {
-    @apply prose prose-ctp prose-sm prose-a:no-underline prose-a:font-normal sm:prose-base md:prose-lg prose-h1:mb-4 prose-headings:font-heading prose-headings:mb-2 prose-p:my-2 prose-headings:mt-0;
+    @apply prose prose-ctp prose-sm prose-blockquote:font-normal prose-blockquote:my-4 prose-figure:my-6 prose-a:no-underline prose-a:font-normal sm:prose-base md:prose-lg prose-h1:mb-4 prose-headings:font-heading prose-headings:mb-2 prose-p:my-2 prose-headings:mt-0;
   }
 
   /* if p comes before heading, increase p bottom margin */

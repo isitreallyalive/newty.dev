@@ -9,8 +9,9 @@
 /* override media query for dark mode so my theme selector works */
 @custom-variant dark (&:where(.frappe, .frappe *, .macchiato, .macchiato *, .mocha, .mocha *, .));
 
-/* inline text+border classes */
+/* inline accent classes */
 @source inline("{text,border,bg}-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender,text}");
+@source inline("hover:bg-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender,text}");
 
 ::selection {
   background-color: var(--catppuccin-color-mauve);
