@@ -20,7 +20,7 @@ if (!path) {
   throw new Error(`Image not found: ${name}.webp`);
 }
 
-const image = await import(path);
+const image = images[path].default;
 ---
 
 <a href={href} class={cn("inline-block", clazz)}>
