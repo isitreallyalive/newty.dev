@@ -14,16 +14,15 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   "$img/friends/*.webp",
   { eager: true },
 );
-const imagePath = Object.keys(images).find((key) => key.includes(name));
+const path = Object.keys(images).find((key) => key.includes(name));
 
-if (!imagePath) {
+if (!path) {
   throw new Error(`Image not found: ${name}.webp`);
 }
 
-const imageMetadata = images[imagePath].default;
-const { width, height } = imageMetadata;
+const image = await import(path);
 ---
 
 <a href={href} class={cn("inline-block", clazz)}>
-  <Image src={imagePath} alt={name} class="m-0" {width} {height} />
+  <Image src={image} alt={name} class="m-0" />
 </a>
