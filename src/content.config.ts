@@ -1,13 +1,17 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
-const blog = defineCollection({
-  loader: glob({
-    base: "./content/blog",
+function mdxLoader(dir: string) {
+  return glob({
+    base: `./content/${dir}`,
     pattern: "**/*.mdx",
     // remove file extension and directory to get slug
     generateId: ({ entry }) => entry.split("/").pop()!.split(".")[0],
-  }),
+  });
+}
+
+const blog = defineCollection({
+  loader: mdxLoader("blog"),
   schema: z.object({
     title: z.string(),
     draft: z.boolean().optional(),
@@ -15,4 +19,13 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const projects = defineCollection({
+  loader: mdxLoader("projects"),
+  schema: z.object({
+    title: z.string(),
+    tagline: z.string(),
+    repo: z.string().url().optional(),
+  }),
+});
+
+export const collections = { blog, projects };

@@ -1,0 +1,14 @@
+---
+import Page from "$page";
+import { getCollection } from "astro:content";
+import Project from "$components/projects/Project.svelte";
+
+const projects = await getCollection("projects");
+---
+
+<Page>
+  <h1>Projects</h1>
+  <div class="mt-8 grid grid-cols-2 gap-12">
+    {projects.map((data) => <Project client:visible {...data} />)}
+  </div>
+</Page>

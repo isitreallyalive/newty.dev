@@ -11,7 +11,7 @@
 
 /* inline accent classes */
 @source inline("{text,border,bg}-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender,text}");
-@source inline("hover:bg-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender,text}");
+@source inline("hover:{border,bg}-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender,text}");
 
 ::selection {
   background-color: var(--catppuccin-color-mauve);
