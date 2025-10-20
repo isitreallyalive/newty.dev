@@ -1,10 +1,10 @@
-import { writable } from "svelte/store";
+import { derived, writable } from "svelte/store";
 
 // dark mode themes - latte included in all
 import frappeUrl from "@catppuccin/tailwindcss/frappe.css?url";
 import macchiatoUrl from "@catppuccin/tailwindcss/macchiato.css?url";
 import mochaUrl from "@catppuccin/tailwindcss/mocha.css?url";
-import type { FlavorName } from "@catppuccin/palette";
+import { flavors, type FlavorName } from "@catppuccin/palette";
 
 export const frappe = frappeUrl;
 export const macchiato = macchiatoUrl;
@@ -74,6 +74,14 @@ export async function applyTheme(
   localStorage.setItem("theme", theme);
 }
 
-export default writable<FlavorName>(
+export const theme = writable<FlavorName>(
   typeof window !== "undefined" ? detectTheme() : "mocha",
 );
+
+export const colours = derived(theme, (theme) =>
+  Object.fromEntries(
+    flavors[theme].colorEntries.map(([name, { hex }]) => [name, hex]),
+  ),
+);
+
+export default theme;

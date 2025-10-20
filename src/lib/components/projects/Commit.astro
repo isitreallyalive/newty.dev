@@ -1,0 +1,44 @@
+---
+import Link from "$components/Link.astro";
+
+export interface Props {
+  oid: string;
+  url: string;
+  messageHeadline: string;
+  committedDate: string;
+  author: {
+    name: string;
+    avatarUrl: string;
+  };
+}
+
+const {
+  oid,
+  url,
+  messageHeadline,
+  committedDate,
+  author: { name: author, avatarUrl },
+} = Astro.props;
+const authorUrl = `https://github.com/${author}`;
+const hash = oid.slice(0, 7);
+const formattedDate = committedDate.split("T")[0].split("-").join(" · ");
+---
+
+<div class="prose-p:my-0 flex items-center gap-8">
+  <a href={authorUrl} class="flex-shrink-0">
+    <img src={avatarUrl} alt={author} class="my-0 size-12 rounded-full" />
+  </a>
+  <div class="flex w-full flex-col">
+    <div class="flex gap-2">
+      <Link colour="text" href={url}>{messageHeadline}</Link>
+    </div>
+    <div class="flex justify-between text-sm">
+      <span class="text-muted-foreground font-mono">{formattedDate}</span>
+      <div class="*:text-muted-foreground flex gap-2">
+        <a href={authorUrl} class="hover:text-text">{author}</a>
+        <span>·</span>
+        <a href={url} class="hover:text-text">{hash}</a>
+      </div>
+    </div>
+  </div>
+</div>

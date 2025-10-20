@@ -6,8 +6,12 @@ import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import Languages, {
   type Language,
-} from "$lib/components/projects/Languages.svelte";
+} from "$components/projects/Languages.svelte";
 import { Icon } from "astro-icon/components";
+import { render } from "astro:content";
+import Commit, {
+  type Props as CommitProps,
+} from "$components/projects/Commit.astro";
 
 export const getStaticPaths = (async () => {
   const projects = await getCollection("projects");
@@ -17,10 +21,11 @@ export const getStaticPaths = (async () => {
   }));
 }) satisfies GetStaticPaths;
 
+const post = Astro.props;
 const {
   id,
   data: { title, repo },
-} = Astro.props;
+} = post;
 const [owner, repoName] = repo?.split("/") || [GITHUB_USERNAME, id];
 
 interface RepoData {
@@ -28,15 +33,29 @@ interface RepoData {
   languages: {
     edges: Language[];
   };
+  defaultBranchRef: {
+    target: {
+      history: {
+        edges: {
+          node: CommitProps;
+        }[];
+      };
+    };
+  };
 }
 
 const {
   stargazerCount: stars,
   languages: { edges: languages },
+  defaultBranchRef: {
+    target: {
+      history: { edges: commits },
+    },
+  },
 } = await getRepoData<RepoData>(
   { owner, name: repoName },
   `
-stargazerCount,
+stargazerCount
 languages(first: 1) {
   edges {
     size
@@ -46,27 +65,72 @@ languages(first: 1) {
     }
   }
 }
+defaultBranchRef {
+  target {
+    ... on Commit {
+      history(first: 5) {
+        edges {
+          node {
+            url
+            oid
+            messageHeadline
+            committedDate
+            author {
+              name
+              avatarUrl
+            }
+          }
+        }
+      }
+    }
+  }
+}
     `,
   { stargazerCount: 0, languages: { edges: [] } },
 );
+
+const { Content } = await render(post);
 ---
 
 <Page>
-  <h1>{title}</h1>
-  <ul class="icons not-prose my-4 gap-4">
-    <li class="hover:text-yellow">
-      <Icon name="mdi:star" />
-      <span>{stars} star{stars !== 1 ? "s" : ""}</span>
-    </li>
-    <a
-      class="hover:text-black dark:hover:text-white"
-      href={`https://github.com/${owner}/${repoName}`}
-    >
-      <li>
-        <Icon name="mdi:github" />
-        <span>View it on GitHub</span>
+  <header class="my-4">
+    <h1>{title}</h1>
+    <ul class="icons not-prose my-4 gap-4">
+      <li class="hover:text-yellow">
+        <Icon name="mdi:star" />
+        <span>{stars} star{stars !== 1 ? "s" : ""}</span>
       </li>
-    </a>
-  </ul>
-  <Languages client:load {languages} />
+      <a
+        class="hover:text-black dark:hover:text-white"
+        href={`https://github.com/${owner}/${repoName}`}
+      >
+        <li>
+          <Icon name="mdi:github" />
+          <span>View it on GitHub</span>
+        </li>
+      </a>
+    </ul>
+    <Languages client:load {languages} />
+  </header>
+  <article>
+    <section>
+      <h2>About</h2>
+      <Content />
+    </section>
+    <section>
+      <h2 class="mb-4">Recent Commits</h2>
+      <div class="flex flex-col gap-4">
+        {commits.map(({ node }) => <Commit {...node} />)}
+      </div>
+    </section>
+  </article>
 </Page>
+
+<style>
+  @reference "$styles/global.css";
+
+  ul.icons > li > *,
+  ul.icons > * > li > * {
+    @apply text-base;
+  }
+</style>

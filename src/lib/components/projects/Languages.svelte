@@ -9,10 +9,10 @@
 </script>
 
 <script lang="ts">
-  import theme from "$lib/stores/theme";
+  import theme, { colours } from "$lib/stores/theme";
   import { cn } from "$lib/utils";
   import { flavors } from "@catppuccin/palette";
-  import nearest from "nearest-color";
+  import nc from "nearest-color";
 
   interface Props {
     languages: Language[];
@@ -21,17 +21,14 @@
   const { languages: data } = $props() as Props;
   const totalSize = data.reduce((acc, { size }) => acc + size, 0);
 
-  const colours = $derived(
-    Object.fromEntries(
-      flavors[$theme].colorEntries.map(([name, { hex }]) => [name, hex]),
-    ),
-  );
-  const nearestColor = $derived(nearest.from(colours));
+  const nearestColor = $derived(nc.from($colours));
   const languages = $derived(
     data.map(({ size, node }) => {
+      console.log(node);
       const percentage = totalSize > 0 ? (size / totalSize) * 100 : 0;
+      const colour = node.color || flavors[$theme].colors.text;
       return {
-        accent: nearestColor(node.color).name,
+        accent: nearestColor(colour).name,
         name: node.name,
         percentage,
         formattedPercentage: percentage.toFixed(1),
@@ -52,10 +49,10 @@
   <ul class="flex flex-wrap gap-2">
     {#each languages as { name, accent, percentage }}
       <li class="flex items-center gap-2 font-mono text-sm">
-        <span
+        <div
           class={cn("h-2 w-2 rounded-full", `bg-${accent}`)}
           aria-hidden="true"
-        ></span>
+        ></div>
         <span>{name}</span>
         <span class="text-muted-foreground">{percentage.toFixed(1)}%</span>
       </li>

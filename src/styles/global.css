@@ -35,15 +35,8 @@
     @apply flex items-center gap-2;
   }
 
-  ul.icons li {
+  ul.icons > li,
+  ul.icons > * > li {
     @apply flex items-center gap-2 font-mono text-lg sm:text-xl md:text-2xl;
-  }
-
-  ul.icons li > * {
-    @apply text-base;
-  }
-
-  ul.icons a {
-    @apply font-normal no-underline;
   }
 }

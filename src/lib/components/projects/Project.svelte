@@ -4,6 +4,10 @@
   import { getRepoData } from "$lib/octokit";
   import accentStore from "$lib/stores/accent";
   import { cn } from "$lib/utils";
+  import type { Language } from "$components/projects/Languages.svelte";
+  import Icon from "@iconify/svelte";
+  import nc from "nearest-color";
+  import { colours } from "$lib/stores/theme";
 
   type Props = CollectionEntry<"projects">;
   const { id, data } = $props() as Props;
@@ -11,30 +15,35 @@
   const [owner, repoName] = repo?.split("/") || [GITHUB_USERNAME, id];
 
   const accent = accentStore();
+  const nearestColor = $derived(nc.from($colours));
 
   interface RepoData {
     stargazerCount: number;
     languages: {
-      nodes: { name: string }[];
+      nodes: Language["node"][];
     };
   }
 
   const {
     stargazerCount: stars,
-    languages: { nodes },
+    languages: { nodes: languages },
   } = await getRepoData<RepoData>(
     { owner, name: repoName },
     `
-stargazerCount,
+stargazerCount
 languages(first: 1) {
   nodes {
     name
+    color
   }
 }
     `,
     { stargazerCount: 0, languages: { nodes: [] } },
   );
-  const language = nodes.map((lang) => lang.name);
+
+  const languageColor = $derived(
+    languages[0] ? nearestColor(languages[0].color)?.name : undefined,
+  );
 </script>
 
 <article
@@ -50,11 +59,17 @@ languages(first: 1) {
       <h3>{title}</h3>
       <p class="text-muted-foreground font-mono">{tagline}</p>
     </div>
-    <div
-      class="text-muted-foreground flex-col gap-4 text-right font-mono text-sm"
+    <ul
+      class="text-muted-foreground not-prose flex-col gap-4 font-mono text-sm"
     >
-      <div class="hover:text-yellow">{stars} star{stars === 1 ? "" : "s"}</div>
-      <div>{language}</div>
-    </div>
+      <li class="hover:text-yellow">
+        <Icon icon="mdi:star" />
+        {stars} star{stars === 1 ? "" : "s"}
+      </li>
+      <li class="flex items-center gap-2">
+        <div class={cn("h-2 w-2 rounded-full", `bg-${languageColor}`)}></div>
+        <span>{languages[0].name}</span>
+      </li>
+    </ul>
   </a>
 </article>
