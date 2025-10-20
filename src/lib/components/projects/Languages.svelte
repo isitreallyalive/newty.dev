@@ -24,7 +24,6 @@
   const nearestColor = $derived(nc.from($colours));
   const languages = $derived(
     data.map(({ size, node }) => {
-      console.log(node);
       const percentage = totalSize > 0 ? (size / totalSize) * 100 : 0;
       const colour = node.color || flavors[$theme].colors.text;
       return {
@@ -37,7 +36,7 @@
   );
 </script>
 
-<div class="not-prose space-y-2">
+<div class="not-prose my-4 space-y-2">
   <div class="flex h-2 w-full overflow-hidden rounded-full">
     {#each languages as { accent, percentage }}
       <div
@@ -46,7 +45,7 @@
       ></div>
     {/each}
   </div>
-  <ul class="flex flex-wrap gap-2">
+  <ul class="flex gap-4 md:gap-8">
     {#each languages as { name, accent, percentage }}
       <li class="flex items-center gap-2 font-mono text-sm">
         <div

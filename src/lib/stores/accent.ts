@@ -1,7 +1,7 @@
 import type { AccentName } from "@catppuccin/palette";
 import { writable } from "svelte/store";
 
-const ACCENTS: AccentName[] = [
+export const ACCENTS: AccentName[] = [
   "rosewater",
   "flamingo",
   "pink",

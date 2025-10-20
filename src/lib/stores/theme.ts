@@ -5,6 +5,7 @@ import frappeUrl from "@catppuccin/tailwindcss/frappe.css?url";
 import macchiatoUrl from "@catppuccin/tailwindcss/macchiato.css?url";
 import mochaUrl from "@catppuccin/tailwindcss/mocha.css?url";
 import { flavors, type FlavorName } from "@catppuccin/palette";
+import { ACCENTS } from "./accent";
 
 export const frappe = frappeUrl;
 export const macchiato = macchiatoUrl;
@@ -80,7 +81,9 @@ export const theme = writable<FlavorName>(
 
 export const colours = derived(theme, (theme) =>
   Object.fromEntries(
-    flavors[theme].colorEntries.map(([name, { hex }]) => [name, hex]),
+    flavors[theme].colorEntries
+      .filter(([name]) => ACCENTS.includes(name as any))
+      .map(([name, { hex }]) => [name, hex]),
   ),
 );
 

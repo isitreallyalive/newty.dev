@@ -8,6 +8,12 @@
     mocha,
   } from "$lib/stores/theme";
   import type { FlavorName } from "@catppuccin/palette";
+  import { cn } from "$lib/utils";
+
+  interface Props {
+    class?: string;
+  }
+  const { class: clazz } = $props() as Props;
 
   const emojis: Record<FlavorName, string> = {
     latte: "🌻",
@@ -31,7 +37,7 @@
 
 <!-- choose a theme :] -->
 <Select.Root type="single" bind:value={$theme}>
-  <Select.Trigger rainbow class="hidden w-17 border-2 sm:inline-flex">
+  <Select.Trigger rainbow class={cn("w-17 border-2", clazz)}>
     {emojis[$theme]}
   </Select.Trigger>
   <Select.Content>

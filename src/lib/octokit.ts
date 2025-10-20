@@ -1,5 +1,4 @@
 import { Octokit } from "@octokit/core";
-import { GITHUB_USERNAME } from "./data";
 
 const octokit = new Octokit({
   auth: import.meta.env.GITHUB_TOKEN,
@@ -15,7 +14,7 @@ export async function getRepoData<T>(
   inner: string,
   defaultValues: Partial<T> = {},
 ): Promise<T> {
-  // if (!import.meta.env.PROD) return defaultValues as T;
+  if (!import.meta.env.PROD) return defaultValues as T;
   const data = (await octokit.graphql(
     `
 query ($name: String!, $owner: String!) {

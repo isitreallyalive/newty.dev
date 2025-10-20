@@ -31,43 +31,49 @@ function buildSegmentHref(index: number): string {
 }
 ---
 
-<div class="flex items-center gap-4 font-mono text-xl">
-  <Cat client:load />
+<div class="flex w-full items-center justify-between md:text-xl">
+  <div class="flex items-center gap-6">
+    <Cat class="hidden sm:block" client:visible />
 
-  <div class="flex">
-    <a href="/">
-      <Accent class="font-semibold" client:load>newt</Accent>
-    </a>
-    {
-      slug
-        ?.map((segment) => segment.replace("-", " "))
-        .map((segment, i) => (
-          <>
-            <span class="text-muted-foreground mx-1">/</span>
-            {i === slug.length - 1 ? (
-              <span class="text-muted-foreground">{segment}</span>
-            ) : (
-              <Link colour="text" href={buildSegmentHref(i)}>
-                {segment}
+    <div class="flex flex-col">
+      <div class="mb-2 flex items-center justify-between sm:hidden">
+        <Cat client:visible />
+        <Theme client:visible />
+      </div>
+
+      <div class="flex truncate font-mono text-lg">
+        <a href="/">
+          <Accent class="font-semibold" client:load>newt</Accent>
+        </a>
+        {
+          slug
+            ?.map((segment) => segment.replace("-", " "))
+            .map((segment, i) => (
+              <>
+                <span class="text-muted-foreground mx-1">/</span>
+                {i === slug.length - 1 ? (
+                  <span class="text-muted-foreground">{segment}</span>
+                ) : (
+                  <Link colour="text" href={buildSegmentHref(i)}>
+                    {segment}
+                  </Link>
+                )}
+              </>
+            ))
+        }
+      </div>
+      <ul class="flex gap-2 md:gap-6">
+        {
+          Object.entries(LINKS).map(([name, { href }]) => (
+            <li>
+              <Link class="text-text font-normal" {href} data-astro-prefetch>
+                {name}
               </Link>
-            )}
-          </>
-        ))
-    }
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </div>
-</div>
-
-<div class="flex items-center gap-8">
-  <ul class="flex gap-2 md:gap-6 md:text-lg">
-    {
-      Object.entries(LINKS).map(([name, { href }]) => (
-        <li>
-          <Link class="text-text font-normal" {href} data-astro-prefetch>
-            {name}
-          </Link>
-        </li>
-      ))
-    }
-  </ul>
-  <Theme client:load />
+  <Theme class="hidden sm:flex" client:visible />
 </div>

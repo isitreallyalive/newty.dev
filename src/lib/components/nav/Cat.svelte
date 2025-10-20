@@ -1,5 +1,12 @@
 <script lang="ts">
+  import { cn } from "$lib/utils";
   import { persistentAtom } from "@nanostores/persistent";
+
+  interface Props {
+    class?: string;
+  }
+
+  const { class: clazz } = $props() as Props;
 
   // state
   const enabled = persistentAtom<boolean>("cat", false, {
@@ -25,9 +32,11 @@
 </script>
 
 <button
-  class="xs:inline relative hidden font-mono text-sm font-bold -tracking-[0.125em] transition-colors select-none hover:cursor-pointer hover:brightness-125 sm:text-base {!$enabled
-    ? 'text-muted-foreground'
-    : ''}"
+  class={cn([
+    " font-mono text-sm font-bold -tracking-[0.125em] transition-colors select-none hover:cursor-pointer hover:brightness-125 sm:text-base md:text-lg",
+    !$enabled ? "text-muted-foreground" : "",
+    clazz,
+  ])}
   onclick={() => ($enabled = !$enabled)}
   aria-label="Toggle cat"
 >

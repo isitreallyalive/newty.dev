@@ -38,7 +38,10 @@ languages(first: 1) {
   }
 }
     `,
-    { stargazerCount: 0, languages: { nodes: [] } },
+    {
+      stargazerCount: 0,
+      languages: { nodes: [{ name: "Rust", color: "#dea584" }] },
+    },
   );
 
   const languageColor = $derived(
@@ -54,21 +57,25 @@ languages(first: 1) {
   onmouseenter={() => accent.next()}
   onmouseleave={() => accent.clear()}
 >
-  <a class="flex justify-between" href={`/projects/${id}`}>
-    <div>
-      <h3>{title}</h3>
-      <p class="text-muted-foreground font-mono">{tagline}</p>
+  <a class="flex flex-col justify-between md:flex-row" href={`/projects/${id}`}>
+    <div class="mb-4 md:mb-0">
+      <h3 class="text-lg md:text-xl">{title}</h3>
+      <p class="text-muted-foreground font-mono text-sm md:text-base">
+        {tagline}
+      </p>
     </div>
     <ul
-      class="text-muted-foreground not-prose flex-col gap-4 font-mono text-sm"
+      class="text-muted-foreground not-prose flex items-end justify-between gap-1 text-right font-mono text-sm *:flex *:items-center *:gap-1 md:flex-col md:justify-start"
     >
       <li class="hover:text-yellow">
         <Icon icon="mdi:star" />
         {stars} star{stars === 1 ? "" : "s"}
       </li>
-      <li class="flex items-center gap-2">
-        <div class={cn("h-2 w-2 rounded-full", `bg-${languageColor}`)}></div>
-        <span>{languages[0].name}</span>
+      <li>
+        <div
+          class={cn("mr-1 h-2 w-2 rounded-full", `bg-${languageColor}`)}
+        ></div>
+        {languages[0].name}
       </li>
     </ul>
   </a>
