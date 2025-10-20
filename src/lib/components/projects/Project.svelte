@@ -1,14 +1,14 @@
 <script lang="ts">
   import { GITHUB_USERNAME } from "$lib/data";
   import type { CollectionEntry } from "astro:content";
-  import { octokit } from "$lib";
-  import Accent from "$components/Accent.svelte";
+  import { getRepoData } from "$lib/octokit";
   import accentStore from "$lib/stores/accent";
   import { cn } from "$lib/utils";
 
   type Props = CollectionEntry<"projects">;
   const { id, data } = $props() as Props;
   const { title, tagline, repo } = data;
+  const [owner, repoName] = repo?.split("/") || [GITHUB_USERNAME, id];
 
   const accent = accentStore();
 
@@ -19,39 +19,22 @@
     };
   }
 
-  let stars = $state(0);
-  let language = $state("Unknown");
-
-  if (import.meta.env.PROD) {
-    (async () => {
-      const { repository } = (await octokit.graphql(
-        `
-  query ($repo: String!, $owner: String!) {
-    repository(name: $repo, owner: $owner) {
-      stargazerCount,
-      languages(first: 1) {
-        nodes {
-          name
-        }
-      }
-    }
+  const {
+    stargazerCount: stars,
+    languages: { nodes },
+  } = await getRepoData<RepoData>(
+    { owner, name: repoName },
+    `
+stargazerCount,
+languages(first: 1) {
+  nodes {
+    name
   }
-`,
-        {
-          repo: repo ? repo.split("/")[1] : id,
-          owner: repo ? repo.split("/")[0] : GITHUB_USERNAME,
-        },
-      )) as any;
-      const {
-        stargazerCount,
-        languages: { nodes },
-      } = repository as RepoData;
-      stars = stargazerCount;
-      language = nodes.map((lang) => lang.name)[0];
-    })();
-  }
-
-  accent.subscribe(console.log);
+}
+    `,
+    { stargazerCount: 0, languages: { nodes: [] } },
+  );
+  const language = nodes.map((lang) => lang.name);
 </script>
 
 <article

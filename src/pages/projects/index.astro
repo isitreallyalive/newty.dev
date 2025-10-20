@@ -8,7 +8,8 @@ const projects = await getCollection("projects");
 
 <Page>
   <h1>Projects</h1>
-  <div class="mt-8 grid grid-cols-2 gap-12">
+  <p>Here's a bunch of things I've built.</p>
+  <div class="mt-8 grid grid-cols-2 gap-8">
     {projects.map((data) => <Project client:visible {...data} />)}
   </div>
 </Page>

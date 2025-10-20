@@ -39,25 +39,21 @@ function buildSegmentHref(index: number): string {
       <Accent class="font-semibold" client:load>newt</Accent>
     </a>
     {
-      slug?.map((segment, i) => (
-        <>
-          <span class="text-muted-foreground mx-1">/</span>
-          {i === slug.length - 1 ? (
-            <span class="text-muted-foreground">{segment}</span>
-          ) : (
-            <a href={buildSegmentHref(i)}>{segment}</a>
-          )}
-        </>
-      ))
+      slug
+        ?.map((segment) => segment.replace("-", " "))
+        .map((segment, i) => (
+          <>
+            <span class="text-muted-foreground mx-1">/</span>
+            {i === slug.length - 1 ? (
+              <span class="text-muted-foreground">{segment}</span>
+            ) : (
+              <Link colour="text" href={buildSegmentHref(i)}>
+                {segment}
+              </Link>
+            )}
+          </>
+        ))
     }
-    <!-- {
-      slug?.map((segment, i) => (
-        <div class={i !== 0 ? "hidden sm:inline" : ""}>
-          <span class="mx-1">/</span>
-
-        </div>
-      ))
-    } -->
   </div>
 </div>
 

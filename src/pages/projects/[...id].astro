@@ -1,6 +1,13 @@
 ---
+import { GITHUB_USERNAME } from "$lib/data";
+import { getRepoData } from "$lib/octokit";
+import Page from "$page";
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
+import Languages, {
+  type Language,
+} from "$lib/components/projects/Languages.svelte";
+import { Icon } from "astro-icon/components";
 
 export const getStaticPaths = (async () => {
   const projects = await getCollection("projects");
@@ -10,5 +17,56 @@ export const getStaticPaths = (async () => {
   }));
 }) satisfies GetStaticPaths;
 
-const project = Astro.props;
+const {
+  id,
+  data: { title, repo },
+} = Astro.props;
+const [owner, repoName] = repo?.split("/") || [GITHUB_USERNAME, id];
+
+interface RepoData {
+  stargazerCount: number;
+  languages: {
+    edges: Language[];
+  };
+}
+
+const {
+  stargazerCount: stars,
+  languages: { edges: languages },
+} = await getRepoData<RepoData>(
+  { owner, name: repoName },
+  `
+stargazerCount,
+languages(first: 1) {
+  edges {
+    size
+    node {
+      name
+      color
+    }
+  }
+}
+    `,
+  { stargazerCount: 0, languages: { edges: [] } },
+);
 ---
+
+<Page>
+  <h1>{title}</h1>
+  <ul class="icons not-prose my-4 gap-4">
+    <li class="hover:text-yellow">
+      <Icon name="mdi:star" />
+      <span>{stars} star{stars !== 1 ? "s" : ""}</span>
+    </li>
+    <a
+      class="hover:text-black dark:hover:text-white"
+      href={`https://github.com/${owner}/${repoName}`}
+    >
+      <li>
+        <Icon name="mdi:github" />
+        <span>View it on GitHub</span>
+      </li>
+    </a>
+  </ul>
+  <Languages client:load {languages} />
+</Page>

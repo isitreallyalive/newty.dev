@@ -12,7 +12,7 @@ import { Icon } from "astro-icon/components";
     the UK. I'm in my second year of university, working towards a BSc (Hons) in
     Computer Science.
   </p>
-  <ul class="not-prose prose-p">
+  <ul class="not-prose icons">
     {
       Object.entries(SOCIALS).map(([name, { href, class: clazz }]) => (
         <li>
@@ -24,15 +24,3 @@ import { Icon } from "astro-icon/components";
     }
   </ul>
 </Page>
-
-<style>
-  @reference "$styles/global.css";
-
-  ul {
-    @apply flex gap-2;
-  }
-
-  li {
-    @apply text-lg sm:text-xl md:text-2xl;
-  }
-</style>
