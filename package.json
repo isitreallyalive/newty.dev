@@ -39,6 +39,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "@types/html-minifier-terser": "^7.0.2",
     "@types/nearest-color": "^0.4.1",
+    "@vercel/speed-insights": "^1.2.0",
     "bits-ui": "^2.11.0",
     "clsx": "^2.1.1",
     "html-minifier-terser": "^7.2.0",
