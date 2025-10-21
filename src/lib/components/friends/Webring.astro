@@ -1,0 +1,54 @@
+---
+import Button from "$components/ui/button/button.svelte";
+import type { AccentName } from "@catppuccin/palette";
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+
+interface Props {
+  name: string;
+  url: string;
+  id: string;
+  colour: AccentName | "text" | "ctp";
+  image?: ImageMetadata;
+}
+const { name, url, id, colour, image } = Astro.props;
+
+const variant = colour === "ctp" ? "ctp" : "ghost";
+const clazz =
+  colour === "ctp" ? null : `hover:bg-${colour} hover:text-background`;
+const previous = `${url}/${id}/previous`;
+const next = `${url}/${id}/next`;
+---
+
+<div class="my-2 flex gap-4 select-none">
+  <Button
+    {variant}
+    class={clazz}
+    size="icon"
+    href={previous}
+    aria-label="Previous"
+    client:visible
+  >
+    <Icon name="mdi:arrow-left" />
+  </Button>
+  <Button {variant} class={clazz} href={url} target="_blank" client:visible>
+    <span class="flex items-center gap-2">
+      {
+        image ? (
+          <Image src={image} alt={name} class="m-0 h-6 w-6" loading="lazy" />
+        ) : null
+      }
+      <span class="text-base">{name}</span>
+    </span>
+  </Button>
+  <Button
+    {variant}
+    class={clazz}
+    size="icon"
+    href={next}
+    aria-label="Next"
+    client:visible
+  >
+    <Icon name="mdi:arrow-right" />
+  </Button>
+</div>

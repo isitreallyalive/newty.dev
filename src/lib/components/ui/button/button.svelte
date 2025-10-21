@@ -21,14 +21,13 @@
         secondary:
           "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
         ctp: "",
-        link: "hover:text-accent",
+        ghost: "",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
         sm: "h-8 gap-1.5 rounded-md px-3 has-[>svg]:px-2.5",
         xl: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9",
-        link: "",
       },
     },
     defaultVariants: {
@@ -51,7 +50,7 @@
   let {
     class: className,
     variant = "default",
-    size: initialSize,
+    size,
     ref = $bindable(null),
     href = undefined,
     type = "button",
@@ -60,8 +59,6 @@
     ...restProps
   }: ButtonProps = $props();
 
-  const size =
-    variant === "link" && !initialSize ? "link" : initialSize || "default";
   const baseClass = $derived(
     cn(
       buttonVariants({ variant, size }),

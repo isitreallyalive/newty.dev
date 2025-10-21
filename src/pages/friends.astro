@@ -1,9 +1,12 @@
 ---
 import Page from "$page";
-import Catppuccin from "$components/friends/Catppuccin.astro";
+import Webring from "$components/friends/Webring.astro";
 import Link from "$components/Link.astro";
 import { REPO } from "$lib/data";
 import Friend from "$lib/components/friends/Friend.astro";
+
+import catppuccin from "$img/webrings/catppuccin.webp";
+import uofg from "$img/webrings/uofg.webp";
 ---
 
 <Page>
@@ -32,5 +35,18 @@ import Friend from "$lib/components/friends/Friend.astro";
     </figcaption>
   </figure>
 
-  <Catppuccin />
+  <Webring
+    name="catppuccin webring :3"
+    url="https://ctp-webr.ing"
+    id="newt"
+    colour="ctp"
+    image={catppuccin}
+  />
+  <Webring
+    name="university of glasgow"
+    url="https://uofg.newty.dev"
+    id="newt"
+    colour="blue"
+    image={uofg}
+  />
 </Page>
