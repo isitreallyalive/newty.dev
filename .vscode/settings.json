@@ -10,6 +10,9 @@
   "[mdx]": {
     "editor.formatOnSave": false
   },
+  "[tailwindcss]": {
+    "editor.formatOnSave": false
+  },
   "[astro]": {
     "editor.defaultFormatter": "astro-build.astro-vscode"
   },

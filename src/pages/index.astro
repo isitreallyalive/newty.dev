@@ -2,7 +2,6 @@
 import Page from "$page";
 import Accent from "$components/Accent.svelte";
 import { AGE, SOCIALS } from "$lib/data";
-import { Icon } from "astro-icon/components";
 ---
 
 <Page>
@@ -17,7 +16,7 @@ import { Icon } from "astro-icon/components";
       Object.entries(SOCIALS).map(([name, { href, class: clazz }]) => (
         <li>
           <a class={clazz} {href}>
-            <Icon {name} />
+            <span class={`icon-[${name}]`} />
           </a>
         </li>
       ))

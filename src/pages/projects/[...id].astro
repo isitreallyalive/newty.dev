@@ -7,7 +7,6 @@ import { getCollection } from "astro:content";
 import Languages, {
   type Language,
 } from "$components/projects/Languages.svelte";
-import { Icon } from "astro-icon/components";
 import { render } from "astro:content";
 import Commit, {
   type Props as CommitProps,
@@ -114,7 +113,7 @@ const { Content } = await render(post);
       class="icons not-prose mb-4 flex-col items-start sm:flex-row sm:justify-between"
     >
       <li class="hover:text-yellow">
-        <Icon name="mdi:star" />
+        <span class="icon-[mdi--star]"></span>
         <span>{stars} star{stars !== 1 ? "s" : ""}</span>
       </li>
       <a
@@ -122,7 +121,7 @@ const { Content } = await render(post);
         href={`https://github.com/${owner}/${repoName}`}
       >
         <li>
-          <Icon name="mdi:github" />
+          <span class="icon-[mdi--github]"></span>
           <span>View it on GitHub</span>
         </li>
       </a>

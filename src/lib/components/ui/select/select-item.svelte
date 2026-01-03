@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Icon from "@iconify/svelte";
   import { Select as SelectPrimitive } from "bits-ui";
   import { cn, type WithoutChild } from "$lib/utils.js";
 
@@ -26,10 +25,9 @@
   {#snippet children({ selected, highlighted })}
     <span class="absolute right-2 size-3.5">
       {#if selected}
-        <Icon
-          icon="mdi:check-bold"
-          class="data-[highlighted]:text-foreground size-4"
-        />
+        <span
+          class="icon-[mdi--check-bold] data-[highlighted]:text-foreground size-4"
+        ></span>
       {/if}
     </span>
     {#if childrenProp}

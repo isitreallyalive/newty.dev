@@ -1,7 +1,6 @@
 ---
 import Button from "$components/ui/button/button.svelte";
 import type { AccentName } from "@catppuccin/palette";
-import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 
 interface Props {
@@ -29,7 +28,7 @@ const next = `${url}/${id}/next`;
     aria-label="Previous"
     client:visible
   >
-    <Icon name="mdi:arrow-left" />
+    <span class="icon-[mdi--arrow-left]"></span>
   </Button>
   <Button {variant} class={clazz} href={url} target="_blank" client:visible>
     <span class="flex items-center gap-2">
@@ -49,6 +48,6 @@ const next = `${url}/${id}/next`;
     aria-label="Next"
     client:visible
   >
-    <Icon name="mdi:arrow-right" />
+    <span class="icon-[mdi--arrow-right]"></span>
   </Button>
 </div>

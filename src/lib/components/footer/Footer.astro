@@ -1,13 +1,12 @@
 ---
 import Commit from "$components/footer/Commit.astro";
-import { Icon } from "astro-icon/components";
 import Accent from "$components/Accent.svelte";
 import type { Links } from "$lib/data";
 
 const LINKS: Links = {
   rss: {
     href: "/rss.xml",
-    icon: "mdi:rss",
+    icon: "mdi--rss",
   },
 };
 ---
@@ -15,17 +14,16 @@ const LINKS: Links = {
 <div class="has-prose container">
   <div>
     <p class="has-icon">
-      made with <Icon
-        name="mdi:heart"
-        class="hover:text-red hover:cursor-pointer"
-      /> by <Accent class="font-medium" client:visible>newt</Accent>
+      made with <span
+        class="icon-[mdi--heart] hover:text-red hover:cursor-pointer"></span> by
+      <Accent class="font-medium" client:visible>newt</Accent>
     </p>
     <ul class="not-prose flex gap-2">
       <li>
         {
           Object.entries(LINKS).map(([name, { href, icon }]) => (
             <a {href}>
-              {icon ? <Icon name={icon} /> : null} {name}
+              {icon ? <span class={`icon-[${icon}]`} /> : null} {name}
             </a>
           ))
         }

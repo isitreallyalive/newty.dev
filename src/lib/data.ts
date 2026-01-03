@@ -20,11 +20,11 @@ interface Social {
 }
 
 export const SOCIALS: Record<string, Social> = {
-  "mdi:github": {
+  "mdi--github": {
     href: `https://github.com/${GITHUB_USERNAME}`,
     class: "dark:hover:text-white hover:text-black",
   },
-  "simple-icons:kofi": {
+  "simple-icons--kofi": {
     href: `https://ko-fi.com/isitreallyalive`,
     class: "hover:text-peach",
   },

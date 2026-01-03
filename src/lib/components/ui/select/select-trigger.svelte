@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Select as SelectPrimitive } from "bits-ui";
-  import Icon from "@iconify/svelte";
   import { cn, stopPropagation, type WithoutChild } from "$lib/utils.js";
   import accentStore from "$lib/stores/accent";
   import { onMount } from "svelte";
@@ -61,6 +60,6 @@
     tabindex="-1"
     role="presentation"
   >
-    <Icon icon="mdi:chevron-down" class="size-4 opacity-50" />
+    <span class="icon-[mdi--chevron-down] size-4 opacity-50"></span>
   </span>
 </SelectPrimitive.Trigger>
