@@ -12,12 +12,12 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@astrojs/markdown-remark": "^6.3.7",
-    "@astrojs/mdx": "^4.3.6",
-    "@astrojs/rss": "^4.0.12",
-    "@astrojs/svelte": "^7.2.0",
+    "@astrojs/markdown-remark": "6.3.10",
+    "@astrojs/mdx": "4.3.13",
+    "@astrojs/rss": "4.0.14",
+    "@astrojs/svelte": "7.2.4",
     "@tailwindcss/vite": "^4.1.14",
-    "astro": "^5.14.1",
+    "astro": "5.16.6",
     "astro-icon": "^1.1.5",
     "svelte": "^5.39.8",
     "tailwindcss": "^4.1.14",
