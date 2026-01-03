@@ -13,12 +13,14 @@
   import { cn } from "$lib/utils";
   import { flavors } from "@catppuccin/palette";
   import nc from "nearest-color";
+  import type { Snippet } from "svelte";
 
   interface Props {
     languages: Language[];
+    children?: Snippet;
   }
 
-  const { languages: data } = $props() as Props;
+  const { languages: data, children } = $props() as Props;
   const totalSize = data.reduce((acc, { size }) => acc + size, 0);
 
   const nearestColor = $derived(nc.from($colours));
@@ -45,16 +47,20 @@
       ></div>
     {/each}
   </div>
-  <ul class="flex gap-4 md:gap-8">
-    {#each languages as { name, accent, percentage }}
-      <li class="flex items-center gap-2 font-mono text-sm">
-        <div
-          class={cn("h-2 w-2 rounded-full", `bg-${accent}`)}
-          aria-hidden="true"
-        ></div>
-        <span>{name}</span>
-        <span class="text-muted-foreground">{percentage.toFixed(1)}%</span>
-      </li>
-    {/each}
-  </ul>
+  <div class="flex justify-between font-mono text-sm">
+    <ul class="flex gap-4 md:gap-8">
+      {#each languages as { name, accent, percentage }}
+        <li class="flex items-center gap-2">
+          <div
+            class={cn("h-2 w-2 rounded-full", `bg-${accent}`)}
+            aria-hidden="true"
+          ></div>
+          <span>{name}</span>
+          <span class="text-muted-foreground">{percentage.toFixed(1)}%</span>
+        </li>
+      {/each}
+    </ul>
+
+    {@render children?.()}
+  </div>
 </div>

@@ -24,7 +24,10 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     tagline: z.string(),
-    repo: z.string().url().optional(),
+    "crates.io": z.string().optional(),
+    npm: z.string().optional(),
+    repoAuthor: z.string().optional(),
+    repoName: z.string().optional(),
   }),
 });
 

@@ -16,7 +16,7 @@ import { AGE, SOCIALS } from "$lib/data";
       Object.entries(SOCIALS).map(([name, { href, class: clazz }]) => (
         <li>
           <a class={clazz} {href}>
-            <span class={`icon-[${name}]`} />
+            <span class={`iconify ${name}`} />
           </a>
         </li>
       ))

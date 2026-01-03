@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@plugin "@iconify/tailwind4";
+
+@plugin "@iconify/tailwind4" {
+  prefixes: mdi, simple-icons, catppuccin;
+}
 
 @import "tw-animate-css";
 
@@ -11,12 +14,10 @@
 @custom-variant dark (&:where(.frappe, .frappe *, .macchiato, .macchiato *, .mocha, .mocha *, .));
 
 /* inline accent classes */
-@source inline(
-  "{text,border,bg}-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender,text}"
-);
-@source inline(
-  "hover:{border,bg}-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender,text}"
-);
+/* prettier-ignore */
+@source inline("{text,border,bg}-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender,text}");
+/* prettier-ignore */
+@source inline("hover:{border,bg}-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender,text}");
 
 ::selection {
   background-color: var(--catppuccin-color-mauve);

@@ -15,7 +15,7 @@ const LINKS: Links = {
   <div>
     <p class="has-icon">
       made with <span
-        class="icon-[mdi--heart] hover:text-red hover:cursor-pointer"></span> by
+        class="iconify mdi--heart hover:text-red hover:cursor-pointer"></span> by
       <Accent class="font-medium" client:visible>newt</Accent>
     </p>
     <ul class="not-prose flex gap-2">
@@ -23,7 +23,7 @@ const LINKS: Links = {
         {
           Object.entries(LINKS).map(([name, { href, icon }]) => (
             <a {href}>
-              {icon ? <span class={`icon-[${icon}]`} /> : null} {name}
+              {icon ? <span class={`iconify ${icon}`} /> : null} {name}
             </a>
           ))
         }

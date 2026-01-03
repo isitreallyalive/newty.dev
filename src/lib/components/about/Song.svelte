@@ -10,6 +10,8 @@
   } from "svelte/store";
   import Progress from "$components/ui/progress/progress.svelte";
   import { onMount } from "svelte";
+  import bert from "$img/bert.webp?url";
+
   type LanyardData =
     ReturnType<typeof useLanyard> extends Readable<infer T> ? T : never;
 
@@ -182,7 +184,7 @@
       <div class="relative">
         <img
           class="h-20 w-20 animate-[spin_8s_linear_infinite] rounded-full sm:h-24 sm:w-24"
-          src="/bert.webp"
+          src={bert}
           alt="bert :3c"
           decoding="async"
           loading="lazy"

@@ -60,6 +60,6 @@
     tabindex="-1"
     role="presentation"
   >
-    <span class="icon-[mdi--chevron-down] size-4 opacity-50"></span>
+    <span class="iconify mdi--chevron-down size-4 opacity-50"></span>
   </span>
 </SelectPrimitive.Trigger>

@@ -67,7 +67,7 @@ languages(first: 1) {
       class="text-muted-foreground not-prose flex items-end justify-between gap-1 text-right font-mono text-sm *:flex *:items-center *:gap-1 md:flex-col md:justify-start"
     >
       <li class="hover:text-yellow">
-        <span class="icon-[mdi--star]"></span>
+        <span class="iconify mdi--star"></span>
         {stars} star{stars === 1 ? "" : "s"}
       </li>
       <li>

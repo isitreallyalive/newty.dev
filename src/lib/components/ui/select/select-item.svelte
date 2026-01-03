@@ -26,7 +26,7 @@
     <span class="absolute right-2 size-3.5">
       {#if selected}
         <span
-          class="icon-[mdi--check-bold] data-[highlighted]:text-foreground size-4"
+          class="iconify mdi--check-bold data-[highlighted]:text-foreground size-4"
         ></span>
       {/if}
     </span>

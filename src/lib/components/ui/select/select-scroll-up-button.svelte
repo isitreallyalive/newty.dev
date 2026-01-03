@@ -15,5 +15,5 @@
   class={cn("flex cursor-default items-center justify-center py-1", className)}
   {...restProps}
 >
-  <span class="icon-[mdi--chevron-up] size-4"></span>
+  <span class="iconify mdi--chevron-up size-4"></span>
 </SelectPrimitive.ScrollUpButton>

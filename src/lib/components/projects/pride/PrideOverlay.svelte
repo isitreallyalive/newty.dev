@@ -7,7 +7,7 @@
   } from "pride-overlay";
   import EnumSelect from "./EnumSelect.svelte";
   import OptionSlider from "./OptionSlider.svelte";
-  import bert from "$img/bert.jpg?url";
+  import bert from "$img/bert.webp?url";
 
   enum Effect {
     Ring,
