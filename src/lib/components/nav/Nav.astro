@@ -31,7 +31,7 @@ function buildSegmentHref(index: number): string {
 }
 ---
 
-<div class="flex w-full items-center justify-between md:text-xl">
+<div class="flex w-full items-center justify-between">
   <div class="flex items-center gap-6">
     <Cat class="hidden sm:block" client:visible />
 
@@ -41,7 +41,7 @@ function buildSegmentHref(index: number): string {
         <Theme client:visible />
       </div>
 
-      <div class="flex truncate font-mono text-lg">
+      <div class="flex truncate font-mono text-xl sm:text-2xl">
         <a href="/">
           <Accent class="font-semibold" client:load>newt</Accent>
         </a>
@@ -62,7 +62,7 @@ function buildSegmentHref(index: number): string {
             ))
         }
       </div>
-      <ul class="flex gap-2 md:gap-6">
+      <ul class="flex gap-2 sm:text-lg md:gap-6">
         {
           Object.entries(LINKS).map(([name, { href }]) => (
             <li>

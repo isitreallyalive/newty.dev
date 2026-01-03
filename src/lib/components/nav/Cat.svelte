@@ -33,7 +33,7 @@
 
 <button
   class={cn([
-    " font-mono text-sm font-bold -tracking-[0.125em] transition-colors select-none hover:cursor-pointer hover:brightness-125 sm:text-base md:text-lg",
+    "relative font-mono text-sm font-bold -tracking-[0.125em] transition-colors select-none hover:cursor-pointer hover:brightness-125 sm:text-base md:text-lg",
     !$enabled ? "text-muted-foreground" : "",
     clazz,
   ])}
@@ -41,7 +41,11 @@
   aria-label="Toggle cat"
 >
   {#if !$enabled}
-    <div class="absolute -top-2 -right-6 motion-safe:animate-bounce">zzz</div>
+    <div
+      class="pointer-events-none absolute -top-3 -right-6 motion-safe:animate-bounce"
+    >
+      zzz
+    </div>
   {/if}
   <div>/\_/\</div>
   <div>

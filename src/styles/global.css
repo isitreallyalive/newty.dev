@@ -39,4 +39,8 @@
   ul.icons > * > li {
     @apply flex items-center gap-2 font-mono text-lg sm:text-xl md:text-2xl;
   }
+
+  hr {
+    @apply hover:border-accent !my-8 border-1 transition-colors duration-200;
+  }
 }

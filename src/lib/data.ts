@@ -1,4 +1,8 @@
-export const AGE = new Date().getFullYear() - 2006;
+const yearInMs = 3.15576e10; // using a year of 365.25 days (because leap years)
+const birthday = new Date("2006-06-06");
+export const AGE = Math.floor(
+  (new Date().getTime() - birthday.getTime()) / yearInMs,
+);
 
 export const GITHUB_USERNAME = "isitreallyalive";
 export const REPO = `${GITHUB_USERNAME}/newty.dev`;
