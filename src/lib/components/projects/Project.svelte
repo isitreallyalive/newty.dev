@@ -58,7 +58,7 @@ languages(first: 1) {
 >
   <a class="flex flex-col justify-between md:flex-row" href={`/projects/${id}`}>
     <div class="mb-4 md:mb-0">
-      <h3 class="text-lg md:text-xl">{title}</h3>
+      <h3 class="font-heading text-lg font-bold md:text-xl">{title}</h3>
       <p class="text-muted-foreground font-mono text-sm md:text-base">
         {tagline}
       </p>

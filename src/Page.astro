@@ -20,8 +20,6 @@ let fullTitle = "newt";
 if (slug) fullTitle += ` / ${slug}`;
 ---
 
-<SpeedInsights />
-
 <html lang="en" transition:name="root" transition:animate="none">
   <head>
     <meta charset="utf-8" />
@@ -31,6 +29,7 @@ if (slug) fullTitle += ` / ${slug}`;
     <title>{fullTitle}</title>
 
     <ClientRouter />
+    <SpeedInsights />
   </head>
   <body>
     <div class="container">
