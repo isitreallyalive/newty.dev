@@ -59,6 +59,7 @@
     onclick={stopPropagation}
     tabindex="-1"
     role="presentation"
+    class="flex items-center justify-center"
   >
     <span class="iconify mdi--chevron-down size-4 opacity-50"></span>
   </span>

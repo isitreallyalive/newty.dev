@@ -16,7 +16,7 @@
 <div class="flex items-center justify-between gap-8">
   <Label for={id}>{label}</Label>
   <Select.Root type="single" bind:value>
-    <Select.Trigger>{options[value]}</Select.Trigger>
+    <Select.Trigger class="border-2">{options[value]}</Select.Trigger>
     <Select.Content>
       {#each entries as [key, value]}
         <Select.Item class="hover:text-background hover:bg-accent" {value}

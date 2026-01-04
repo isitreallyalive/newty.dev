@@ -110,7 +110,7 @@ const { Content } = await render(post);
 ---
 
 <Page>
-  <header>
+  <header class="mb-8">
     <div class="flex justify-between">
       <h1>{title}</h1>
 
@@ -143,10 +143,6 @@ const { Content } = await render(post);
         {stars} star{stars !== 1 ? "s" : ""}
       </div>
     </Languages>
-
-    <div class="flex justify-between font-mono text-base">
-      <div class="hover:text-yellow flex items-center gap-1"></div>
-    </div>
   </header>
 
   <article>

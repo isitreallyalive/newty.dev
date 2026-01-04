@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @import "@fontsource-variable/outfit";
-@import "@fontsource-variable/cascadia-code";
+@import "@fontsource/maple-mono";
 
 @theme inline {
   --font-sans: "Outfit", sans-serif;
-  --font-mono: "Cascadia Code", monospace;
+  --font-mono: "Maple Mono", monospace;
   --color-background: #181825; /* mantle */
   --color-foreground: #cdd6f4; /* text */
   --color-muted-foreground: #a6adc8; /* subtext0 */

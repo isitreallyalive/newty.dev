@@ -47,6 +47,6 @@
   }
 
   hr {
-    @apply hover:border-accent !my-8 border-1 transition-colors duration-200;
+    @apply hover:border-accent my-6! border transition-colors duration-200;
   }
 }

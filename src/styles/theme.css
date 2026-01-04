@@ -1,7 +1,7 @@
 @import "@fontsource-variable/outfit";
-@import "@fontsource-variable/cascadia-code";
+@import "@fontsource/maple-mono";
 
-@import "@fontsource/poppins/800.css";
+@import "@fontsource-variable/nunito";
 
 :root {
   --radius: 0.625rem;
@@ -10,8 +10,8 @@
 @theme inline {
   /* fonts */
   --font-sans: "Outfit", sans-serif;
-  --font-mono: "Cascadia Code", monospace;
-  --font-heading: "Poppins", sans-serif;
+  --font-mono: "Maple Mono", monospace;
+  --font-heading: "Nunito", sans-serif;
 
   /* palette */
   --color-background: var(--catppuccin-color-mantle);
