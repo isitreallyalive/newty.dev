@@ -11,7 +11,6 @@
 
   const { url, languages, stars, forks, commits, mainBranch } =
     $props() as RepoData;
-  console.log(url);
 
   const totalSize = languages.reduce((acc, { size }) => acc + size, 0);
   const fullLang = languages.map((language) => ({

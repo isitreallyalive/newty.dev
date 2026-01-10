@@ -1,19 +1,24 @@
 ---
 import "$styles/global.css";
 
-import Navbar from "$components/nav";
 import Footer from "$components/footer";
+import { THEME_KEY, URLS } from "$lib/stores/theme";
+import Navbar from "$components/nav";
 
 interface Props {
-  title?: string;
+  title?: string | string[];
   titleClass?: string;
 }
 
 const { title, titleClass } = Astro.props;
-const segments = Astro.url ? Astro.url.pathname.split("/").filter(Boolean) : [];
+const segments = Array.isArray(title)
+  ? title
+  : Astro.url
+    ? Astro.url.pathname.split("/").filter(Boolean)
+    : [];
 
 // if a title is provided, replace the last segment with it
-if (title) {
+if (typeof title === "string") {
   segments.pop();
   segments.push(title);
 }
@@ -30,6 +35,38 @@ if (slug) fullTitle += ` / ${slug}`;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{fullTitle}</title>
+
+    <!-- set the theme at the first possible instance -->
+    <script is:inline define:vars={{ THEME_KEY, URLS }}>
+      let theme = localStorage.getItem(THEME_KEY);
+
+      // set default theme if necessary
+      if (!theme) {
+        const forcedColours = window.matchMedia(
+          "(forced-colors: active)",
+        ).matches;
+        const highContrast = window.matchMedia(
+          "(prefers-contrast: more)",
+        ).matches;
+        const prefersLight = window.matchMedia(
+          "(prefers-color-scheme: light)",
+        ).matches;
+
+        theme =
+          prefersLight || forcedColours || highContrast ? "latte" : "mocha";
+        localStorage.setItem(THEME_KEY, theme);
+      }
+
+      // add link to theme stylesheet
+      const link = document.createElement("link");
+      link.id = "theme";
+      link.rel = "stylesheet";
+      link.href = URLS[theme];
+      document.head.appendChild(link);
+
+      // set theme to be used
+      document.documentElement.classList.add(theme);
+    </script>
   </head>
   <body>
     <Navbar {segments} {titleClass} />
@@ -39,3 +76,9 @@ if (slug) fullTitle += ` / ${slug}`;
     <Footer />
   </body>
 </html>
+
+<style>
+  nav a {
+    @apply hover:text-inherit!;
+  }
+</style>

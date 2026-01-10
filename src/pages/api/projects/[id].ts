@@ -51,7 +51,6 @@ export const GET: APIRoute = async ({ params }) => {
 
   // if in development, return mock data
   // otherwise, fetch from github
-  console.log(import.meta.env);
   const data = import.meta.env.PROD
     ? await fetchGithub(url)
     : {

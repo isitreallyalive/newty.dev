@@ -1,0 +1,8 @@
+.husky
+.vscode
+readme.md
+.prettierignore
+prettier.config.ts
+.env.example
+.gitignore
+.gitmodules
