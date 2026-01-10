@@ -1,0 +1,15 @@
+{
+  "files.exclude": {
+    ".astro": true,
+    ".vercel": true,
+    "dist": true,
+    "ctp-tailwind": true
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.formatOnSave": true,
+  "svelte.plugin.svelte.compilerWarnings": {
+    "state_referenced_locally": "ignore"
+  }
+}

@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+@import "@catppuccin/tailwindcss/typography.css";
+
+/* todo: why is tailwindcss not respecting ts aliases? */
+@import "./icons.css";
+@import "./links.css";
+@import "./shadcn.css";
+
+@import "@fontsource-variable/outfit";
+@import "@fontsource-variable/nunito";
+@import "@fontsource/maple-mono/400.css"; /* regular */
+@import "@fontsource/maple-mono/700.css"; /* bold    */
+
+@theme inline {
+  --font-sans: "Outfit Variable", sans-serif;
+  --font-mono: "Maple Mono", monospace;
+  --font-heading: "Nunito Variable", sans-serif;
+
+  --color-crust: var(--catppuccin-color-crust);
+}
+
+/* override media query for dark mode to support all flavors of catppuccin */
+@custom-variant dark (&:where(.frappe, .frappe *, .macchiato, .macchiato *, .mocha, .mocha *, .));
+
+::selection {
+  @apply bg-mauve text-background;
+}
+
+body {
+  @apply prose prose-headings:mb-0 prose-p:text-lg; /* prose */
+  @apply bg-background text-foreground prose-catppuccin; /* catppuccin */
+  @apply flex min-h-screen min-w-full flex-col; /* layout */
+}
+
+.container {
+  @apply min-w-full px-24 py-8;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-heading;
+}
+
+hr {
+  @apply hover:text-accent text-muted rounded-lg border-2 transition-colors duration-200;
+}
+
+/* inline classes */
+
+/* RepoStats.svelte */
+/* prettier-ignore */
+@source inline("bg-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender,text}");
+
+/* Accent.astro */
+/* prettier-ignore */
+@source inline("hover:text-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender}");
+
+/* select-trigger.svelte */
+/* prettier-ignore */
+@source inline("{hover,aria-expanded}:border-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender}");

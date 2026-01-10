@@ -1,0 +1,8 @@
+@plugin "@iconify/tailwind4" {
+  prefixes: lucide, mdi, simple-icons, catppuccin;
+}
+
+/* inline icons */
+*:has(> .iconify, > .iconify-color) {
+  @apply inline-flex items-center gap-1;
+}

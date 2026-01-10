@@ -1,0 +1,70 @@
+---
+import Theme from "$components/nav/Theme.svelte";
+import Cat from "$components/nav/Cat.svelte";
+import Accent from "$components/helper/Accent.svelte";
+import Underline from "$components/nav/Underline.astro";
+
+interface Props {
+  segments: string[];
+  titleClass?: string;
+}
+
+const PAGES = {
+  about: "/about",
+  projects: "/projects",
+  writing: "/writing",
+  friends: "/friends",
+};
+
+const { segments, titleClass } = Astro.props;
+const { origin } = Astro.url;
+
+function getHref(index: number) {
+  if (segments.length === 0) return `${origin}/`;
+  const path = segments.slice(0, index + 1).join("/");
+  return `${origin}/${path}`;
+}
+---
+
+<nav class="container flex items-center justify-between select-none">
+  <div class="flex w-1/4 items-center gap-8">
+    <Cat client:visible />
+
+    <div class="prose-headings:my-0! grow">
+      <!-- slug -->
+      <!-- prettier-ignore -->
+      <span>
+        <h2 class="font-mono!">
+          <a href="/" class="inline-block">
+            <Accent client:idle class="font-bold">newt</Accent>
+          </a>{segments.map((segment, i) => (
+            <><span class="text-muted-foreground mx-2">/</span>{i === segments.length - 1 ? (
+                <span class={titleClass ?? "text-muted-foreground"}>{segment.replace("-", " ")}</span>
+              ) : (
+                <Underline href={getHref(i)} class="bg-foreground">{segment.replace("-", " ")}</Underline>
+              )}
+            </>
+          ))}
+        </h2>
+      </span>
+      <!-- links -->
+      <ul class="not-prose flex justify-between text-lg">
+        {
+          Object.entries(PAGES).map(([page, href]) => (
+            <li>
+              <Underline {href}>{page}</Underline>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <Theme client:visible />
+</nav>
+
+<style>
+  a {
+    @apply hover:text-inherit!;
+  }
+</style>

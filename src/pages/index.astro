@@ -1,0 +1,46 @@
+---
+import { GITHUB } from "$data";
+import { cn } from "$utils";
+import Page from "$page";
+import type { ActionAPIContext } from "astro:actions";
+
+const YEAR_MS = 3.15576e10; // using a year of 365.25 days (because leap years)
+const BIRTHDAY = new Date("2006-06-06");
+const AGE = Math.floor((new Date().getTime() - BIRTHDAY.getTime()) / YEAR_MS);
+
+interface Social {
+  href: string;
+  class: string;
+}
+
+const SOCIALS: Record<string, Social> = {
+  "mdi--github": {
+    href: GITHUB,
+    class: "hover:text-black dark:hover:text-white",
+  },
+  "simple-icons--kofi": {
+    href: "https://ko-fi.com/isitreallyalive",
+    class: "hover:text-peach",
+  },
+};
+---
+
+<Page>
+  <h1>Welcome!</h1>
+  <p>
+    Hey, I'm newt (he/they), a {AGE}-year-old from the UK. I'm in my second year
+    of university, studying towards an MSci (Hons) in Computer Science.
+  </p>
+
+  <ul class="not-prose flex gap-2">
+    {
+      Object.entries(SOCIALS).map(([icon, { href, class: clazz }]) => (
+        <li>
+          <a {href} class={clazz} target="_blank">
+            <span class={cn("iconify size-6", icon)} />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Page>

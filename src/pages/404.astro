@@ -1,0 +1,17 @@
+---
+import Page from "$page";
+import { Image } from "astro:assets";
+import dog from "$img/404.webp";
+---
+
+<Page title="404" titleClass="text-red">
+  <div class="flex flex-col items-center">
+    <Image
+      src={dog}
+      alt="A dog digging a hole, leading to nothing."
+      class="w-xl select-none"
+    />
+    <h1>Page not found!</h1>
+    <button onclick="history.back()">Go back</button>
+  </div>
+</Page>

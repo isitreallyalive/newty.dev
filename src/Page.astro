@@ -1,0 +1,41 @@
+---
+import "$styles/global.css";
+
+import Navbar from "$components/nav";
+import Footer from "$components/footer";
+
+interface Props {
+  title?: string;
+  titleClass?: string;
+}
+
+const { title, titleClass } = Astro.props;
+const segments = Astro.url ? Astro.url.pathname.split("/").filter(Boolean) : [];
+
+// if a title is provided, replace the last segment with it
+if (title) {
+  segments.pop();
+  segments.push(title);
+}
+
+const slug = segments.join(" / ");
+let fullTitle = "newt";
+if (slug) fullTitle += ` / ${slug}`;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <Navbar {segments} {titleClass} />
+    <main class="container pt-0!">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

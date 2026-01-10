@@ -1,0 +1,24 @@
+---
+import { GITHUB } from "$data";
+import Page from "$page";
+import type { GetStaticPaths } from "astro";
+
+// either /ack or /ACK
+export const getStaticPaths = (() => {
+  return ["ack", "ACK"].map((ack) => ({ params: { ack } }));
+}) satisfies GetStaticPaths;
+---
+
+<Page title="ACK">
+  <!-- prettier-ignore -->
+  <h1 class="bg-crust text-muted-foreground! inline-block rounded-lg px-4 py-2 font-mono!">ACK</h1>
+
+  <p>
+    This site is build upon the tireless work of many open-source contributors,
+    font designers, and other creatives. I hope to acknowledge as many as I can
+    here, but <a href="/humans.txt">I am only human</a> and I may miss some. If you
+    think I have, please do <a href={`${GITHUB}/issues`}>let me know</a>!
+  </p>
+
+  <h1>TODO</h1>
+</Page>

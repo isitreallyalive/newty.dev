@@ -1,0 +1,12 @@
+{
+  "name": "@catppuccin/tailwindcss-monorepo",
+  "private": "true",
+  "packageManager": "pnpm@10.13.1",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm --filter demo dev"
+  }
+}

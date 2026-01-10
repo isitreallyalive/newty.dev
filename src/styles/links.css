@@ -1,0 +1,9 @@
+nav a,
+footer a {
+  @apply hover:text-accent no-underline transition-colors;
+}
+
+/* content links should be underlined, and not icon links */
+main a:not(:has(:only-child.iconify)):not(.no-underline) {
+  @apply border-muted hover:border-accent text-accent border-b-2 no-underline transition-colors duration-200;
+}

@@ -1,0 +1,60 @@
+---
+import Accent from "$components/helper/Accent.svelte";
+import Time from "$components/footer/Time.svelte";
+
+interface Link {
+  icon: string;
+  href: string;
+}
+
+const LINKS: Record<string, Link> = {
+  rss: {
+    icon: "mdi--rss",
+    href: "/rss.xml",
+  },
+  ack: {
+    icon: "mdi--account-heart",
+    href: "/ack",
+  },
+};
+---
+
+<footer
+  class="bg-primary-foreground text-muted-foreground container mt-auto grid grid-cols-2 grid-rows-2 items-start text-lg select-none"
+>
+  <!-- top left -->
+  <p class="my-0! flex items-center gap-1">
+    made with
+    <a href="/bert.webp" class="hover:text-red!">
+      <span class="iconify mdi--heart"></span>
+    </a>
+    by <Accent client:idle>newt</Accent>
+  </p>
+
+  <!-- top right -->
+  <div class="right">
+    <span class="iconify mdi--clock"></span>
+    <Time client:load />
+  </div>
+
+  <!-- bottom left -->
+  <ul class="not-prose flex gap-4">
+    {
+      Object.entries(LINKS).map(([name, { icon, href }]) => (
+        <li>
+          <a href={href}>
+            <span class={`iconify ${icon}`} /> {name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <!-- bottom right -->
+</footer>
+
+<style>
+  .right {
+    @apply flex justify-end;
+  }
+</style>
