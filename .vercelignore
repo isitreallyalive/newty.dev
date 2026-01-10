@@ -2,7 +2,7 @@
 .vscode
 readme.md
 .prettierignore
-prettier.config.ts
+.prettierrc
 .env.example
 .gitignore
 .gitmodules
