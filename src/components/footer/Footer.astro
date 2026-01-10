@@ -32,7 +32,7 @@ const LINKS: Record<string, Link> = {
   </p>
 
   <!-- top right -->
-  <div class="right">
+  <div class="flex justify-end">
     <span class="iconify mdi--clock"></span>
     <Time client:load />
   </div>
@@ -42,7 +42,7 @@ const LINKS: Record<string, Link> = {
     {
       Object.entries(LINKS).map(([name, { icon, href }]) => (
         <li>
-          <a href={href}>
+          <a href={href} class="hover:text-accent">
             <span class={`iconify ${icon}`} /> {name}
           </a>
         </li>
@@ -52,9 +52,3 @@ const LINKS: Record<string, Link> = {
 
   <!-- bottom right -->
 </footer>
-
-<style>
-  .right {
-    @apply flex justify-end;
-  }
-</style>
