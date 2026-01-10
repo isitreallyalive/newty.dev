@@ -2,6 +2,7 @@
 import Page from "$page";
 import { Image } from "astro:assets";
 import dog from "$img/404.webp";
+import { Button } from "$components/ui/button";
 ---
 
 <Page title="404" titleClass="text-red">
@@ -12,6 +13,8 @@ import dog from "$img/404.webp";
       class="w-xl select-none"
     />
     <h1>Page not found!</h1>
-    <button onclick="history.back()">Go back</button>
+    <Button class="mt-4 hover:cursor-pointer" onclick="history.back()">
+      Go back
+    </Button>
   </div>
 </Page>
