@@ -16,9 +16,9 @@
 </script>
 
 <ul class="not-prose flex flex-col gap-4">
-  {#each commits as { author: { name: authorName, avatar, url: authorUrl }, author, message, hash, date, url }, i}
+  {#each commits as { author: { name: authorName, avatar, url: authorUrl }, message, hash, date, url }, i}
     <li
-      class="bg-crust flex items-center gap-2 overflow-hidden rounded-lg border-l-4 p-2 transition-all hover:scale-[1.01] hover:shadow-lg {colors[
+      class="bg-crust transition- flex items-center gap-2 overflow-hidden rounded-lg border-l-4 p-2 {colors[
         i % colors.length
       ]}"
     >

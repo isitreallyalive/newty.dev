@@ -51,15 +51,19 @@ hr {
   @apply hover:text-accent text-muted rounded-lg border-2 transition-colors duration-200;
 }
 
+blockquote {
+  @apply border-muted text-foreground font-normal;
+}
+
 /* inline classes */
 
 /* RepoStats.svelte */
 /* prettier-ignore */
 @source inline("bg-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender,text}");
 
-/* Accent.astro */
+/* Accent.astro (text) + Webring.astro (bg) */
 /* prettier-ignore */
-@source inline("hover:text-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender}");
+@source inline("hover:{text,bg}-{rosewater,flamingo,pink,mauve,red,maroon,peach,yellow,green,teal,sky,sapphire,blue,lavender}");
 
 /* select-trigger.svelte */
 /* prettier-ignore */

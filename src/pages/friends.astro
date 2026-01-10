@@ -1,0 +1,78 @@
+---
+import Page from "$page";
+import { Image } from "astro:assets";
+import path from "node:path";
+import Webring from "$components/friends/Webring.astro";
+import catppuccin from "$img/webrings/catppuccin.webp";
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "$img/friends/*.webp",
+  { eager: true },
+);
+
+// add yourself here! :)
+// you also need to add a .webp image in the content/img/friends
+// folder with it's name being the key you use below
+const FRIENDS = { abstralexis: "https://abstralexis.dev/" };
+---
+
+<Page>
+  <!-- friends -->
+  <h1>Say hello to my friends</h1>
+  <p>You should go and give their websites some love!</p>
+  <blockquote>
+    If we are friends, and you'd like to be here - let me know, or <a href=""
+      >add yourself</a
+    > :]
+  </blockquote>
+
+  <div class="mb-6 flex gap-4">
+    {
+      Object.entries(FRIENDS).map(([name, site]) => {
+        const imgPath = Object.keys(images).find((key) => {
+          const fileName = path.basename(key).split(".")[0];
+          return fileName === name;
+        });
+
+        if (!imgPath) {
+          throw new Error(`Image for friend "${name}" not found.`);
+        }
+
+        return (
+          <a href={site} title={name} class="no-underline">
+            <Image
+              src={images[imgPath].default}
+              alt={name}
+              class="not-prose size-12 select-none"
+            />
+          </a>
+        );
+      })
+    }
+  </div>
+
+  <!-- webrings  -->
+  <h1>I'm in webrings too!</h1>
+
+  <figure>
+    <blockquote>
+      A webring is a collection of websites linked together in a loop. Each
+      website contains links to the previous and next websites in the ring. If
+      you navigate far enough, eventually you end up back where you started!
+    </blockquote>
+    <figcaption>
+      — <a href="https://github.com/k3rs3d/ringfairy">k3rs3d/ringfairy</a>
+      README.md
+    </figcaption>
+  </figure>
+
+  <div class="grid max-w-fit grid-cols-2 gap-8">
+    <Webring
+      name="catppuccin webring :3"
+      url="https://ctp-webr.ing"
+      id="newt"
+      colour="ctp"
+      image={catppuccin}
+    />
+  </div>
+</Page>

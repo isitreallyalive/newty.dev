@@ -1,0 +1,59 @@
+---
+import { Button } from "$components/ui/button";
+import { cn } from "$lib/utils";
+import type { AccentName } from "@catppuccin/palette";
+import { Image } from "astro:assets";
+
+interface Props {
+  name: string;
+  url: string;
+  id: string;
+  colour: AccentName | "text" | "ctp";
+  image?: ImageMetadata;
+}
+const { name, url, id, colour, image } = Astro.props;
+
+const variant = colour === "ctp" ? "ctp" : "ghost";
+const clazz =
+  colour === "ctp" ? null : `hover:bg-${colour} hover:text-background`;
+const previous = `${url}/${id}/previous`;
+const next = `${url}/${id}/next`;
+---
+
+<div class="flex justify-between gap-4">
+  <Button
+    {variant}
+    class={clazz}
+    size="icon"
+    href={previous}
+    aria-label="Previous"
+    client:visible
+  >
+    <span class="iconify mdi--arrow-left"></span>
+  </Button>
+  <Button {variant} class={clazz} href={url} target="_blank" client:visible>
+    <span class="flex items-center gap-2">
+      {
+        image ? (
+          <Image
+            src={image}
+            alt={name}
+            class="m-0 size-6 select-none"
+            loading="lazy"
+          />
+        ) : null
+      }
+      <span class="text-base">{name}</span>
+    </span>
+  </Button>
+  <Button
+    {variant}
+    class={cn(clazz, "justify-self-end")}
+    size="icon"
+    href={next}
+    aria-label="Next"
+    client:visible
+  >
+    <span class="iconify mdi--arrow-right"></span>
+  </Button>
+</div>
