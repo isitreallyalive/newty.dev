@@ -13,8 +13,9 @@ import { Button } from "$components/ui/button";
       class="w-xl select-none"
     />
     <h1>Page not found!</h1>
-    <Button class="mt-4 hover:cursor-pointer" onclick="history.back()">
-      Go back
-    </Button>
-  </div>
-</Page>
+    <div class="mt-4 flex gap-8 *:hover:cursor-pointer">
+      <Button onclick="history.back()">Go back</Button>
+      <Button onclick="window.location.href = '/'">Go home</Button>
+    </div>
+  </div></Page
+>
