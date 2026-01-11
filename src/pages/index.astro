@@ -1,5 +1,5 @@
 ---
-import { GITHUB } from "$data";
+import { GITHUB_PROFILE } from "$data";
 import { cn } from "$utils";
 import Page from "$page";
 import bert from "$img/bert.webp?url";
@@ -15,7 +15,7 @@ interface Social {
 
 const SOCIALS: Record<string, Social> = {
   "mdi--github": {
-    href: GITHUB,
+    href: GITHUB_PROFILE,
     class: "hover:text-black dark:hover:text-white",
   },
   "simple-icons--kofi": {

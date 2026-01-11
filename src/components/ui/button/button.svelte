@@ -63,7 +63,7 @@
     cn(
       buttonVariants({ variant, size }),
       variant === "ctp" ? `hover:bg-${$accent} hover:text-background!` : "",
-      "no-underline!",
+      "no-underline",
       className,
     ),
   );

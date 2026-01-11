@@ -57,14 +57,7 @@
   </div>
 
   {#if repo}
-    <RepoStats
-      url={repo.url}
-      stars={repo.stars}
-      forks={repo.forks}
-      languages={repo.languages}
-      mainBranch={repo.mainBranch}
-      commits={repo.commits}
-    />
+    <RepoStats {...repo} />
   {/if}
 </header>
 

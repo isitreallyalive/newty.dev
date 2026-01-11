@@ -1,13 +1,13 @@
 @layer base {
   /* give the links an underline, unless they are just an icon or opt out */
   a:not(:has(:only-child.iconify)):not(.no-underline) {
-    @apply relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-current after:transition-[width] after:ease-in-out hover:after:w-full;
+    @apply relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:transition-[width] after:ease-in-out hover:after:w-full;
   }
 }
 
 @layer components {
   a:not(:has(:only-child.iconify)):not(.no-underline) {
-    @apply text-accent after:duration-300;
+    @apply text-accent after:bg-current after:duration-300;
   }
 
   main a:not(:has(:only-child.iconify)):not(.no-underline) {

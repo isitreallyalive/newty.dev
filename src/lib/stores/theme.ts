@@ -6,15 +6,10 @@ import { isBrowser } from "$lib/utils";
 import type { FlavorName } from "@catppuccin/palette";
 import { persistentAtom } from "@nanostores/persistent";
 
-/**
- * All available themes.
- */
 export const THEMES: FlavorName[] = ["latte", "frappe", "macchiato", "mocha"];
 
-/**
- * Mapping of theme names to their stylesheet URLs.
- */
-export const URLS: Record<FlavorName, string> = {
+// latte and mocha share the same base stylesheet
+const URLS: Record<FlavorName, string> = {
   latte: mocha,
   mocha,
   frappe,
@@ -26,15 +21,11 @@ export const theme = persistentAtom<FlavorName>(THEME_KEY);
 
 if (isBrowser) {
   theme.subscribe((new_, old) => {
+    const url = URLS[new_];
+
     // avoid re-adding existing theme
     const existing: HTMLLinkElement | null =
       document.querySelector("link#theme");
-    const url =
-      new_ === "mocha" || new_ == "latte"
-        ? mocha
-        : new_ === "frappe"
-          ? frappe
-          : macchiato;
     if (existing && existing.href === url) return;
 
     // add new theme stylesheet

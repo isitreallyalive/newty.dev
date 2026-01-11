@@ -1,5 +1,6 @@
 export const GITHUB_USERNAME = "isitreallyalive";
-export const GITHUB = `https://github.com/${GITHUB_USERNAME}/newty.dev`;
+export const GITHUB_PROFILE = `https://github.com/${GITHUB_USERNAME}`;
+export const GITHUB_REPO = `${GITHUB_PROFILE}/newty.dev`;
 
 /**
  * Cache for 10 minutes, revalidate for 30 seconds

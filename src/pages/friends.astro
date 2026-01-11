@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import path from "node:path";
 import Webring from "$components/friends/Webring.astro";
 import catppuccin from "$img/webrings/catppuccin.webp";
+import { GITHUB_REPO } from "$data";
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
   "$img/friends/*.webp",
@@ -14,6 +15,20 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 // you also need to add a .webp image in the content/img/friends
 // folder with it's name being the key you use below
 const FRIENDS = { abstralexis: "https://abstralexis.dev/" };
+
+// helper to find image path for friend
+const findFriendImage = (name: string) => {
+  const imgPath = Object.keys(images).find((key) => {
+    const fileName = path.basename(key).split(".")[0];
+    return fileName === name;
+  });
+
+  if (!imgPath) {
+    throw new Error(`Image for friend "${name}" not found.`);
+  }
+
+  return images[imgPath].default;
+};
 ---
 
 <Page>
@@ -21,33 +36,22 @@ const FRIENDS = { abstralexis: "https://abstralexis.dev/" };
   <h1>Say hello to my friends</h1>
   <p>You should go and give their websites some love!</p>
   <blockquote>
-    If we are friends, and you'd like to be here - let me know, or <a href=""
-      >add yourself</a
+    If we are friends, and you'd like to be here - let me know, or <a
+      href={GITHUB_REPO}>add yourself</a
     > :]
   </blockquote>
 
   <div class="mb-6 flex gap-4">
     {
-      Object.entries(FRIENDS).map(([name, site]) => {
-        const imgPath = Object.keys(images).find((key) => {
-          const fileName = path.basename(key).split(".")[0];
-          return fileName === name;
-        });
-
-        if (!imgPath) {
-          throw new Error(`Image for friend "${name}" not found.`);
-        }
-
-        return (
-          <a href={site} title={name} class="no-underline">
-            <Image
-              src={images[imgPath].default}
-              alt={name}
-              class="not-prose size-12 select-none"
-            />
-          </a>
-        );
-      })
+      Object.entries(FRIENDS).map(([name, site]) => (
+        <a href={site} title={name} class="no-underline">
+          <Image
+            src={findFriendImage(name)}
+            alt={name}
+            class="not-prose size-12 select-none"
+          />
+        </a>
+      ))
     }
   </div>
 
