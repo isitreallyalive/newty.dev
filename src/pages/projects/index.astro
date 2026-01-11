@@ -8,5 +8,5 @@ const data = projects.map(({ id, data }) => ({ id, ...data }));
 ---
 
 <Page>
-  <ProjectList projects={data} client:load />
+  <ProjectList projects={data} server:defer />
 </Page>

@@ -18,7 +18,7 @@ const { Content } = await render(project);
 ---
 
 <Page title={project.data.name} titleClass="text-accent">
-  <Project {...project} client:load>
+  <Project {...project} server:defer>
     <Content />
   </Project>
 </Page>
