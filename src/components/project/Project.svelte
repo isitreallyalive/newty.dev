@@ -11,40 +11,44 @@
   }
 
   const { id, data, children } = $props() as Props;
-  const {
-    name,
-    links: { github, "crates.io": crates, npm },
-  } = data;
+  const { name, links } = data;
 
   let repo = $state<RepoData | null>(null);
 
+  // fetch full repo data on mount
   onMount(async () => {
-    repo = await fetch(`/api/projects/${id}`).then((res) => res.json());
+    try {
+      const response = await fetch(`/api/projects/${id}`);
+      if (response.ok) {
+        repo = await response.json();
+      }
+    } catch (error) {
+      console.error(`Failed to fetch repo data for ${id}:`, error);
+    }
   });
 </script>
 
 <header>
   <div class="grid grid-cols-2">
     <h1 class="font-mono">{name}</h1>
-    <!-- social links -->
     <ul class="not-prose flex items-center gap-4 justify-self-end">
-      {#if github}
+      {#if links.github}
         {@render link(
-          `https://github.com/${github}`,
+          `https://github.com/${links.github}`,
           "mdi--github hover:text-black dark:hover:text-white",
           "GitHub",
         )}
       {/if}
-      {#if crates}
+      {#if links["crates.io"]}
         {@render link(
-          `https://crates.io/crates/${crates}`,
+          `https://crates.io/crates/${links["crates.io"]}`,
           "catppuccin--cargo hover:text-peach",
           "crates.io",
         )}
       {/if}
-      {#if npm}
+      {#if links.npm}
         {@render link(
-          `https://www.npmjs.com/package/${npm}`,
+          `https://www.npmjs.com/package/${links.npm}`,
           "simple-icons--npm hover:text-red",
           "npm",
         )}
@@ -53,7 +57,14 @@
   </div>
 
   {#if repo}
-    <RepoStats {...repo} />
+    <RepoStats
+      url={repo.url}
+      stars={repo.stars}
+      forks={repo.forks}
+      languages={repo.languages}
+      mainBranch={repo.mainBranch}
+      commits={repo.commits}
+    />
   {/if}
 </header>
 
@@ -63,7 +74,7 @@
   </section>
   <section>
     {#if repo}
-      <Commits {...repo.commits} />
+      <Commits sample={repo.commits.sample} />
     {/if}
   </section>
 </article>

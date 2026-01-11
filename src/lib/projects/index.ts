@@ -1,96 +1,60 @@
-import type { Language } from "$components/project/RepoStats.svelte";
 import { getCollection } from "astro:content";
-import getFullGithub, { batchPartialGithub } from "./github";
+import { getFullGithub, batchPartialGithub } from "./github";
+import type { PartialRepoData, RepoData, RepoSource } from "./types";
 
-enum RepoSource {
-  GitHub,
-}
+export * from "./types";
 
-// determine the repo source for each project
-const sources = new Map<string, RepoSource>();
-export const projects = await getCollection("projects");
+const projects = await getCollection("projects");
+
+// map project ids to their source (github, etc) and repo slug
+const projectSourceMap = new Map<
+  string,
+  { source: RepoSource; slug: string }
+>();
 
 for (const {
   id,
   data: { links },
 } of projects) {
-  // order of preference:
-  // - github
   if (links.github) {
-    sources.set(id, RepoSource.GitHub);
+    projectSourceMap.set(id, {
+      source: "github" as RepoSource,
+      slug: links.github,
+    });
   }
 }
 
-/**
- * Does the project with the given ID exist?
- */
 export function projectExists(id: string): boolean {
-  return projects.some((p) => p.id === id);
+  return projectSourceMap.has(id);
 }
 
-/**
- * Fetch full repository data for the given project ID.
- */
-export function fetchRepo(id: string): Promise<RepoData> {
-  const source = sources.get(id);
-  if (!projectExists(id)) return Promise.reject("Project does not exist");
-  const project = projects.find((p) => p.id === id)!;
+export async function fetchRepo(id: string): Promise<RepoData> {
+  const projectInfo = projectSourceMap.get(id);
 
-  switch (source) {
-    case RepoSource.GitHub:
-      return getFullGithub(project.data.links.github!);
+  if (!projectInfo) {
+    throw new Error(`Project not found: ${id}`);
+  }
+
+  switch (projectInfo.source) {
+    case "github":
+      return getFullGithub(projectInfo.slug);
     default:
-      return Promise.reject("Unsupported repository source");
+      throw new Error(`Unsupported repository source: ${projectInfo.source}`);
   }
 }
 
-export function fetchPartialRepos(): Promise<
+export async function fetchPartialRepos(): Promise<
   Map<string, PartialRepoData | null>
 > {
-  const githubRepos: Map<string, string> = new Map();
+  const githubRepos = new Map<string, string>();
 
-  for (const {
-    id,
-    data: {
-      links: { github },
-    },
-  } of projects) {
-    const source = sources.get(id);
-    switch (source) {
-      case RepoSource.GitHub:
-        githubRepos.set(id, github!);
-        break;
+  for (const [id, info] of projectSourceMap.entries()) {
+    if (info.source === "github") {
+      githubRepos.set(id, info.slug);
     }
   }
 
   return batchPartialGithub(githubRepos);
 }
 
-interface Commit {
-  message: string;
-  url: string;
-  hash: string;
-  date: Date;
-  author: {
-    name: string;
-    avatar: string;
-    url: string;
-  };
-}
-
-export interface PartialRepoData {
-  stars: number;
-  primaryLanguage: Omit<Language, "size">;
-}
-
-export interface RepoData {
-  url: string;
-  stars: number;
-  forks: number;
-  languages: Language[];
-  mainBranch: string;
-  commits: {
-    count: number;
-    sample: Commit[];
-  };
-}
+export { projects };

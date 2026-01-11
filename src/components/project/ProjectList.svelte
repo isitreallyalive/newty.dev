@@ -9,6 +9,8 @@
 
   const { projects } = $props() as Props;
   let data = $state<{ [id: string]: PartialRepoData } | null>(null);
+
+  // merge static project data with fetched github data
   const fullProjects = $derived.by(() => {
     return projects.map((project) => ({
       ...project,
@@ -17,8 +19,14 @@
   });
 
   onMount(async () => {
-    data = await fetch(`/api/projects/list`).then((res) => res.json());
-    console.log(data);
+    try {
+      const response = await fetch(`/api/projects/list`);
+      if (response.ok) {
+        data = await response.json();
+      }
+    } catch (error) {
+      console.error("Failed to fetch project list:", error);
+    }
   });
 </script>
 

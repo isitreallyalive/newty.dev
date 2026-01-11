@@ -1,30 +1,44 @@
+import type { APIRoute } from "astro";
 import {
   fetchPartialRepos,
   projects,
   type PartialRepoData,
 } from "$lib/projects";
-import type { APIRoute } from "astro";
+import { generateMockPartialRepoData as generateMockPartial } from "$lib/projects/mock";
+import { CACHE_HEADERS } from "$data";
 
 export const prerender = false;
 
-export const GET: APIRoute = async (_) => {
-  let data = new Map<string, PartialRepoData | null>();
-
+async function getPartialReposData(): Promise<
+  Map<string, PartialRepoData | null>
+> {
   if (import.meta.env.PROD) {
-    data = await fetchPartialRepos();
-  } else {
-    projects.forEach(({ id }) => {
-      data.set(id, {
-        stars: Math.floor(Math.random() * 1000),
-        primaryLanguage: { name: "Rust", colour: "#dea584" },
-      });
-    });
+    return fetchPartialRepos();
   }
 
-  return new Response(JSON.stringify(Object.fromEntries(data)), {
-    headers: {
-      "Cache-Control": "s-maxage=600, stale-while-revalidate=30", // cache for 10 minutes, revalidate for 30 seconds
-      "Content-Type": "application/json",
-    },
+  const mockData = new Map<string, PartialRepoData | null>();
+  projects.forEach(({ id }) => {
+    mockData.set(id, generateMockPartial());
   });
+  return mockData;
+}
+
+export const GET: APIRoute = async () => {
+  try {
+    const data = await getPartialReposData();
+    const jsonData = Object.fromEntries(data);
+
+    return new Response(JSON.stringify(jsonData), {
+      headers: CACHE_HEADERS,
+    });
+  } catch (error) {
+    console.error("Error fetching partial repos:", error);
+    return new Response(
+      JSON.stringify({ error: "Failed to fetch project data" }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+  }
 };

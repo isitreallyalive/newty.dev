@@ -17,7 +17,7 @@ const project = Astro.props;
 const { Content } = await render(project);
 ---
 
-<Page titleClass="text-accent">
+<Page title={project.data.name} titleClass="text-accent">
   <Project {...project} client:load>
     <Content />
   </Project>

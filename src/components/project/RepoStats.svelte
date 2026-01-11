@@ -1,19 +1,27 @@
-<script lang="ts" module>
-  export interface Language {
-    name: string;
-    size: number;
-    colour: string;
-  }
-</script>
-
 <script lang="ts">
-  import type { RepoData } from "src/pages/api/projects/[id]";
+  import type { RepoData } from "$lib/projects";
 
-  const { url, languages, stars, forks, commits, mainBranch } =
-    $props() as RepoData;
+  let {
+    url,
+    stars,
+    forks,
+    languages,
+    mainBranch,
+    commits,
+  }: {
+    url: string;
+    stars: number;
+    forks: number;
+    languages: RepoData["languages"];
+    mainBranch: string;
+    commits: RepoData["commits"];
+  } = $props();
 
-  const totalSize = languages.reduce((acc, { size }) => acc + size, 0);
-  const fullLang = languages.map((language) => ({
+  const totalSize = languages.reduce(
+    (acc: number, { size }: { size: number }) => acc + size,
+    0,
+  );
+  const fullLang = languages.map((language: RepoData["languages"][0]) => ({
     ...language,
     percentage: totalSize > 0 ? (language.size / totalSize) * 100 : 0,
   }));

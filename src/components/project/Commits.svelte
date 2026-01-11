@@ -1,10 +1,13 @@
 <script lang="ts">
-  import type { RepoData } from "src/pages/api/projects/[id]";
+  import type { RepoData } from "$lib/projects";
   import { formatDistanceToNowStrict } from "date-fns";
   import bert from "$img/bert.webp?url";
 
-  const { sample: commits } = $props() as RepoData["commits"];
-  const colors = [
+  interface Props {
+    sample: RepoData["commits"]["sample"];
+  }
+
+  const COLOURS = [
     "border-mauve",
     "border-pink",
     "border-teal",
@@ -12,15 +15,17 @@
     "border-lavender",
   ];
 
-  // shuffle colors to add variety
-  colors.sort(() => Math.random() - 0.5);
+  const { sample: commits } = $props() as Props;
+
+  // shuffle for variety
+  COLOURS.sort(() => Math.random() - 0.5);
 </script>
 
 <ul class="not-prose flex flex-col gap-4">
   {#each commits as { author: { name: authorName, avatar, url: authorUrl }, message, hash, date, url }, i}
     <li
-      class="bg-crust transition- flex items-center gap-2 overflow-hidden rounded-lg border-l-4 p-2 {colors[
-        i % colors.length
+      class="bg-crust transition- flex items-center gap-2 overflow-hidden rounded-lg border-l-4 p-2 {COLOURS[
+        i % COLOURS.length
       ]}"
     >
       <img
