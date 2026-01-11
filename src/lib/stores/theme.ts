@@ -9,7 +9,7 @@ import { persistentAtom } from "@nanostores/persistent";
 export const THEMES: FlavorName[] = ["latte", "frappe", "macchiato", "mocha"];
 
 // latte and mocha share the same base stylesheet
-const URLS: Record<FlavorName, string> = {
+export const URLS: Record<FlavorName, string> = {
   latte: mocha,
   mocha,
   frappe,
