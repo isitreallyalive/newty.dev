@@ -14,7 +14,8 @@
       "$components/*": ["src/components/*"],
       "$styles/*": ["src/styles/*"],
 
-      "$img/*": ["content/image/*"]
+      "$img/*": ["content/image/*"],
+      "$build/*": ["build/*"]
     }
   }
 }

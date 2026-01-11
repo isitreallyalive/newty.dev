@@ -3,6 +3,7 @@ import { GITHUB_PROFILE } from "$data";
 import { cn } from "$utils";
 import Page from "$page";
 import bert from "$img/bert.webp?url";
+import Skin from "$components/skin";
 
 const YEAR_MS = 3.15576e10; // using a year of 365.25 days (because leap years)
 const BIRTHDAY = new Date("2006-06-06");
@@ -46,6 +47,8 @@ const SOCIALS: Record<string, Social> = {
       class="text-green">Minecraft</a
     > or <a href="https://terraria.org/" class="text-teal">Terraria</a>.
   </p>
+
+  <Skin player="newt" height={250} />
 
   <ul class="not-prose flex gap-2">
     {

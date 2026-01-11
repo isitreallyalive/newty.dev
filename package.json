@@ -8,6 +8,7 @@
     "preview": "astro preview",
     "fmt": "prettier --write src content",
     "lint": "eslint src content",
+    "patch": "patch-package astro",
     "astro": "astro",
     "vercel": "vercel",
     "shadcn": "shadcn-svelte"
@@ -24,11 +25,15 @@
     "@iconify/tailwind4": "^1.2.0",
     "@nanostores/persistent": "^1.2.0",
     "@octokit/core": "^7.0.6",
+    "@south-paw/typeface-minecraft": "^1.0.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.6",
     "date-fns": "^4.1.0",
     "pride-overlay": "^3.0.1",
+    "sharp": "^0.34.5",
+    "sharp-ico": "^0.1.5",
+    "skinview3d": "^3.4.1",
     "svelte": "^5.46.1",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3"
@@ -38,6 +43,7 @@
     "@iconify/json": "^2.2.425",
     "@internationalized/date": "^3.10.0",
     "@types/eslint-plugin-jsx-a11y": "^6.10.1",
+    "@types/node": "^25.0.6",
     "bits-ui": "^2.14.4",
     "clsx": "^2.1.1",
     "eslint": "^9.39.2",
@@ -48,6 +54,7 @@
     "globals": "^17.0.0",
     "husky": "^9.1.7",
     "jiti": "^2.6.1",
+    "patch-package": "^8.0.1",
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-svelte": "^3.4.1",
@@ -59,5 +66,8 @@
     "typescript-eslint": "^8.52.0",
     "vercel": "^50.1.6",
     "vite-plugin-wasm": "^3.5.0"
+  },
+  "patchedDependencies": {
+    "astro@5.16.6": "patches/astro@5.16.6.patch"
   }
 }

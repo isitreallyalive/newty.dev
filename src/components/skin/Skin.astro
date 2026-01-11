@@ -1,0 +1,25 @@
+---
+import "@south-paw/typeface-minecraft";
+
+import { PLAYERS } from "$data";
+import SkinRenderer, {
+  type Props as RendererProps,
+} from "$components/skin/SkinRenderer.svelte";
+
+export { Controls } from "$components/skin";
+
+interface Props extends Omit<RendererProps, "username" | "uuid"> {
+  player?: keyof typeof PLAYERS;
+}
+
+const { player = "newt", ...props } = Astro.props;
+const { cape, uuid } = PLAYERS[player];
+
+const username = await fetch(
+  `https://api.minecraftservices.com/minecraft/profile/lookup/${uuid}`,
+)
+  .then((res) => res.json())
+  .then((data) => data.name as string);
+---
+
+<SkinRenderer client:only="svelte" {username} {uuid} {cape} {...props} />
