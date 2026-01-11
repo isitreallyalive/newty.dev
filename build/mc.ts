@@ -7,9 +7,6 @@ const CRAFATAR = "https://avatars.cloudhaven.gg"; // todo: change back to crafat
 const VISAGE = "https://vzge.me";
 const CAPES = "https://api.capes.dev";
 
-/**
- * Fetches a resource and returns it as an ArrayBuffer.
- */
 async function getBuffer(url: string): Promise<ArrayBuffer> {
   return await fetch(url, {
     headers: {
@@ -18,17 +15,11 @@ async function getBuffer(url: string): Promise<ArrayBuffer> {
   }).then((res) => res.arrayBuffer());
 }
 
-/**
- * Downloads an image from a URL and returns it as a sharp instance.
- */
 async function downloadImage(url: string): Promise<sharp.Sharp> {
   const buffer = await getBuffer(url);
   return sharp(buffer).toFormat("webp");
 }
 
-/**
- * Saves a sharp image to a file.
- */
 async function saveImage(image: sharp.Sharp, path: string) {
   const dir = path.split("/").slice(0, -1).join("/");
   await fs.mkdir(dir, { recursive: true });
@@ -38,7 +29,7 @@ async function saveImage(image: sharp.Sharp, path: string) {
 export async function donwloadPlayerAssets(player: keyof typeof PLAYERS) {
   const { cape, uuid } = PLAYERS[player];
 
-  // download head
+  // head
   if (player === "newt") {
     const head = await downloadImage(
       `${CRAFATAR}/avatars/${uuid}?overlay&size=256`,

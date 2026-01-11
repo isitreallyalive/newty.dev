@@ -18,7 +18,7 @@ const { Content } = await render(project);
 ---
 
 <Page title={project.data.name} titleClass="text-accent">
-  <Project {...project} server:defer>
+  <Project {...project} client:only="svelte">
     <Content />
   </Project>
 </Page>

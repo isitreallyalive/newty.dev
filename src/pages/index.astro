@@ -51,20 +51,20 @@ const SOCIALS: Record<string, Social> = {
           class="text-green">Minecraft</a
         > or <a href="https://terraria.org/" class="text-teal">Terraria</a>.
       </p>
+
+      <ul class="not-prose flex gap-2">
+        {
+          Object.entries(SOCIALS).map(([icon, { href, class: clazz }]) => (
+            <li>
+              <a {href} class={clazz} target="_blank">
+                <span class={cn("iconify size-6", icon)} />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
 
     <Skin player="newt" height={250} class="justify-self-center" walking />
   </article>
-
-  <ul class="not-prose flex gap-2">
-    {
-      Object.entries(SOCIALS).map(([icon, { href, class: clazz }]) => (
-        <li>
-          <a {href} class={clazz} target="_blank">
-            <span class={cn("iconify size-6", icon)} />
-          </a>
-        </li>
-      ))
-    }
-  </ul>
 </Page>

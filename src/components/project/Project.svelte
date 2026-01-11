@@ -2,7 +2,7 @@
   import { cn } from "$utils";
   import type { CollectionEntry } from "astro:content";
   import type { RepoData } from "$lib/projects";
-  import { onMount, type Snippet } from "svelte";
+  import { type Snippet } from "svelte";
   import RepoStats from "$components/project/RepoStats.svelte";
   import Commits from "$components/project/Commits.svelte";
 
@@ -12,20 +12,9 @@
 
   const { id, data, children } = $props() as Props;
   const { name, links } = data;
-
-  let repo = $state<RepoData | null>(null);
-
-  // fetch full repo data on mount
-  onMount(async () => {
-    try {
-      const response = await fetch(`/api/projects/${id}`);
-      if (response.ok) {
-        repo = await response.json();
-      }
-    } catch (error) {
-      console.error(`Failed to fetch repo data for ${id}:`, error);
-    }
-  });
+  const repo: Promise<RepoData> = fetch(`/api/projects/${id}`).then((res) =>
+    res.json(),
+  );
 </script>
 
 <header>
@@ -56,9 +45,7 @@
     </ul>
   </div>
 
-  {#if repo}
-    <RepoStats {...repo} />
-  {/if}
+  <RepoStats {repo} />
 </header>
 
 <article>
@@ -66,9 +53,7 @@
     {@render children()}
   </section>
   <section>
-    {#if repo}
-      <Commits sample={repo.commits.sample} />
-    {/if}
+    <Commits {repo} />
   </section>
 </article>
 

@@ -59,9 +59,6 @@
       },
     },
   },
-  "trustedDependencies": [
-    "@parcel/watcher",
-  ],
   "patchedDependencies": {
     "astro@5.16.6": "patches/astro@5.16.6.patch",
   },

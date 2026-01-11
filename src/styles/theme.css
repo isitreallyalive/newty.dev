@@ -60,6 +60,7 @@
   --color-lavender: var(--catppuccin-color-lavender);
   --color-text: var(--catppuccin-color-text);
   --color-crust: var(--catppuccin-color-crust);
+  --color-surface0: var(--catppuccin-color-surface0);
 
   /* spacing/radius */
   --spacing: 0.25rem;
