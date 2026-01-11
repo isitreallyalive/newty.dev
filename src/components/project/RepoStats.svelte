@@ -30,7 +30,7 @@
 <div class="my-4 space-y-2">
   <!-- bar -->
   <div class="flex h-2 overflow-hidden rounded-full">
-    {#each fullLang as { size, colour, percentage }}
+    {#each fullLang as { name, colour, percentage } (name)}
       <div
         class="transition-opacity hover:opacity-80"
         style={`width: ${percentage}%; background-color: ${colour}`}
@@ -41,7 +41,7 @@
   <div class="grid grid-cols-2 font-mono text-sm">
     <!-- legend -->
     <ul class="not-prose flex gap-4">
-      {#each fullLang as { name, colour, percentage }}
+      {#each fullLang as { name, colour, percentage } (name)}
         <li class="flex items-center gap-2">
           <div
             class="size-2 rounded-full"

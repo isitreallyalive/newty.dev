@@ -5,6 +5,7 @@ import path from "node:path";
 import Webring from "$components/friends/Webring.astro";
 import catppuccin from "$img/webrings/catppuccin.webp";
 import { GITHUB_REPO } from "$data";
+import type { ImageMetadata } from "astro";
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
   "$img/friends/*.webp",

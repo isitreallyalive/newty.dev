@@ -31,7 +31,7 @@
 </script>
 
 <div class="grid grid-cols-3 gap-6">
-  {#each fullProjects as { id, name, tagline, stars, primaryLanguage: lang }}
+  {#each fullProjects as { id, name, tagline, stars, primaryLanguage: lang } (id)}
     <a href={`/projects/${id}`} class=" after:bg-accent text-inherit">
       <article
         class="bg-crust flex flex-col justify-between rounded-lg p-4 shadow-md"

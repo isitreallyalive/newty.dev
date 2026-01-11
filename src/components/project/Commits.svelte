@@ -22,7 +22,7 @@
 </script>
 
 <ul class="not-prose flex flex-col gap-4">
-  {#each commits as { author: { name: authorName, avatar, url: authorUrl }, message, hash, date, url }, i}
+  {#each commits as { author: { name: authorName, avatar, url: authorUrl }, message, hash, date, url }, i (hash)}
     <li
       class="bg-crust transition- flex items-center gap-2 overflow-hidden rounded-lg border-l-4 p-2 {COLOURS[
         i % COLOURS.length

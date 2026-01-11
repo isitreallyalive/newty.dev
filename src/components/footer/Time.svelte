@@ -1,7 +1,6 @@
 <script lang="ts">
   let hours = $state("");
   let minutes = $state("");
-  let seconds = $state("");
 
   const formatter = new Intl.DateTimeFormat("en-GB", {
     hour: "2-digit",
