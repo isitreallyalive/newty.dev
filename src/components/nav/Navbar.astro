@@ -9,7 +9,6 @@ interface Props {
 }
 
 const PAGES = {
-  about: "/about",
   projects: "/projects",
   writing: "/writing",
   friends: "/friends",
@@ -37,7 +36,7 @@ function getHref(index: number) {
           <><span class="text-muted-foreground mx-2">/</span>{i === segments.length - 1 ? (
               <span class={titleClass ?? "text-muted-foreground"}>{segment.replace("-", " ")}</span>
             ) : (
-              <a href={getHref(i)} class="font-medium">{segment.replace("-", " ")}</a>
+              <a href={getHref(i)} class="font-medium text-foreground">{segment.replace("-", " ")}</a>
             )}
           </>
         ))}
@@ -47,7 +46,10 @@ function getHref(index: number) {
         {
           Object.entries(PAGES).map(([page, href]) => (
             <li>
-              <a {href} class="hover:text-accent text-foreground">
+              <a
+                {href}
+                class="hover:text-accent text-foreground transition-colors duration-300"
+              >
                 {page}
               </a>
             </li>

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { cn } from "$utils";
   import type { CollectionEntry } from "astro:content";
-  import type { RepoData } from "src/pages/api/projects/[id]";
+  import type { RepoData } from "$lib/projects";
   import { onMount, type Snippet } from "svelte";
   import RepoStats from "$components/project/RepoStats.svelte";
   import Commits from "$components/project/Commits.svelte";

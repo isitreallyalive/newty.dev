@@ -15,7 +15,6 @@
     const parts = formatter.formatToParts(new Date());
     hours = parts.find((part) => part.type === "hour")?.value || "00";
     minutes = parts.find((part) => part.type === "minute")?.value || "00";
-    seconds = parts.find((part) => part.type === "second")?.value || "00";
   }
 
   $effect(() => {
@@ -25,4 +24,4 @@
   });
 </script>
 
-{hours}:{minutes}:{seconds} UTC
+{hours}:{minutes} UTC

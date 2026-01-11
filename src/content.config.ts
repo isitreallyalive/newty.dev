@@ -18,6 +18,7 @@ const projects = defineCollection({
   loader: mdx("projects"),
   schema: z.object({
     name: z.string(),
+    tagline: z.string(),
     links: z
       .object({
         // repo

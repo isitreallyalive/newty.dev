@@ -36,7 +36,7 @@
       {#each fullLang as { name, colour, percentage }}
         <li class="flex items-center gap-2">
           <div
-            class={`size-2 rounded-full`}
+            class="size-2 rounded-full"
             style={`background-color: ${colour}`}
           ></div>
           {name}

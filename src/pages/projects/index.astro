@@ -1,8 +1,12 @@
 ---
+import ProjectList from "$components/project/ProjectList.svelte";
 import Page from "$page";
 import { getCollection } from "astro:content";
 
 const projects = await getCollection("projects");
+const data = projects.map(({ id, data }) => ({ id, ...data }));
 ---
 
-<Page />
+<Page>
+  <ProjectList projects={data} client:load />
+</Page>

@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { RepoData } from "src/pages/api/projects/[id]";
   import { formatDistanceToNowStrict } from "date-fns";
+  import bert from "$img/bert.webp?url";
 
   const { sample: commits } = $props() as RepoData["commits"];
   const colors = [
@@ -23,7 +24,7 @@
       ]}"
     >
       <img
-        src={avatar || "/placeholder.svg"}
+        src={avatar || bert}
         alt={authorName}
         class="row-span-2 size-12 rounded-full select-none"
       />

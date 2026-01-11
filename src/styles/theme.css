@@ -59,6 +59,7 @@
   --color-blue: var(--catppuccin-color-blue);
   --color-lavender: var(--catppuccin-color-lavender);
   --color-text: var(--catppuccin-color-text);
+  --color-crust: var(--catppuccin-color-crust);
 
   /* spacing/radius */
   --spacing: 0.25rem;

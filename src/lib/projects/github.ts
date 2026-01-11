@@ -1,17 +1,25 @@
 import { Octokit } from "@octokit/core";
-import {
-  COMMIT_COUNT,
-  LANGUAGE_COUNT,
-  type RepoData,
-} from "src/pages/api/projects/[id]";
+import { COMMIT_COUNT, LANGUAGE_COUNT } from "src/pages/api/projects/[id]";
+import type { PartialRepoData, RepoData } from "$lib/projects";
 
 const octokit = new Octokit({
   auth: import.meta.env.GITHUB_TOKEN,
 });
 
-/**
- * Response type for the GraphQL query to GitHub's API
- */
+interface PartialGithubRepoResponse {
+  stargazerCount: number;
+
+  languages: {
+    edges: {
+      size: number;
+      node: {
+        color: string;
+        name: string;
+      };
+    }[];
+  };
+}
+
 interface GithubRepoResponse {
   repository: {
     stargazerCount: number;
@@ -53,12 +61,65 @@ interface GithubRepoResponse {
   };
 }
 
-async function fetchGithub(repo: string): Promise<RepoData> {
+export async function batchPartialGithub(
+  repos: Map<string, string>, // id, repo
+): Promise<Map<string, PartialRepoData | null>> {
+  const queries: string[] = [];
+  repos.forEach((repo, id) => {
+    const [owner, name] = repo.split("/");
+    queries.push(`
+      ${id}: repository(owner: "${owner}", name: "${name}") {
+        stargazerCount
+        languages(first: 1) {
+          edges {
+            node {
+              name
+              color
+            }
+          }
+        }
+      }
+    `);
+  });
+
+  const response = await octokit.graphql<{
+    [key: string]: PartialGithubRepoResponse | null;
+  }>(`
+    {
+      ${queries.join("\n")}
+    }
+  `);
+
+  const result = new Map<string, PartialRepoData | null>();
+  repos.forEach((repo, id) => {
+    const data = response[id];
+    if (!data) {
+      result.set(repo, null);
+      return;
+    }
+
+    const {
+      stargazerCount: stars,
+      languages: {
+        edges: [
+          {
+            node: { name, color },
+          },
+        ],
+      },
+    } = data;
+    result.set(id, { stars, primaryLanguage: { name, colour: color } });
+  });
+
+  return result;
+}
+
+async function getFullGithub(repo: string): Promise<RepoData> {
   const [owner, name] = repo.split("/");
   const {
     repository: {
-      stargazerCount,
-      forkCount,
+      stargazerCount: stars,
+      forkCount: forks,
       languages: { edges: languages },
       defaultBranchRef: {
         name: mainBranch,
@@ -114,8 +175,8 @@ async function fetchGithub(repo: string): Promise<RepoData> {
 
   return {
     url: `https://github.com/${repo}`,
-    stars: stargazerCount,
-    forks: forkCount,
+    stars,
+    forks,
     languages: languages
       .map(({ size, node: { name, color: colour } }) => ({
         name,
@@ -155,4 +216,4 @@ async function fetchGithub(repo: string): Promise<RepoData> {
   };
 }
 
-export default fetchGithub;
+export default getFullGithub;

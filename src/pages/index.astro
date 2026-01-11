@@ -2,7 +2,7 @@
 import { GITHUB } from "$data";
 import { cn } from "$utils";
 import Page from "$page";
-import type { ActionAPIContext } from "astro:actions";
+import bert from "$img/bert.webp?url";
 
 const YEAR_MS = 3.15576e10; // using a year of 365.25 days (because leap years)
 const BIRTHDAY = new Date("2006-06-06");
@@ -33,7 +33,18 @@ const SOCIALS: Record<string, Social> = {
   </p>
 
   <p>
-    <a href="a" class="text-sky">hi</a>
+    I love music, programming, video games, and <a href={bert} class="text-red"
+      >bert</a
+    >. My favourite album is <a
+      href="https://soundcloud.com/underscores/sets/wsk"
+      class="text-sky">Wallsocket</a
+    > by underscores, my favourite programming language is <a
+      href="https://www.rust-lang.org/"
+      class="text-maroon">Rust</a
+    >, and my favourite video game is either <a
+      href="https://www.minecraft.net/"
+      class="text-green">Minecraft</a
+    > or <a href="https://terraria.org/" class="text-teal">Terraria</a>.
   </p>
 
   <ul class="not-prose flex gap-2">
