@@ -55,7 +55,7 @@ export async function donwloadPlayerAssets(player: keyof typeof PLAYERS) {
   const skinRender = await downloadImage(
     `${VISAGE}/frontfull/832/${uuid}.png?no=ears`,
   );
-  await saveImage(skinRender, `public/mc//render/${uuid}.webp`);
+  await saveImage(skinRender, `public/mc/render/${uuid}.webp`);
 
   // cape
   if (cape) {

@@ -8,6 +8,7 @@
     "preview": "astro preview",
     "fmt": "prettier --write src content",
     "lint": "eslint src content",
+    "postinstall": "patch-package",
     "patch": "patch-package astro",
     "astro": "astro",
     "vercel": "vercel",

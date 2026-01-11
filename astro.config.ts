@@ -8,7 +8,7 @@ import mdx from "@astrojs/mdx";
 import vercel from "@astrojs/vercel";
 
 import { PLAYERS } from "$data";
-import { donwloadPlayerAssets } from "build/mc";
+import { donwloadPlayerAssets } from "$build/mc";
 
 for (const player of Object.keys(PLAYERS)) {
   await donwloadPlayerAssets(player as keyof typeof PLAYERS);

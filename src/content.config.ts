@@ -37,4 +37,11 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { projects };
+const blog = defineCollection({
+  loader: mdx("blog"),
+  schema: z.object({
+    title: z.string(),
+  }),
+});
+
+export const collections = { projects, blog };
