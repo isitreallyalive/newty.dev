@@ -1,15 +1,4 @@
-<script lang="ts">
-  import {
-    NameTagObject,
-    SkinViewer,
-    type SkinViewerOptions,
-    WalkingAnimation,
-  } from "skinview3d";
-
-  import { Controls, isControlEnabled } from "$components/skin";
-  import { isWebGL } from "$utils";
-  import { CapeSource } from "$data";
-
+<script lang="ts" module>
   export interface Props extends Omit<
     Partial<SkinViewerOptions>,
     "enableControls" | "cape" | "renderPaused"
@@ -20,7 +9,21 @@
     username?: string;
     uuid: string;
     walking?: boolean;
+    class?: string;
   }
+</script>
+
+<script lang="ts">
+  import {
+    NameTagObject,
+    SkinViewer,
+    type SkinViewerOptions,
+    WalkingAnimation,
+  } from "skinview3d";
+
+  import { Controls, isControlEnabled } from "$components/skin";
+  import { cn, isWebGL } from "$utils";
+  import { CapeSource } from "$data";
 
   const {
     cape,
@@ -29,8 +32,9 @@
     username,
     uuid,
     walking = false,
+    class: clazz,
     ...options
-  }: Props = $props();
+  } = $props() as Props;
   const width = (height / 832) * 512;
 
   // svelte-ignore non_reactive_update
@@ -95,11 +99,12 @@
 </script>
 
 {#if webgl}
-  <canvas bind:this={canvas} class={loading ? "hidden" : ""}></canvas>
+  <canvas bind:this={canvas} class={cn(loading ? "hidden" : "", clazz)}
+  ></canvas>
 {/if}
 
 {#if !webgl || loading}
-  <figure class="flex flex-col items-center text-center">
+  <figure class={cn("flex flex-col items-center text-center", clazz)}>
     <img
       src={`/mc/render/${uuid}.webp`}
       alt={username}

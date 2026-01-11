@@ -28,27 +28,33 @@ const SOCIALS: Record<string, Social> = {
 
 <Page>
   <h1>Welcome!</h1>
-  <p>
-    Hey, I'm newt (he/they), a {AGE}-year-old from the UK. I'm in my second year
-    of university, studying towards an MSci (Hons) in Computer Science.
-  </p>
 
-  <p>
-    I love music, programming, video games, and <a href={bert} class="text-red"
-      >bert</a
-    >. My favourite album is <a
-      href="https://soundcloud.com/underscores/sets/wsk"
-      class="text-sky">Wallsocket</a
-    > by underscores, my favourite programming language is <a
-      href="https://www.rust-lang.org/"
-      class="text-maroon">Rust</a
-    >, and my favourite video game is either <a
-      href="https://www.minecraft.net/"
-      class="text-green">Minecraft</a
-    > or <a href="https://terraria.org/" class="text-teal">Terraria</a>.
-  </p>
+  <article class="grid grid-cols-3">
+    <div class="col-span-2">
+      <p>
+        Hey, I'm newt (he/they), a {AGE}-year-old from the UK. I'm in my second
+        year of university, studying towards an MSci (Hons) in Computer Science.
+      </p>
 
-  <Skin player="newt" height={250} />
+      <p>
+        I love music, programming, video games, and <a
+          href={bert}
+          class="text-red">bert</a
+        >. My favourite album is <a
+          href="https://soundcloud.com/underscores/sets/wsk"
+          class="text-sky">Wallsocket</a
+        > by underscores, my favourite programming language is <a
+          href="https://www.rust-lang.org/"
+          class="text-maroon">Rust</a
+        >, and my favourite video game is either <a
+          href="https://www.minecraft.net/"
+          class="text-green">Minecraft</a
+        > or <a href="https://terraria.org/" class="text-teal">Terraria</a>.
+      </p>
+    </div>
+
+    <Skin player="newt" height={250} class="justify-self-center" walking />
+  </article>
 
   <ul class="not-prose flex gap-2">
     {
