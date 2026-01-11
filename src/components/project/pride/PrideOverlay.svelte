@@ -8,6 +8,7 @@
   import EnumSelect from "./EnumSelect.svelte";
   import OptionSlider from "./OptionSlider.svelte";
   import bert from "$img/bert.webp?url";
+  import input from "$img/bert.webp?uint8array";
 
   enum Effect {
     Ring,
@@ -20,12 +21,7 @@
   let opacity: number = $state(0.5);
   let thickness: number = $state(0.1);
 
-  // fetch image data
-  let input = $state<Uint8Array>(
-    await fetch(`${window.location.origin}${bert}`)
-      .then((res) => res.arrayBuffer())
-      .then((buf) => new Uint8Array(buf)),
-  );
+  // output
   let output = $derived(applyEffect(input));
   let outputUrl = $derived(URL.createObjectURL(new Blob([output])));
 

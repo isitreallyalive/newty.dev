@@ -3,6 +3,7 @@ import { defineConfig } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 import wasm from "vite-plugin-wasm";
+import arrayBuffer from "vite-plugin-arraybuffer";
 import svelte from "@astrojs/svelte";
 import mdx from "@astrojs/mdx";
 import vercel from "@astrojs/vercel";
@@ -17,7 +18,7 @@ for (const player of Object.keys(PLAYERS)) {
 // https://astro.build/config
 export default defineConfig({
   vite: {
-    plugins: [tailwindcss(), wasm()],
+    plugins: [tailwindcss(), wasm(), arrayBuffer()],
   },
 
   integrations: [svelte(), mdx()],

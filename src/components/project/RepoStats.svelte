@@ -8,40 +8,11 @@
   const { repo } = $props() as Props;
 </script>
 
-<div class="my-4 space-y-2">
-  <!-- bar skeleton -->
-  <div
-    class="bg-surface0 flex h-2 animate-pulse overflow-hidden rounded-full"
-  ></div>
-
-  <div class="grid grid-cols-2 font-mono text-sm">
-    <!-- legend skeleton -->
-    <ul class="not-prose flex gap-4">
-      {#each Array(2) as _}
-        <li class="flex items-center gap-2">
-          <div class="bg-surface0 size-2 animate-pulse rounded-full"></div>
-          <div class="bg-surface0 h-4 w-16 animate-pulse rounded"></div>
-          <div class="bg-surface0 h-4 w-10 animate-pulse rounded"></div>
-        </li>
-      {/each}
-    </ul>
-    <!-- stats skeleton -->
-    <ul class="not-prose flex gap-4 justify-self-end">
-      {#each Array(3) as _}
-        <li class="flex items-center gap-1">
-          <div class="bg-surface0 size-4 animate-pulse rounded"></div>
-          <div class="bg-surface0 h-4 w-8 animate-pulse rounded"></div>
-        </li>
-      {/each}
-    </ul>
-  </div>
-</div>
-
 {#await repo}
   <div class="my-4 space-y-2">
     <!-- bar skeleton -->
     <div
-      class="bg-surface0 flex h-2 animate-pulse overflow-hidden rounded-full"
+      class="bg-card flex h-2 animate-pulse overflow-hidden rounded-full"
     ></div>
 
     <div class="grid grid-cols-2 font-mono text-sm">
@@ -49,9 +20,9 @@
       <ul class="not-prose flex gap-4">
         {#each Array(2) as _}
           <li class="flex items-center gap-2">
-            <div class="bg-surface0 size-2 animate-pulse rounded-full"></div>
-            <div class="bg-surface0 h-4 w-16 animate-pulse rounded"></div>
-            <div class="bg-surface0 h-4 w-10 animate-pulse rounded"></div>
+            <div class="bg-card size-2 animate-pulse rounded-full"></div>
+            <div class="bg-card h-4 w-16 animate-pulse rounded"></div>
+            <div class="bg-card h-4 w-10 animate-pulse rounded"></div>
           </li>
         {/each}
       </ul>
@@ -59,8 +30,8 @@
       <ul class="not-prose flex gap-4 justify-self-end">
         {#each Array(3) as _}
           <li class="flex items-center gap-1">
-            <div class="bg-surface0 size-4 animate-pulse rounded"></div>
-            <div class="bg-surface0 h-4 w-8 animate-pulse rounded"></div>
+            <div class="bg-card size-4 animate-pulse rounded"></div>
+            <div class="bg-card h-4 w-8 animate-pulse rounded"></div>
           </li>
         {/each}
       </ul>

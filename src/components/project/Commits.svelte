@@ -25,19 +25,19 @@
   <ul class="not-prose flex flex-col gap-4">
     {#each Array(3) as _, i}
       <li
-        class="bg-crust border-surface0 flex items-center gap-2 overflow-hidden rounded-lg border-l-4 p-2"
+        class="bg-crust border-card flex items-center gap-2 overflow-hidden rounded-lg border-l-4 p-2"
       >
         <div
-          class="bg-surface0 row-span-2 size-12 animate-pulse rounded-full"
+          class="bg-card row-span-2 size-12 animate-pulse rounded-full"
         ></div>
         <div class="grid flex-1 grid-rows-2 gap-1">
-          <div class="bg-surface0 h-5 w-3/4 animate-pulse rounded"></div>
+          <div class="bg-card h-5 w-3/4 animate-pulse rounded"></div>
           <div class="flex items-center gap-2">
-            <div class="bg-surface0 h-4 w-24 animate-pulse rounded"></div>
+            <div class="bg-card h-4 w-24 animate-pulse rounded"></div>
             <span class="text-muted-foreground">•</span>
-            <div class="bg-surface0 h-4 w-16 animate-pulse rounded"></div>
+            <div class="bg-card h-4 w-16 animate-pulse rounded"></div>
             <span class="text-muted-foreground">•</span>
-            <div class="bg-surface0 h-4 w-20 animate-pulse rounded"></div>
+            <div class="bg-card h-4 w-20 animate-pulse rounded"></div>
           </div>
         </div>
       </li>
