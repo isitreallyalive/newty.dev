@@ -1,3 +1,9 @@
+@import "@fontsource-variable/outfit";
+@import "@fontsource-variable/nunito";
+@import "@fontsource/maple-mono/400.css"; /* regular */
+@import "@fontsource/maple-mono/500.css"; /* medium  */
+@import "@fontsource/maple-mono/700.css"; /* bold    */
+
 /* todo: why is tailwindcss not respecting ts aliases? */
 @import "./base.css";
 @import "./icons.css";
