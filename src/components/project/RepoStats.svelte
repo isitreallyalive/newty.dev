@@ -8,8 +8,8 @@
   const { repo } = $props() as Props;
 </script>
 
-{#await repo}
-  <div class="my-4 space-y-2">
+<div class="mt-2 mb-4 space-y-2">
+  {#await repo}
     <!-- bar skeleton -->
     <div
       class="bg-card flex h-2 animate-pulse overflow-hidden rounded-full"
@@ -36,19 +36,17 @@
         {/each}
       </ul>
     </div>
-  </div>
-{:then data}
-  {@const totalSize = data.languages.reduce(
-    (acc: number, { size }: { size: number }) => acc + size,
-    0,
-  )}
-  {@const fullLang = data.languages.map(
-    (language: RepoData["languages"][0]) => ({
-      ...language,
-      percentage: totalSize > 0 ? (language.size / totalSize) * 100 : 0,
-    }),
-  )}
-  <div class="my-4 space-y-2">
+  {:then data}
+    {@const totalSize = data.languages.reduce(
+      (acc: number, { size }: { size: number }) => acc + size,
+      0,
+    )}
+    {@const fullLang = data.languages.map(
+      (language: RepoData["languages"][0]) => ({
+        ...language,
+        percentage: totalSize > 0 ? (language.size / totalSize) * 100 : 0,
+      }),
+    )}
     <!-- bar -->
     <div class="flex h-2 overflow-hidden rounded-full">
       {#each fullLang as { name, colour, percentage } (name)}
@@ -101,5 +99,5 @@
         </li>
       </ul>
     </div>
-  </div>
-{/await}
+  {/await}
+</div>

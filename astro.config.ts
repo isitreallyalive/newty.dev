@@ -11,6 +11,8 @@ import vercel from "@astrojs/vercel";
 import { PLAYERS } from "$data";
 import { donwloadPlayerAssets } from "$build/mc";
 
+import pubWorker from "@astropub/worker";
+
 for (const player of Object.keys(PLAYERS)) {
   await donwloadPlayerAssets(player as keyof typeof PLAYERS);
 }
@@ -21,6 +23,6 @@ export default defineConfig({
     plugins: [tailwindcss(), wasm(), arrayBuffer()],
   },
 
-  integrations: [svelte(), mdx()],
+  integrations: [svelte(), mdx(), pubWorker()],
   adapter: vercel(),
 });

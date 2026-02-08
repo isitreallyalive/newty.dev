@@ -53,6 +53,7 @@
     {@render children()}
   </section>
   <section>
+    <h1>Commits</h1>
     <Commits {repo} />
   </section>
 </article>

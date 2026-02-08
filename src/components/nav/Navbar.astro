@@ -15,12 +15,11 @@ const PAGES = {
 };
 
 const { segments, titleClass } = Astro.props;
-const { origin } = Astro.url;
 
 function getHref(index: number) {
-  if (segments.length === 0) return `${origin}/`;
+  if (segments.length === 0) return `/`;
   const path = segments.slice(0, index + 1).join("/");
-  return `${origin}/${path}`;
+  return `/${path}`;
 }
 ---
 

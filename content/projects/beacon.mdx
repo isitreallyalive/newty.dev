@@ -1,0 +1,17 @@
+---
+name: beacon
+tagline: 🎮 the minecraft server you'll love!
+
+links:
+    github: isitreallyalive/beacon
+---
+
+A Minecraft server written in Rust, utilising [bevy-ecs](https://docs.rs/bevy-ecs). Highly immature as of the time of writing, but it's a
+fascinating project to work on that is teaching me a lot about network programming and simulation.
+
+While I aim for vanilla parity, I also want to add some QoL features that I think the Java server is missing. For example, so far I have added:
+
+- A better way to configure the server.
+  - A clean [TOML](https://github.com/isitreallyalive/beacon/blob/main/docs/beacon.design.toml) configuration file, as opposted
+    to [server.properties](https://server.properties)
+  - Hot reloading of the configuration file - which also works for the favicon, so you can change *most* options without restarting the server!

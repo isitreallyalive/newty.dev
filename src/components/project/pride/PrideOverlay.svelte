@@ -22,10 +22,24 @@
   let thickness: number = $state(0.1);
 
   // output
-  let output = $derived(applyEffect(input));
-  let outputUrl = $derived(URL.createObjectURL(new Blob([output])));
+  let output = $state("");
 
-  function applyEffect(data: Uint8Array): Uint8Array {
+  $effect(() => {
+    const outputData = applyEffect(input, flag, effect);
+    output = URL.createObjectURL(new Blob([outputData], { type: "image/png" }));
+
+    return () => {
+      if (output) {
+        URL.revokeObjectURL(output);
+      }
+    };
+  });
+
+  function applyEffect(
+    data: Uint8Array,
+    flag: Flag,
+    effect: Effect,
+  ): Uint8Array {
     switch (effect) {
       case Effect.Ring:
         return applyRing(data, flag, opacity, thickness);
@@ -54,6 +68,6 @@
   </div>
   <div>
     <p class="text-2xl font-bold">After</p>
-    <img src={outputUrl} alt="Bert the dog, after pride-overlay" />
+    <img src={output} alt="Bert the dog, after pride-overlay" />
   </div>
 </div>

@@ -10,6 +10,15 @@ links:
 
 import PrideOverlay from "$components/project/pride";
 
-A Rust library that overlays pride flags on images. It works in WASM, try it out below!
+A Rust library that overlays pride flags on images. I aimed to make it as easy to use as possible, while supporting both
+native targets and WASM.
+
+It's currently being [rewritten](https://github.com/isitreallyalive/pride-overlay/tree/newt/gif) to support animation, and be more performant.
+The new version will support [GIF](https://github.com/isitreallyalive/pride-overlay/blob/newt/gif/src/image/gif.rs), [APNG](https://github.com/isitreallyalive/pride-overlay/blob/newt/gif/src/image/png.rs),
+and [animated WebP](https://github.com/isitreallyalive/pride-overlay/blob/newt/gif/src/image/webp/native.rs) (including on the web via [emscipten](https://github.com/isitreallyalive/pride-overlay/blob/newt/gif/wasm/src/webp.cpp)).
+
+## Try it out!
+
+**Note:** Works best on Chrome. For some reason, it is a bit choppier in Firefox.
 
 <PrideOverlay client:load />

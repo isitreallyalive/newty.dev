@@ -18,6 +18,7 @@
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/svelte": "^7.2.4",
     "@astrojs/vercel": "^9.0.3",
+    "@astropub/worker": "^0.2.0",
     "@catppuccin/palette": "^1.7.1",
     "@catppuccin/tailwindcss": "file:ctp-tailwind/packages/catppuccin-tailwindcss",
     "@fontsource-variable/nunito": "^5.2.7",

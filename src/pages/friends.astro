@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import path from "node:path";
 import Webring from "$components/friends/Webring.astro";
 import catppuccin from "$img/webrings/catppuccin.webp";
+import uofg from "$img/webrings/uofg.webp";
 import { GITHUB_REPO } from "$data";
 import type { ImageMetadata } from "astro";
 
@@ -60,7 +61,7 @@ const findFriendImage = (name: string) => {
   </div>
 
   <!-- webrings  -->
-  <h1>I'm in webrings too!</h1>
+  <h1>I'm in some webrings too!</h1>
 
   <figure class="mt-4!">
     <blockquote>
@@ -81,6 +82,14 @@ const findFriendImage = (name: string) => {
       id="newt"
       colour="ctp"
       image={catppuccin}
+    />
+
+    <Webring
+      name="University of Glasgow"
+      url="https://uofg.newty.dev"
+      id="newt"
+      colour="lavender"
+      image={uofg}
     />
   </div>
 </Page>

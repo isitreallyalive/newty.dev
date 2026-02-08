@@ -18,5 +18,5 @@
 }
 
 main {
-  @apply prose prose-catppuccin prose-p:text-lg prose-headings:mb-0! min-w-full;
+  @apply prose prose-catppuccin prose-p:text-lg prose-headings:mb-2! min-w-full;
 }
