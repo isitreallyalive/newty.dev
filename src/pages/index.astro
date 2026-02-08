@@ -28,31 +28,48 @@ const SOCIALS: Record<string, Social> = {
 
 <Page>
   <h1>Welcome!</h1>
+  <p>
+    <span class="text-red font-medium">Important!</span> This website is currently
+    under construction. Expect things to be broken, or rough around the edges.
+  </p>
 
   <article class="grid grid-cols-3">
     <div class="col-span-2">
       <p>
-        Hey, I'm newt (he/they), a {AGE}-year-old from the UK. I'm in my second
-        year of university, studying towards an MSci (Hons) in Computer Science.
+        I'm newt (he/they), a {AGE}-year-old from the UK. I'm in my second year
+        of university, studying towards an MSci (Hons) in Computer Science. Most
+        of my time programming has been spent building various tools in <a
+          href="https://www.rust-lang.org/"
+          class="text-maroon">Rust</a
+        >, but I am also interested in compiler design and game development.
       </p>
 
       <p>
-        I love music, programming, video games, and <a
+        Outside of programming, my biggest interests are music, video games, and <a
           href={bert}
           class="text-red">bert</a
         >. My favourite album is <a
           href="https://soundcloud.com/underscores/sets/wsk"
           class="text-sky">Wallsocket</a
-        > by underscores, my favourite programming language is <a
-          href="https://www.rust-lang.org/"
-          class="text-maroon">Rust</a
-        >, and my favourite video game is either <a
+        > by underscores, and my favourite video game is split between <a
           href="https://www.minecraft.net/"
           class="text-green">Minecraft</a
-        > or <a href="https://terraria.org/" class="text-teal">Terraria</a>.
+        > or <a href="https://terraria.org/" class="text-teal">Terraria</a> - quite
+        a few of my personal projects are related to one of these in some way. For
+        example, I've been working on a Minecraft server implementation in Rust which
+        I call <a href="/projects/beacon">beacon</a> - right now it's a one person
+        project, but contributions are, as always, very welcome!
       </p>
 
-      <ul class="not-prose flex gap-2">
+      <p>
+        Me and a few friends are working on <span class="text-mauve font-medium"
+          >amethyst</span
+        >, what we believe to be the next generation of game server hosting. If
+        you feel you've got something you can bring to the table, or just want
+        to find out more, we'd love to hear from you!
+      </p>
+
+      <ul class="not-prose flex gap-3">
         {
           Object.entries(SOCIALS).map(([icon, { href, class: clazz }]) => (
             <li>

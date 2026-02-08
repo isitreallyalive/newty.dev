@@ -4,13 +4,15 @@ import "$styles/global.css";
 import Footer from "$components/footer";
 import { THEME_KEY, URLS } from "$lib/stores/theme";
 import Navbar from "$components/nav";
+import { cn } from "$lib/utils";
 
 interface Props {
+  class?: string;
   title?: string | string[];
   titleClass?: string;
 }
 
-const { title, titleClass } = Astro.props;
+const { class: clazz, title, titleClass } = Astro.props;
 const segments = Array.isArray(title)
   ? title
   : Astro.url
@@ -70,7 +72,7 @@ if (slug) fullTitle += ` / ${slug}`;
   </head>
   <body>
     <Navbar {segments} {titleClass} />
-    <main class="container pt-0!">
+    <main class={cn("container pt-0!", clazz)}>
       <slot />
     </main>
     <Footer />

@@ -32,17 +32,20 @@ const findFriendImage = (name: string) => {
 };
 ---
 
-<Page>
+<Page class="prose-blockquote:mt-0!">
   <!-- friends -->
   <h1>Say hello to my friends</h1>
-  <p>You should go and give their websites some love!</p>
+  <p>
+    I think they are pretty cool, and that you should go and give their websites
+    some love!
+  </p>
   <blockquote>
     If we are friends, and you'd like to be here - let me know, or <a
       href={GITHUB_REPO}>add yourself</a
     > :]
   </blockquote>
 
-  <div class="mb-6 flex gap-4">
+  <div class="mb-12 flex gap-4">
     {
       Object.entries(FRIENDS).map(([name, site]) => (
         <a href={site} title={name} class="no-underline">
@@ -59,7 +62,7 @@ const findFriendImage = (name: string) => {
   <!-- webrings  -->
   <h1>I'm in webrings too!</h1>
 
-  <figure>
+  <figure class="mt-4!">
     <blockquote>
       A webring is a collection of websites linked together in a loop. Each
       website contains links to the previous and next websites in the ring. If
