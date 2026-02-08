@@ -16,7 +16,8 @@
       "$styles/*": ["src/styles/*"],
 
       "$img/*": ["content/image/*"],
-      "$build/*": ["build/*"]
+      "$build/*": ["build/*"],
+      "$plugins/*": ["plugins/*"]
     }
   }
 }

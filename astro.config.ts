@@ -1,4 +1,3 @@
-// @ts-check
 import { defineConfig } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
@@ -8,10 +7,12 @@ import svelte from "@astrojs/svelte";
 import mdx from "@astrojs/mdx";
 import vercel from "@astrojs/vercel";
 
+import rssTailwind from "$plugins/rss/tailwind";
+import rssMinify from "$plugins/rss/minify";
+import readingTime from "$plugins/readingTime";
+
 import { PLAYERS } from "$data";
 import { donwloadPlayerAssets } from "$build/mc";
-
-import pubWorker from "@astropub/worker";
 
 for (const player of Object.keys(PLAYERS)) {
   await donwloadPlayerAssets(player as keyof typeof PLAYERS);
@@ -20,9 +21,13 @@ for (const player of Object.keys(PLAYERS)) {
 // https://astro.build/config
 export default defineConfig({
   vite: {
-    plugins: [tailwindcss(), wasm(), arrayBuffer()],
+    plugins: [tailwindcss(), wasm(), arrayBuffer(), rssMinify()],
   },
 
-  integrations: [svelte(), mdx(), pubWorker()],
+  markdown: {
+    remarkPlugins: [readingTime],
+  },
+
+  integrations: [rssTailwind(), svelte(), mdx()],
   adapter: vercel(),
 });

@@ -41,6 +41,9 @@ const blog = defineCollection({
   loader: mdx("blog"),
   schema: z.object({
     title: z.string(),
+    headline: z.string().optional(),
+    draft: z.boolean().optional(),
+    published: z.date().optional(),
   }),
 });
 

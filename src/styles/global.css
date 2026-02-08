@@ -1,27 +1,9 @@
-@import "tailwindcss";
-@config "../../tailwind.config.ts";
-
 /* todo: why is tailwindcss not respecting ts aliases? */
+@import "./base.css";
 @import "./icons.css";
-@import "./links.css";
-@import "./theme.css";
-@import "./typography.css";
 
 /* override media query for dark mode to support all flavors of catppuccin */
 @custom-variant dark (&:where(.frappe, .frappe *, .macchiato, .macchiato *, .mocha, .mocha *, .));
-
-::selection {
-  @apply bg-mauve text-background;
-}
-
-body {
-  @apply bg-background text-foreground;
-  @apply flex min-h-screen min-w-full flex-col;
-}
-
-.container {
-  @apply min-w-full px-24 py-8;
-}
 
 h1,
 h2,
@@ -30,10 +12,6 @@ h4,
 h5,
 h6 {
   @apply font-heading;
-}
-
-hr {
-  @apply hover:text-accent text-muted rounded-lg border-2 transition-colors duration-200;
 }
 
 blockquote {

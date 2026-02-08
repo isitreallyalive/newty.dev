@@ -1,0 +1,23 @@
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
+
+@import "./links.css";
+@import "./theme.css";
+@import "./typography.css";
+
+::selection {
+  @apply bg-mauve text-background;
+}
+
+body {
+  @apply bg-background text-foreground;
+  @apply flex min-h-screen min-w-full flex-col;
+}
+
+hr {
+  @apply hover:text-accent text-muted my-8 rounded-lg border-2 transition-colors duration-200;
+}
+
+.container {
+  @apply min-w-full px-24 py-8;
+}
